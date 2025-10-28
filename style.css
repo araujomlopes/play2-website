@@ -88,6 +88,7 @@ section {
     float: left;
     width: 100%;
     position: relative;
+    background-color: #f1f3f8;
 }
 
 .section,
@@ -2017,7 +2018,7 @@ footer .widget {
 }
 
 .kf_table2 li.table_head {
-    color: #333;
+    color: #1a313c;
     font-size: 14px;
     text-align: left;
     font-weight: bold;
@@ -2107,7 +2108,7 @@ footer .widget {
 
 .kf_table2 .versus div p a {
     margin: -5px 0 1px;
-    color: #333;
+    color: #1a313c;
     display: block;
     font-weight: bold;
 }
@@ -2133,6 +2134,8 @@ footer .widget {
     margin: 0 0 30px;
     padding: 16px 20px 19px;
     border: 1px solid #d7d8d8;
+    border-radius: 12px;
+    background-color: #ffffff;
 }
 
 .table_style3 li div {
@@ -2473,7 +2476,8 @@ footer .widget {
 
 .team_st_table /*Cor do Fundo da Tabela*/{
     text-align: center;
-    background-color: white;
+    background-color: #ffffff;
+    border-radius: 12px;
 }
 
 .team_stats {
