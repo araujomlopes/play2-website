@@ -2471,8 +2471,9 @@ footer .widget {
 
 /*Team Stats #teamstats*/
 
-.team_st_table {
+.team_st_table /*Cor do Fundo da Tabela*/{
     text-align: center;
+    background-color: white;
 }
 
 .team_stats {
