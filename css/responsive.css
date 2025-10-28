@@ -1001,7 +1001,7 @@
     }
     .team_st_table li .versus div>span,
     .team_st_table .tb2_pct,
-    .team_st_table .tb2_gb {
+    .team_st_table {
         display: none;
     }
 }
