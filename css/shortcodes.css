@@ -92,7 +92,7 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    background: #e7eaf0;
+    background: ;
     margin-bottom: 30px;
 }
 
@@ -100,7 +100,7 @@
     z-index: 1;
     float: left;
     width: auto;
-    color: #fff;
+    color: #1a313c;
     font-size: 20px;
     font-weight: bold;
     position: relative;
