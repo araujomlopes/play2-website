@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
+  <title>Rios — Website Leve e Responsivo</title>
+
+  <style>
+    /* ========== :ROOT / VARS ========== */
+    :root{
+      --bg:#f7f8fb;
+      --surface:#ffffff;
+      --muted:#6b7280;
+      --accent:#0a4fff;
+      --radius:10px;
+      --container:1400px;
+      --gutter:1rem;
+      --shadow:0 6px 18px rgba(15,23,42,0.06);
+      --text:#111827;
+      --footer-bg:#0b0b0b;
+      --footer-surface:#111;
+      --footer-muted:#9ca3af;
+      --footer-contrast:#d1d5db;
+    }
+
+    /* ========== RESET LIGHT ========== */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui, "Segoe UI", Roboto, -apple-system, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.45;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      text-rendering:optimizeLegibility;
+      -webkit-text-size-adjust:100%;
+    }
+
+    /* ========== LAYOUT HELPERS ========== */
+    .container{
+
+      
+      width:100%;
+      max-width:var(--container);
+      margin:0 auto;
+      padding:0 var(--gutter);
+    }
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+    /* ========== HEADER ========== */
+    header{
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(4px);
+      border-bottom:1px solid #e5e7eb;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .site-header{height:64px;display:flex;align-items:center;gap:1rem}
+    .brand{color:var(--accent);text-decoration:none;font-weight:700;font-size:1.15rem}
+    .top-links{margin-left:auto;display:flex;gap:1rem}
+    .top-links a{ text-decoration:none;padding:.38rem .7rem;font-size:.9rem;color:var(--muted);border:1px solid #e5e7eb;border-radius:8px;background:transparent;display:flex;align-items:center;justify-content:center;font-weight:600}
+    .top-links a:hover{ color:var(--accent); background:#f0f4ff }
+    .nav-toggle{font-size:1.5rem;background:none;border:none;display:block;cursor:pointer}
+
+    nav{margin-left:1rem;position:relative}
+    .nav-list{list-style:none;margin:0;padding:0;display:none;flex-direction:column;gap:.25rem;background:var(--surface);position:absolute;right:0;top:64px;width:224px;padding:.75rem;border-radius:10px;box-shadow:var(--shadow)}
+    .nav-list.show{display:flex}
+    .nav-list a{ text-decoration:none;padding:.55rem .8rem;color:var(--muted);font-weight:600;display:block;border-radius:8px }
+    .nav-list a:hover{ color:var(--accent); background:#f0f4ff }
+    .has-submenu{position:relative}
+    .submenu{list-style:none;margin:0;padding:.5rem 0 .5rem 1rem;display:none;flex-direction:column;gap:.25rem}
+    .has-submenu:hover .submenu{display:flex}
+
+    @media(min-width:880px){
+      .nav-toggle{display:none}
+      .nav-list{position:static;display:flex !important;flex-direction:row;gap:1rem;background:none;box-shadow:none;width:auto;padding:0}
+      .submenu{position:absolute;top:100%;left:0;background:var(--surface);border-radius:10px;padding:.5rem 0;box-shadow:var(--shadow);width:210px;display:none}
+      .has-submenu:hover .submenu{display:block}
+      .submenu a{padding:.6rem .9rem}
+    }
+
+    /* ========== HERO / CONTENT ========== */
+    .hero{padding:4rem 0;display:grid;gap:2rem;align-items:center}
+    .hero-inner{display:grid;gap:1rem}
+    .eyebrow{ color:var(--muted); font-weight:600; font-size:.9rem }
+    .hero h1{ margin:0; font-size:clamp(1.7rem, 4vw, 2.65rem); line-height:1.05 }
+    .hero p{ margin:0; color:var(--muted); max-width:700px }
+    .cta-row{ display:flex; gap:.75rem; flex-wrap:wrap; margin-top:.75rem }
+    .btn{ display:inline-block; padding:.7rem 1rem; border-radius:10px; text-decoration:none; font-weight:700; font-size:.95rem }
+    .btn-primary{ background:var(--accent); color:#fff }
+    .btn-ghost{ background:transparent; border:1px solid #e5e7eb; color:var(--muted) }
+
+    .grid-3{ display:grid; gap:1.5rem; grid-template-columns:1fr; margin-top:1rem }
+    @media(min-width:700px){ .grid-3{ grid-template-columns:repeat(3,1fr) } .hero{ grid-template-columns: 2fr 1fr; padding:4rem 2rem } }
+
+    .card{ background:var(--surface); border-radius:var(--radius); padding:1rem; box-shadow:var(--shadow) }
+
+    /* ========== CONTACT FORM ========== */
+    form.card input, form.card textarea{
+      width:100%; padding:.6rem; border:1px solid #ddd; border-radius:8px; font:inherit
+    }
+
+    /* ========== FOOTER (MINIMAL + STUDIO-GRADE) ========== */
+    /* big footer inspired by modern club sites but kept minimal and modular */
+    .rio-footer{ background:var(--footer-surface); color:var(--footer-contrast); margin-top:3rem; font-size:0.95rem }
+    .rio-footer-top{ padding:3rem 0 2rem; border-bottom:1px solid rgba(255,255,255,0.04) }
+    .rio-ct{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter); display:flex; gap:2rem; flex-wrap:wrap; align-items:flex-start }
+    .rio-brand{ display:flex; gap:1rem; align-items:center; min-width:220px }
+    .rio-brand img{ width:64px; height:64px; object-fit:contain; border-radius:6px; background:transparent }
+    .rio-brand p{ margin:0; color:var(--footer-contrast); font-weight:700 }
+
+    .rio-links{ display:grid; grid-template-columns: repeat(3, minmax(160px,1fr)); gap:1.25rem; flex:1 }
+    @media(max-width:840px){ .rio-links{ grid-template-columns:repeat(2,1fr) } .rio-brand{ min-width:unset; width:100% } .rio-ct{ flex-direction:column } }
+
+    .rio-links h4{ margin:0 0 .5rem; color: #fff; font-size:.95rem; font-weight:700 }
+    .rio-links a{ display:block; color:var(--footer-muted); text-decoration:none; margin:.28rem 0; font-size:.9rem }
+    .rio-links a:hover{ color:var(--footer-contrast) }
+
+    .rio-footer-bottom{ background:#090909; padding:1rem 0; font-size:.85rem }
+    .rio-bottom-inner{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter); display:flex; justify-content:space-between; align-items:center; gap:.75rem; flex-wrap:wrap }
+    .rio-legal a{ color:var(--footer-muted); text-decoration:none; margin-left:1rem }
+    .rio-legal a:hover{ color:var(--footer-contrast) }
+
+    /* small utility */
+    .muted{ color:var(--muted) }
+    a{ color:inherit }
+  </style>
+</head>
+
+<body>
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="container site-header">
+      <a href="index.html" class="brand">Rios</a>
+
+      <!-- LINKS FIXOS NO HEADER -->
+      <div class="top-links">
+        <a href="jogos.html">Jogos</a>
+        <a href="tabeladepontuacao.html">Tabela</a>
+      </div>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="
+        const nav = document.getElementById('nav');
+        nav.classList.toggle('show');
+        this.setAttribute('aria-expanded', nav.classList.contains('show') ? 'true' : 'false');
+      ">☰</button>
+
+      <nav>
+        <ul class="nav-list" id="nav" aria-label="Main navigation">
+          <li class="has-submenu">
+            <a href="#estatistica">Estatística</a>
+            <ul class="submenu" aria-label="Estatística submenu">
+              <li><a href="estatisticasjogadores.html">Jogadores</a></li>
+              <li><a href="estatisticasequipa.html">Equipas</a></li>
+              <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
+            </ul>
+          </li>
+          <li><a href="equipas.html">Equipas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ========== MAIN ========== -->
+  <main id="main">
+   
+
+
+
+    <!-- ========== EQUIPA INICIO ========== -->
+
+    
+
+<div id="content" class="site-content">
+    <div class="page-header dtable text-center header-transparent"  
+         style="background-image: url(../wp-content/uploads/sites/5/2020/06/pheader-portfolio.jpg);">
+        <div class="dcell">
+            <div class="container">
+                <h1 class="page-title">Nome da equipa</h1>
+                <ul id="breadcrumbs" class="breadcrumbs none-style">
+                    <li><a href=""></a></li>
+                </ul>    
+            </div>
+        </div>
+    </div>
+
+    <!-- JORNADAS / SLIDER DE JOGOS -->
+ 
+    <!-- JORNADAS / SLIDER DE JOGOS -->
+    <div class="tabelapontos-container" style="max-width:1200px; margin:0 auto; padding:0 10px; padding-top:60px;">
+        <section class="mu-slider-wrapper">
+            <div class="mu-slider-head">
+                <h2 class="mu-slider-title">
+                    <span class="jogos">Jogos</span>
+                    <a href="#" class="mu-slider-link">Ver todos Jogos</a>
+                </h2>
+            </div>
+
+            <div class="mu-slider">
+                <button class="mu-slider-btn prev" aria-label="Previous">‹</button>
+                <div class="mu-slider-track">
+                    <!-- MATCH CARDS -->
+                    <div class="mu-card">
+                        <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
+                        <p class="info">Saturday 25 October 2025, 18:30, Estádio Central</p>
+                        <div class="score">
+                            <img src="//via.placeholder.com/42" alt="">
+                            <span>4 - 2</span>
+                            <img src="//via.placeholder.com/42" alt="">
+                        </div>
+                        <div class="teams"><span>Team A</span><span>VS</span><span>Team B</span></div>
+                        <a href="#" class="cta"></a>
+                    </div>
+                    <div class="mu-card">
+                        <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
+                        <p class="info">Saturday 01 November 2025, 17:00, Arena Norte</p>
+                        <div class="score">
+                            <img src="//via.placeholder.com/42" alt="">
+                            <span>2 - 2</span>
+                            <img src="//via.placeholder.com/42" alt="">
+                        </div>
+                        <div class="teams"><span>Team C</span><span>VS</span><span>Team A</span></div>
+                        <a href="#" class="cta"></a>
+                    </div>
+                    <div class="mu-card">
+                        <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
+                        <p class="info">Monday 24 November 2025, 22:00, Estádio Central</p>
+                        <div class="score">
+                            <img src="//via.placeholder.com/42" alt="">
+                            <span>22:00</span>
+                            <img src="//via.placeholder.com/42" alt="">
+                        </div>
+                        <div class="teams"><span>Team A</span><span>VS</span><span>Team D</span></div>
+                        <a href="#" class="cta"></a>
+                    </div>
+                    <div class="mu-card">
+                        <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
+                        <p class="info">Sunday 30 November 2025, 14:00, Estádio Sul</p>
+                        <div class="score">
+                            <img src="//via.placeholder.com/42" alt="">
+                            <span>14:00</span>
+                            <img src="//via.placeholder.com/42" alt="">
+                        </div>
+                        <div class="teams"><span>Team E</span><span>VS</span><span>Team A</span></div>
+                        <a href="#" class="cta"></a>
+                    </div>
+                    <div class="mu-card">
+                        <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
+                        <p class="info">Thursday 04 December 2025, 22:00, Estádio Central</p>
+                        <div class="score">
+                            <img src="//via.placeholder.com/42" alt="">
+                            <span>22:00</span>
+                            <img src="//via.placeholder.com/42" alt="">
+                        </div>
+                        <div class="teams"><span>Team A</span><span>VS</span><span>Team F</span></div>
+                        <a href="#" class="cta"></a>
+                    </div>
+                </div>
+                <button class="mu-slider-btn next" aria-label="Next">›</button>
+            </div>
+        </section>
+    </div>
+
+    <style>
+        .mu-slider-wrapper { background:#fff; border-radius:8px; border:1px solid #dbdde9; padding:40px 0; font-family:'Source Sans Pro', sans-serif; margin-bottom:40px;}
+        .jogos { font-size:24px; font-weight:700; color:#374151; margin:20px 0 16px;}
+        .mu-slider-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding-inline:24px; }
+        .mu-slider-title { font-family:'Bebas Neue', sans-serif; font-size:28px; color:#111; display:flex; justify-content:space-between; align-items:center; width:100%; }
+        .mu-slider-link { color:#0232ff; font-size:16px; font-weight:700; text-decoration:none; border-style:none; cursor:pointer; }
+        .mu-slider { position:relative; overflow:hidden; padding-inline:24px; }
+        .mu-slider-track { display:flex; gap:16px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; cursor:grab; padding:8px 0; }
+        .mu-slider-track::-webkit-scrollbar { display:none; }
+        .mu-card { background:#fff; border:1px solid #dbdde9; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,.08); padding:20px; flex:0 0 267px; height:300px; text-align:center; user-select:none; }
+        .mu-card img { pointer-events:none; }
+        .mu-card .league { width:150px; margin-bottom:10px; }
+        .mu-card .info { font-size:14px; color:#333; margin-bottom:15px; line-height:1.4; }
+        .mu-card .score { display:flex; align-items:center; justify-content:center; gap:12px; font-weight:700; font-size:18px; margin:10px 0; }
+        .mu-card .score img { width:42px; height:42px; }
+        .mu-card .teams { display:flex; justify-content:center; gap:8px; font-weight:600; margin:10px 0; font-size:14px; }
+        .mu-card .cta { color:#c70101; font-weight:700; text-transform:uppercase; font-size:13px; text-decoration:none; }
+        .mu-slider-btn { background:#fff; border:1px solid #ccc; border-radius:50%; width:36px; height:36px; font-size:22px; color:#000; cursor:pointer; position:absolute; top:45%; transform:translateY(-50%); transition:all .2s ease; }
+        .mu-slider-btn:hover { background:#c70101; color:#fff; }
+        .mu-slider-btn.prev { left:0; }
+        .mu-slider-btn.next { right:0; }
+        @media (max-width:1024px){ .mu-card{flex:0 0 48%;} }
+        @media (max-width:600px){ .mu-card{flex:0 0 85%;} .mu-slider-btn{display:none;} }
+        .mu-slider-track.dragging{cursor:grabbing;}
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const track = document.querySelector('.mu-slider-track');
+            const btnPrev = document.querySelector('.mu-slider-btn.prev');
+            const btnNext = document.querySelector('.mu-slider-btn.next');
+            const scrollAmount = 283;
+            const smoothScrollBy = (distance) => { track.scrollTo({ left: track.scrollLeft + distance, behavior:'smooth' }); };
+            btnPrev.addEventListener('click', () => smoothScrollBy(-scrollAmount));
+            btnNext.addEventListener('click', () => smoothScrollBy(scrollAmount));
+            let isDown=false, startX, scrollLeft;
+            const start=(x)=>{isDown=true; track.classList.add('dragging'); startX=x; scrollLeft=track.scrollLeft;};
+            const move=(x)=>{if(isDown) track.scrollLeft=scrollLeft-(x-startX);};
+            const end=()=>{isDown=false; track.classList.remove('dragging');};
+            track.addEventListener('mousedown', e=>start(e.pageX));
+            track.addEventListener('mousemove', e=>move(e.pageX));
+            window.addEventListener('mouseup', end);
+            track.addEventListener('touchstart', e=>start(e.touches[0].pageX),{passive:true});
+            track.addEventListener('touchmove', e=>move(e.touches[0].pageX),{passive:true});
+            track.addEventListener('touchend', end);
+        });
+    </script>
+
+    <!-- KEY STATS -->
+ <!-- KEY STATS (substituir o bloco antigo por este) -->
+<div class="topscore-container" style="max-width:1200px; margin:0 auto; padding:0 10px 40px 10px;">
+  <section class="key-stats-card">
+    <!-- LEFT: donut + barras -->
+    <div class="ks-left">
+      <div class="ks-title">Estatísticas</div>
+
+      <div class="donut-and-bars">
+        <!-- DONUT -->
+        <div class="donut-new">
+          <svg viewBox="0 0 36 36" class="donut-svg-new" aria-hidden="true">
+            <!-- fundo -->
+            <circle cx="18" cy="18" r="15.5" fill="none" stroke="#e5e7eb" stroke-width="3"></circle>
+
+            <!-- segmento principal (verde) -->
+            <circle cx="18" cy="18" r="15.5" fill="none"
+              stroke="#00D600" stroke-width="3"
+              stroke-dasharray="330 330"
+              stroke-dashoffset="20"
+              stroke-linecap="round"
+              transform="rotate(-90 18 18)"/>
+
+            <!-- pequeno segmento (azul) -->
+            <circle cx="18" cy="18" r="15.5" fill="none"
+              stroke="#1E40FF" stroke-width="3"
+              stroke-dasharray="30 330"
+              stroke-dashoffset="-310"
+              stroke-linecap="round"
+              transform="rotate(-90 18 18)"/>
+          </svg>
+
+          <div class="donut-center-new">
+            <div class="donut-number-new">0</div>
+            <div class="donut-label-new">Jogos</div>
+          </div>
+        </div>
+
+        <!-- BARRAS (Wins / Draws / Defeats) -->
+        <div class="bars-list">
+          <div class="bar-row">
+            <span class="bar-label">Victória</span><span class="bar-value">0</span>
+            <div class="bar-track"><div class="bar-fill wins" style="width:95%"></div></div>
+          </div>
+
+          <div class="bar-row">
+            <span class="bar-label">Empates</span><span class="bar-value">0</span>
+            <div class="bar-track"><div class="bar-fill draws" style="width:10%"></div></div>
+          </div>
+
+          <div class="bar-row">
+            <span class="bar-label">Derrotas</span><span class="bar-value">0</span>
+            <div class="bar-track"><div class="bar-fill defeats" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: os 4 estatísticos que devem permanecer -->
+    <div class="ks-right">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div id="stat-team" class="stat-number">0</div>
+          <div class="stat-label">Golos</div>
+        </div>
+
+        <div class="stat-item">
+          <div id="stat-goals" class="stat-number">0</div>
+          <div class="stat-label">Golos sofridos</div>
+        </div>
+
+        <div class="stat-item">
+          <div id="stat-yellows" class="stat-number">0</div>
+          <div class="stat-label">Cartões Amarelos</div>
+        </div>
+
+        <div class="stat-item">
+          <div id="stat-reds" class="stat-number">0</div>
+          <div class="stat-label">Cartões Vermelhos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CSS específico desta secção (colar no teu <style> global ou manter aqui) -->
+<style>
+/* --- reutilizamos e adaptamos estilos para encaixar no layout existente --- */
+.key-stats-card {
+  background:#fbfdff;
+  border:1px solid #eef2f6;
+  border-radius:12px;
+  padding:18px 28px;
+  display:flex;
+  gap:28px;
+  align-items:flex-start;
+  max-width:1200px;
+  margin:12px auto;
+  box-shadow:0 1px 0 rgba(10,15,28,0.02);
+}
+
+/* Left column */
+.ks-left { width:320px; min-width:260px; }
+.ks-title { font-size:20px; font-weight:700; color:#0a0f1c; margin-bottom:12px; }
+
+/* container donut + barras */
+.donut-and-bars { display:flex; gap:18px; align-items:center; }
+
+/* donut */
+.donut-new { position: relative; width:130px; height:130px; flex:0 0 130px; }
+.donut-svg-new { width:100%; height:100%; display:block; }
+
+.donut-center-new {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  text-align:center;
+}
+.donut-number-new { font-size:26px; font-weight:700; color:#0a0f1c; }
+.donut-label-new { font-size:12px; color:#6b6f7a; margin-top:4px; }
+
+/* barras */
+.bars-list { width:160px; display:flex; flex-direction:column; gap:10px; }
+.bar-row { display:block; }
+.bar-label { font-size:13px; color:#374151; font-weight:600; display:inline-block; }
+.bar-value { float:right; font-size:13px; font-weight:700; color:#111; }
+.bar-track { clear:both; width:100%; height:8px; background:#e5e7eb; border-radius:6px; margin-top:6px; overflow:hidden; }
+.bar-fill { height:100%; border-radius:6px; }
+.bar-fill.wins { background:#00D600; }
+.bar-fill.draws { background:#1E40FF; }
+.bar-fill.defeats { background:#9CA3AF; }
+
+/* Right column (mantemos o teu grid de estatísticas) */
+.ks-right { flex:1; }
+.stats-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+
+.stat-item {
+  display:flex;
+  flex-flow:column nowrap;
+  justify-content:center;
+  border-radius:.8rem;
+  gap:.6rem;
+  color:#0a0f1c;
+  background:#f8fafc;
+  text-align:left;
+  min-height:7.2rem;
+  padding:1.2rem;
+  border:1px solid #eef2f6;
+}
+
+.stat-number { font-size:24px; font-weight:700; color:#0a0f1c; }
+.stat-label { font-size:13px; color:#6b6f7a; margin-top:6px; }
+
+/* Responsivo */
+@media (max-width:900px) {
+  .key-stats-card { flex-direction:column; align-items:stretch; padding:18px; }
+  .donut-and-bars { justify-content:flex-start; }
+  .stats-grid { grid-template-columns:1fr 1fr; }
+  .ks-left { width:auto; min-width:0; }
+}
+@media (max-width:480px) {
+  .bars-list { width:100%; }
+  .donut-new { width:110px; height:110px; }
+  .donut-number-new { font-size:20px; }
+}
+</style>
+
+
+<!-- SQUAD -->
+<div class="topscore-container" style="max-width:1200px; margin:0 auto; padding:0 10px 40px 10px;">
+  <div class="squad-card">
+    <div class="squad-header">
+      <h2>Squad</h2>
+      <div style="display:flex; gap:12px;">
+        <button class="squad-nav-btn">‹</button>
+        <button class="squad-nav-btn">›</button>
+      </div>
+    </div>
+    <div class="squad-carousel">
+      <div class="squad-player"><div class="squad-player-img"><img src="images/player1.jpg" alt="Player"></div><div class="squad-player-name">Álex Baena</div><div class="squad-player-role">Midfielder</div></div>
+      <div class="squad-player"><div class="squad-player-img"><img src="images/player2.jpg" alt="Player"></div><div class="squad-player-name">Almada</div><div class="squad-player-role">Midfielder</div></div>
+      <div class="squad-player"><div class="squad-player-img"><img src="images/player3.jpg" alt="Player"></div><div class="squad-player-name">Alvarez</div><div class="squad-player-role">Forward</div></div>
+      <div class="squad-player"><div class="squad-player-img"><img src="images/player4.jpg" alt="Player"></div><div class="squad-player-name">Barrios</div><div class="squad-player-role">Midfielder</div></div>
+      <div class="squad-player"><div class="squad-player-img"><img src="images/player5.jpg" alt="Player"></div><div class="squad-player-name">Cardoso</div><div class="squad-player-role">Midfielder</div></div>
+    </div>
+  </div>
+</div>
+
+<style>
+.squad-card { background:#fff; padding:32px; border-radius:22px; box-shadow:0 4px 12px rgba(0,0,0,0.05); border:1px solid #e5e7eb;}
+.squad-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:28px;}
+.squad-header h2 { font-size:28px; color:#1e293b; font-weight:600; margin:0;}
+.squad-nav-btn { width:40px; height:40px; border-radius:50%; border:1px solid #cbd5e1; color:#0284c7; background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px;}
+.squad-carousel { display:flex; gap:32px; overflow-x:auto; padding:20px 0;}
+.squad-player { width:120px; flex-shrink:0; text-align:center;}
+.squad-player-img { width:100px; height:100px; margin:auto; border-radius:50%; overflow:hidden; border:1px solid #e2e8f0; box-shadow:0 2px 6px rgba(0,0,0,0.06);}
+.squad-player-img img { width:100%; height:100%; object-fit:cover;}
+.squad-player-name { margin-top:12px; font-size:15px; font-weight:600; color:#334155;}
+.squad-player-role { font-size:12px; color:#94a3b8;}
+</style>
+
+<script>
+const carousel = document.querySelector('.squad-carousel');
+const buttons = document.querySelectorAll('.squad-nav-btn');
+buttons[0].addEventListener('click', () => { carousel.scrollBy({ left:-300, behavior:'smooth' }); });
+buttons[1].addEventListener('click', () => { carousel.scrollBy({ left:300, behavior:'smooth' }); });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// ----------------------
+// CONFIGURAÇÃO DOS SHEETS
+// ----------------------
+const SHEETS = {
+    jogos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=0&single=true&output=csv",
+    equipas: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1253685309&single=true&output=csv",
+    jogadores: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1795344515&single=true&output=csv"
+};
+
+// ----------------------
+// PEGAR PARAMETRO DA URL
+// ----------------------
+function getTeamFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('team') || '';
+}
+const TEAM_NAME = getTeamFromURL();
+
+// ----------------------
+// FUNÇÃO AUXILIAR PARA LER CSV
+// ----------------------
+async function fetchCSV(url) {
+    const res = await fetch(url);
+    const text = await res.text();
+    const lines = text.trim().split("\n");
+    const headers = lines.shift().split(",");
+    return lines.map(line => {
+        const values = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/); // respeita aspas
+        let obj = {};
+        headers.forEach((h,i) => obj[h.trim()] = values[i] ? values[i].trim().replace(/^"|"$/g, "") : "");
+        return obj;
+    });
+}
+
+// ----------------------
+// LIMPAR NOMES
+// ----------------------
+function cleanPlayerName(name) {
+    if(!name) return "";
+    let cleaned = name.replace(/["']/g, "");
+    cleaned = cleaned.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let id = cleaned.toLowerCase().replace(/[^a-z0-9]/g, "");
+    return { display: cleaned, id: id };
+}
+
+// ----------------------
+// CARREGAR DADOS DA EQUIPA
+// ----------------------
+let allTeams = [];
+let allPlayers = [];
+async function loadTeamData() {
+    allTeams = await fetchCSV(SHEETS.equipas);
+    const team = allTeams.find(t => t.Team === TEAM_NAME);
+    if(!team) return console.error("Team not found:", TEAM_NAME);
+
+    document.querySelector(".page-title").textContent = team.Team;
+
+    if(team.Logo){
+        let logo = document.createElement("img");
+        logo.src = team.Logo;
+        logo.alt = team.Team;
+        logo.style.height = "60px";
+        logo.style.marginTop = "10px";
+        document.querySelector(".page-header .dcell .container").appendChild(logo);
+    }
+
+    if(team["background picture"]){
+        document.querySelector(".page-header").style.backgroundImage = `url('${team["background picture"]}')`;
+    }
+}
+
+// ----------------------
+// CARREGAR JOGOS
+// ----------------------
+let allMatches = [];
+async function loadMatches() {
+    allMatches = await fetchCSV(SHEETS.jogos);
+    const teamMatches = allMatches.filter(j => j.HomeTeam === TEAM_NAME || j.AwayTeam === TEAM_NAME);
+    const track = document.querySelector(".mu-slider-track");
+    if(!track) return;
+
+    track.innerHTML = "";
+    teamMatches.forEach(j => {
+        const home = j.HomeTeam, away = j.AwayTeam;
+        const scoreHome = j.HomeGoals || "", scoreAway = j.AwayGoals || "";
+        const homeTeamData = allTeams.find(t => t.Team===home);
+        const awayTeamData = allTeams.find(t => t.Team===away);
+
+        const card = document.createElement("div");
+        card.className = "mu-card";
+        card.innerHTML = `
+            <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
+            <p class="info">${j.Data}, ${j.Time}, ${j["Local do jogo"]}</p>
+            <div class="score">
+                <img src="${homeTeamData?.Logo || '//via.placeholder.com/42'}" alt="${home}">
+                <span>${scoreHome} - ${scoreAway}</span>
+                <img src="${awayTeamData?.Logo || '//via.placeholder.com/42'}" alt="${away}">
+            </div>
+            <div class="teams"><span>${home}</span><span>VS</span><span>${away}</span></div>
+        `;
+        track.appendChild(card);
+    });
+}
+
+// ----------------------
+// CARREGAR JOGADORES / SQUAD
+// ----------------------
+async function loadSquad() {
+    allPlayers = await fetchCSV(SHEETS.jogadores);
+    const teamPlayers = allPlayers.filter(p => p.Team === TEAM_NAME);
+    const carousel = document.querySelector(".squad-carousel");
+    if(!carousel) return;
+
+    carousel.innerHTML = "";
+    teamPlayers.forEach(p => {
+        const { display, id } = cleanPlayerName(p.Player);
+        const div = document.createElement("div");
+        div.className = "squad-player";
+        div.innerHTML = `
+            <a href="jogador.html?player=${encodeURIComponent(id)}">
+                <div class="squad-player-img"><img src="${p.Image}" alt="${display}"></div>
+                <div class="squad-player-name">${display}</div>
+                <div class="squad-player-role">${p.Position}</div>
+            </a>
+        `;
+        carousel.appendChild(div);
+    });
+}
+
+// ----------------------
+// CARREGAR ESTATÍSTICAS
+// ----------------------
+function calculateStats() {
+    // filtrar apenas jogos com resultado
+    const teamMatches = allMatches.filter(j => 
+        (j.HomeTeam === TEAM_NAME || j.AwayTeam === TEAM_NAME) &&
+        j.HomeGoals !== "" && j.AwayGoals !== ""
+    );
+
+    let played = teamMatches.length;
+    let wins=0, draws=0, losses=0;
+    let goalsFor=0, goalsAgainst=0, yellows=0, reds=0;
+
+    teamMatches.forEach(j => {
+        const homeScore = parseInt(j.HomeGoals||0);
+        const awayScore = parseInt(j.AwayGoals||0);
+
+        if(j.HomeTeam === TEAM_NAME){
+            goalsFor += homeScore;
+            goalsAgainst += awayScore;
+
+            // Contar cartões separando por vírgula, ignorando vazios
+            yellows += j.YellowsHome ? j.YellowsHome.split(",").filter(x => x.trim()!=="").length : 0;
+            reds += j.RedsHome ? j.RedsHome.split(",").filter(x => x.trim()!=="").length : 0;
+
+            if(homeScore > awayScore) wins++;
+            else if(homeScore === awayScore) draws++;
+            else losses++;
+        } else {
+            goalsFor += awayScore;
+            goalsAgainst += homeScore;
+
+            yellows += j.YellowsAway ? j.YellowsAway.split(",").filter(x => x.trim()!=="").length : 0;
+            reds += j.RedsAway ? j.RedsAway.split(",").filter(x => x.trim()!=="").length : 0;
+
+            if(awayScore > homeScore) wins++;
+            else if(awayScore === homeScore) draws++;
+            else losses++;
+        }
+    });
+
+    // Atualizar DOM
+    document.querySelector(".donut-value").textContent = played;
+    document.querySelector(".legend-item:nth-child(1) strong").textContent = wins;
+    document.querySelector(".legend-item:nth-child(2) strong").textContent = draws;
+    document.querySelector(".legend-item:nth-child(3) strong").textContent = losses;
+
+    document.getElementById("stat-team").textContent = goalsFor;
+    document.getElementById("stat-goals").textContent = goalsAgainst;
+    document.getElementById("stat-yellows").textContent = yellows;
+    document.getElementById("stat-reds").textContent = reds;
+}
+
+
+// ----------------------
+// INICIALIZAR TUDO
+// ----------------------
+async function initTeamPage() {
+    await loadTeamData();
+    await loadMatches();
+    await loadSquad();
+    calculateStats();
+}
+
+document.addEventListener("DOMContentLoaded", initTeamPage);
+
+// ----------------------
+// SLIDER SQUAD
+// ----------------------
+const squadCarousel = document.querySelector('.squad-carousel');
+const squadButtons = document.querySelectorAll('.squad-nav-btn');
+if(squadButtons[0]) squadButtons[0].addEventListener('click', () => { squadCarousel.scrollBy({ left:-300, behavior:'smooth' }); });
+if(squadButtons[1]) squadButtons[1].addEventListener('click', () => { squadCarousel.scrollBy({ left:300, behavior:'smooth' }); });
+</script>
+</div><!-- #content -->
+
+
+
+
+
+
+
+
+
+    <!-- ========== EQUIPA FIM ========== -->
+
+
+    
+  
+
+  
+  <!-- ========== FOOTER (Bayern-style adapted, minimalized for production) ========== -->
+  <footer class="rio-footer" role="contentinfo" aria-label="Rodapé do site">
+    <div class="rio-footer-top">
+      <div class="rio-ct">
+        <div class="rio-brand">
+          <!-- substitui a src por um logo próprio quando tiveres -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/512px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png" alt="Rios logo" />
+          <div>
+            <p>Rios</p>
+            <div class="muted" style="font-size:.9rem; margin-top:.2rem">Design & Arquitetura Digital</div>
+          </div>
+        </div>
+
+        <nav class="rio-links" aria-label="Links do rodapé">
+          <div>
+            <h4>Competição</h4>
+            <a href="#jogos">Jogos</a>
+            <a href="#tabela">Tabela</a>
+            <a href="#equipas">Equipas</a>
+            <a href="#melhores-marcadores">Melhores Jogadores</a>
+          </div>
+
+          <div>
+            <h4>Informação</h4>
+            <a href="#news">Notícias</a>
+            <a href="#estatisticas">Estatísticas</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#hist">Histórico</a>
+          </div>
+
+          <div>
+            <h4>Clube</h4>
+            <a href="#about">Sobre</a>
+            <a href="#contact">Contacto</a>
+            <a href="#rules">Regulamentos</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="rio-footer-bottom">
+      <div class="rio-bottom-inner">
+        <span>© <span id="rioYear"></span> Rios. Todos os direitos reservados.</span>
+        <div class="rio-legal">
+          <a href="#">Privacidade</a>
+          <a href="#">Termos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== JS (mínimo) ========== -->
+  <script>
+    // Ano automático
+    (function(){ var el = document.getElementById('rioYear'); if(el) el.textContent = new Date().getFullYear(); })();
+    // Fechar o nav ao clicar fora (pequena utilidade)
+    document.addEventListener('click', function(e){
+      var nav = document.getElementById('nav');
+      var toggle = document.querySelector('.nav-toggle');
+      if(!nav || !toggle) return;
+      if(!nav.contains(e.target) && !toggle.contains(e.target)) nav.classList.remove('show');
+    });
+  </script>
+</body>
+</html>
