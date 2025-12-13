@@ -518,6 +518,8 @@
     });
   </script>
 </section>
+
+
 <!--/////////////SCRIPT START/////////////-->
 <script>
 (async () => {
@@ -552,15 +554,19 @@
   // === MAPA DE LOGOTIPOS ===
   const logos = {};
   equipas.forEach(e => {
-    logos[e.Team?.trim()] = e.Logo ? e.Logo.trim() : "";
+    logos[e.Team?.trim()] = e.Logopng ? e.Logopng.trim() : "";
+
   });
 
-  const getLogo = (teamName) => {
-    const logoFile = logos[teamName] || "";
-    return logoFile
-      ? (logoFile.startsWith("http") ? logoFile : `images/${logoFile}`)
-      : "images/default.png";
-  };
+  function getLogo(teamName) {
+  const logoFile = logos[teamName?.trim()];
+  return logoFile
+    ? (logoFile.startsWith("http")
+        ? logoFile
+        : `assets/images/team-logo/${logoFile}`)
+    : "assets/images/team-logo/default.svg";
+}
+
 
   // === CALCULAR ESTATÍSTICAS ===
   const teams = {};

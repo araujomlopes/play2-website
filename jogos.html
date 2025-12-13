@@ -573,11 +573,21 @@ function parseDateTime(d, t) {
   return new Date(year, month-1, day, h, m);
 }
 
+const LOGO_BASE_PATH = "assets/images/team-logo/";
 function renderMatchCard(m, tm) {
   const home = m.HomeTeam || "";
   const away = m.AwayTeam || "";
-  const homeLogo = (tm[home] && tm[home].Logo) ? tm[home].Logo : `imagens/equipas/${normalizeName(home)}.png`;
-  const awayLogo = (tm[away] && tm[away].Logo) ? tm[away].Logo : `imagens/equipas/${normalizeName(away)}.png`;
+  function getLogo(teamName) {
+  const team = tm[teamName];
+  if (!team || !team.Logopng) return `${LOGO_BASE_PATH}default.svg`;
+  // remove espaços e normaliza nomes
+  const fileName = team.Logopng.trim();
+  return `${LOGO_BASE_PATH}${fileName}`;
+}
+
+const homeLogo = getLogo(home);
+const awayLogo = getLogo(away);
+
   const dateText = m.Data || "";
   const localText = m["Local do jogo"] || "";
   const timeText = m.Time || "";

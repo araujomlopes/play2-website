@@ -299,7 +299,7 @@
             golos: 0,
             team: j.Team,
             position: j.Position || "",
-            image: j.Image || "images/silhouette/silhouette64x64.webp"
+            image: j.Image || "/images/silhouette/silhouette64x64.webp"
           };
           if (j.Team) clubSet.add(j.Team);
         });
@@ -358,7 +358,7 @@
               <div class="player-info">
                 <a href="${link}">
                   <img src="${p.image}" class="player-photo" 
-                       onerror="this.onerror=null;this.src='images/silhouette/silhouette64x64.webp';">
+                       onerror="this.onerror=null;this.src='assets/images/silhouette/silhouette64x64.webp';">
                 </a>
                 <div class="player-text">
                   <a href="${link}"><h3>${p.playerName}</h3></a>
