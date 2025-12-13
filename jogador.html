@@ -26,7 +26,13 @@
 
     /* ========== RESET LIGHT ========== */
     *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
+
+    html,body{
+  height:100%;
+  overflow-x:hidden; /* FIX do menu sticky */
+}
+
+    
     body{
       margin:0;
       font-family:system-ui, "Segoe UI", Roboto, -apple-system, "Helvetica Neue", Arial;
@@ -51,14 +57,112 @@
     .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
     /* ========== HEADER ========== */
-    header{
-      background:rgba(255,255,255,0.85);
-      backdrop-filter:blur(4px);
-      border-bottom:1px solid #e5e7eb;
-      position:sticky;
-      top:0;
-      z-index:50;
-    }
+
+
+header{
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(4px);
+  border-bottom:1px solid #e5e7eb;
+  position:sticky;
+  top:0;
+  z-index:999;        /* reforço */
+  isolation:isolate;  /* evita interferência */
+  will-change:transform;
+}
+
+
+.site-header{
+  height:64px;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+
+.brand{
+  font-weight:700;
+  color:var(--accent);
+  text-decoration:none;
+}
+
+.top-links{
+  margin-left:auto;
+  display:flex;
+  gap:1rem;
+}
+
+.top-links a{
+  text-decoration:none;
+  padding:.4rem .8rem;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.nav-toggle{
+  font-size:1.5rem;
+  background:none;
+  border:none;
+  cursor:pointer;
+  display:block;
+}
+
+nav{position:relative}
+
+.nav-list{
+  list-style:none;
+  margin:0;
+  padding:.75rem;
+  display:none;
+  flex-direction:column;
+  gap:.25rem;
+  position:absolute;
+  right:0;
+  top:64px;
+  width:220px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:var(--shadow);
+}
+
+.nav-list.show{display:flex}
+
+.nav-list a{
+  text-decoration:none;
+  padding:.6rem;
+  border-radius:8px;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.nav-list a:hover{
+  background:#f0f4ff;
+  color:var(--accent);
+}
+
+@media(min-width:880px){
+  .nav-toggle{display:none}
+  .nav-list{
+    position:static;
+    display:flex !important;
+    flex-direction:row;
+    background:none;
+    box-shadow:none;
+    padding:0;
+    gap:1rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
     .site-header{height:64px;display:flex;align-items:center;gap:1rem}
     .brand{color:var(--accent);text-decoration:none;font-weight:700;font-size:1.15rem}
     .top-links{margin-left:auto;display:flex;gap:1rem}
@@ -128,42 +232,281 @@
     /* small utility */
     .muted{ color:var(--muted) }
     a{ color:inherit }
+
+
+
+
+
+
+
+
+
+
+/* HEADER-BANER INICIO */
+/* MAIN WRAPPER */
+.header-banner {
+  width: 100%;
+  background: #d6002f;
+  overflow: hidden;
+  position: relative;
+}
+
+/* CONTAINER */
+.player-header-container {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  height: 420px;
+}
+
+/* BACKGROUND */
+.club-header-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.bg-texture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  mix-blend-mode: multiply;
+}
+
+/* CONTENT */
+.player-content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 10px;
+  max-width: 1200px;
+}
+
+/* LEFT INFO */
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* NUMBER */
+.player-number {
+  font-size: 110px;
+  font-weight: 900;
+  line-height: 0.9;
+  color: #fff;
+}
+
+/* NAME */
+.player-name {
+  display: flex;
+  flex-direction: column;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.firstName {
+  font-size: 40px;
+}
+
+.lastName {
+  font-size: 48px;
+  margin-top: -8px;
+}
+
+/* CLUB INFO */
+.club-info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.club-logo {
+  width: 70px;
+  height: 70px;
+}
+
+.club-text {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-weight: 600;
+}
+
+.player-position {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.player-club {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* PLAYER PHOTO */
+.player-photo img
+ {
+    width: auto;
+    height: 90%;
+   
+    inset: auto 0px 0px auto;
+    /* object-fit: contain; */
+    position: absolute;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .player-content {
+    padding: 30px 35px;
+  }
+  .player-photo img {
+    height: 300px;
+  }
+  .player-number {
+    font-size: 90px;
+  }
+}
+
+@media (max-width: 768px) {
+  .player-header-container {
+    height: auto;
+    padding-bottom: 40px;
+  }
+
+  .player-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .player-photo img {
+    align-self: center;
+    height: 260px;
+  }
+
+  .player-number {
+    font-size: 70px;
+  }
+  .firstName { font-size: 32px; }
+  .lastName { font-size: 38px; }
+}
+
+/* HEADER BANNER FIM */
+
+
+
   </style>
 </head>
 
+
 <body>
   <!-- ========== HEADER ========== -->
-  <header>
-    <div class="container site-header">
-      <a href="index.html" class="brand">Rios</a>
+  <header class="main-header">
+  <div class="container site-header">
+    <a href="index.html" class="brand">Rios</a>
 
-      <!-- LINKS FIXOS NO HEADER -->
-      <div class="top-links">
-        <a href="jogos.html">Jogos</a>
-        <a href="tabeladepontuacao.html">Tabela</a>
+    <!-- LINKS FIXOS NO HEADER -->
+    <div class="top-links">
+      <a href="jogos.html">Jogos</a>
+      <a href="tabeladepontuacao.html">Tabela</a>
+    </div>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="
+      const nav = document.getElementById('nav');
+      nav.classList.toggle('show');
+      this.setAttribute('aria-expanded', nav.classList.contains('show') ? 'true' : 'false');
+    ">☰</button>
+
+    <nav>
+      <ul class="nav-list" id="nav" aria-label="Main navigation">
+        <li class="has-submenu">
+          <a href="#estatistica">Estatística</a>
+          <ul class="submenu" aria-label="Estatística submenu">
+            <li><a href="estatisticasjogadores.html">Jogadores</a></li>
+            <li><a href="estatisticasequipa.html">Equipas</a></li>
+            <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
+          </ul>
+        </li>
+        <li><a href="equipas.html">Equipas</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+
+
+<!-- ========== background baner start ========== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ========== background baner inicio ========== -->
+<section class="header-banner">
+  <div class="player-header-container">
+
+    <div class="club-header-background">
+      <img class="bg-texture" 
+           src="https://assets.bundesliga.com/tachyon/background/club/dot-stripe/DFL-CLU-00000G.png"
+           alt="">
+    </div>
+
+    <div class="player-content">
+
+      <div class="player-info">
+        <div class="player-number">1</div>
+
+        <div class="player-name">
+          <span class="firstName">NOME</span>
+          <span class="lastName">APELIDO</span>
+        </div>
+
+        <div class="club-info">
+          <img class="club-logo"
+               src="/assets/clublogo/DFL-CLU-00000G.svg"
+               alt="Club Logo">
+
+          <div class="club-text">
+            <div class="player-position">POSIÇÃO</div>
+            <div class="player-club">EQUIPA</div>
+          </div>
+        </div>
       </div>
 
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="
-        const nav = document.getElementById('nav');
-        nav.classList.toggle('show');
-        this.setAttribute('aria-expanded', nav.classList.contains('show') ? 'true' : 'false');
-      ">☰</button>
+      <div class="player-photo">
+        <img src="https://assets.bundesliga.com/player/dfl-obj-0000i4-dfl-clu-00000g-dfl-sea-0001k9-body.png"
+             alt="Player">
+      </div>
 
-      <nav>
-        <ul class="nav-list" id="nav" aria-label="Main navigation">
-          <li class="has-submenu">
-            <a href="#estatistica">Estatística</a>
-            <ul class="submenu" aria-label="Estatística submenu">
-              <li><a href="estatisticasjogadores.html">Jogadores</a></li>
-              <li><a href="estatisticasequipa.html">Equipas</a></li>
-              <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
-            </ul>
-          </li>
-          <li><a href="equipas.html">Equipas</a></li>
-        </ul>
-      </nav>
     </div>
-  </header>
+  </div>
+</section>
+<!-- ========== background baner fim ========== -->
 
 
   <!-- ========== MAIN ========== -->
@@ -227,29 +570,6 @@
 
 
 
-<div id="content" class="site-content">
-    
-    <div class="page-header dtable text-center header-transparent cr-header"
-         style="background-image: url(../wp-content/uploads/sites/5/2020/06/pheader-portfolio.jpg);">
-
-        <!-- FOTO DO JOGADOR -->
-        <img id="player-photo" class="cristiano-overlay" src="" alt="Foto do Jogador">
-
-        <div class="dcell">
-            <div class="container">
-
-                <!-- NOME DO JOGADOR -->
-                <h1 id="player-name" class="page-title">A carregar...</h1>
-
-                <ul id="breadcrumbs" class="breadcrumbs none-style">
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active">Perfil do Jogador</li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 <!-- PAPA PARSE -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>

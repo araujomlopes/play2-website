@@ -26,7 +26,15 @@
 
     /* ========== RESET LIGHT ========== */
     *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
+
+
+    html,body{
+  height:100%;
+  overflow-x:hidden; /* FIX do menu sticky */
+}
+
+
+
     body{
       margin:0;
       font-family:system-ui, "Segoe UI", Roboto, -apple-system, "Helvetica Neue", Arial;
@@ -52,13 +60,16 @@
 
     /* ========== HEADER ========== */
     header{
-      background:rgba(255,255,255,0.85);
-      backdrop-filter:blur(4px);
-      border-bottom:1px solid #e5e7eb;
-      position:sticky;
-      top:0;
-      z-index:50;
-    }
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(4px);
+  border-bottom:1px solid #e5e7eb;
+  position:sticky;
+  top:0;
+  z-index:999;        /* reforço */
+  isolation:isolate;  /* evita interferência */
+  will-change:transform;
+}
+
     .site-header{height:64px;display:flex;align-items:center;gap:1rem}
     .brand{color:var(--accent);text-decoration:none;font-weight:700;font-size:1.15rem}
     .top-links{margin-left:auto;display:flex;gap:1rem}
@@ -170,8 +181,20 @@
 <main id="main">
    
 
-
-
+<!-- ========== Titulo inicio========== -->
+<div class="page-header_title" style="
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+    padding-bottom: 0px;
+  padding-bottom: 35px;">
+  <h1 class="section--title bigTitle pk-font-size--xl2 pk-font-size-md--xl4">
+    <span class="page-header_title-text">
+      Calendário
+    </span>
+  </h1>
+</div>
+<!-- ========== titulo fim========== -->
 
 
 <!-- ========== JOGOS INICIO ========== -->
@@ -179,16 +202,6 @@
     
 
 
-<div  id="content" class="site-content">
-	        
-            <div class="page-header dtable text-center header-transparent"  style="background-image: url(../wp-content/uploads/sites/5/2020/06/pheader-portfolio.jpg);" >
-                <div class="dcell">
-                    <div class="container">
-                                                    <h1 class="page-title">Jogos e resultados</h1>
-                        <ul id="breadcrumbs" class="breadcrumbs none-style"><li><a href=""></a></li></ul>    
-                            </div>
-                </div>
-            </div>
         
 <style>
   :root{
@@ -269,7 +282,24 @@
   .away-block { justify-content:flex-end; }
 
   .team-logo { width:44px; height:44px; }
-  .team-name { font-size:20px; font-weight:600; color:var(--muted-2); }
+
+  .team-name { font-size:20px; font-weight:600; color:var(--muted-2); 
+  
+  
+  
+  }
+
+
+  .team-name {
+    order: 1;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    max-height: 1.875rem;
+}
+
   .team-sub { font-size:13px; color:var(--muted); }
 
   .match-meta {
@@ -280,11 +310,22 @@
   .match-time {
     font-size:20px;
     font-weight:600;
-    color: white;
-    background:#2C325F;
-    border:1px solid var(--border);
+    color: rgb(56, 55, 55);
+    
+    
     padding:4px 12px;
     border-radius:4px;
+  }
+
+  .match-time {
+    position: relative;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 0px 0.5rem;
+    white-space: nowrap;
   }
 
   .match-actions {
@@ -567,7 +608,7 @@ function renderMatchCard(m, tm) {
       </div>
 
       <div class="match-meta">
-        <div class="match-time">${ hasScore ? `<strong style="font-size:18px;">${hg} — ${ag}</strong>` : (timeText || "--:--") }</div>
+        <div class="match-time">${ hasScore ? `<strong style="font-size:18px;">${hg} : ${ag}</strong>` : (timeText || "--:--") }</div>
       </div>
 
       <div class="away-block">

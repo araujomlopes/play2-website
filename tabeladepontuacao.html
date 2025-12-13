@@ -26,7 +26,15 @@
 
     /* ========== RESET LIGHT ========== */
     *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
+
+
+    html,body{
+  height:100%;
+  overflow-x:hidden; /* FIX do menu sticky */
+}
+
+
+
     body{
       margin:0;
       font-family:system-ui, "Segoe UI", Roboto, -apple-system, "Helvetica Neue", Arial;
@@ -52,13 +60,16 @@
 
     /* ========== HEADER ========== */
     header{
-      background:rgba(255,255,255,0.85);
-      backdrop-filter:blur(4px);
-      border-bottom:1px solid #e5e7eb;
-      position:sticky;
-      top:0;
-      z-index:50;
-    }
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(4px);
+  border-bottom:1px solid #e5e7eb;
+  position:sticky;
+  top:0;
+  z-index:999;        /* reforço */
+  isolation:isolate;  /* evita interferência */
+  will-change:transform;
+}
+
     .site-header{height:64px;display:flex;align-items:center;gap:1rem}
     .brand{color:var(--accent);text-decoration:none;font-weight:700;font-size:1.15rem}
     .top-links{margin-left:auto;display:flex;gap:1rem}
@@ -168,33 +179,7 @@
 
   <!-- ========== MAIN ========== -->
   <main id="main">
-   
 
-
-
-     <!-- ========== JOGADOR INICIO ========== -->
-
-     
-
-
-<div  id="content" class="site-content">
-	        
-            <div class="page-header dtable text-center header-transparent"  style="background-image: url(../wp-content/uploads/sites/5/2020/06/pheader-portfolio.jpg);" >
-                <div class="dcell">
-                    <div class="container">
-                                                    <h1 class="page-title">Tabela de pontuação</h1>
-                        <ul id="breadcrumbs" class="breadcrumbs none-style"><li><a href="http://wpdemo.archiwp.com/theratio"></a></li></ul>    
-                            </div>
-                </div>
-            </div>
-        
-
-
-
-
-
-
-						
 
 
 	<!-- TABELA PONTOS INICIO -->
@@ -436,11 +421,26 @@
 
 
 
+/* === TELAS MUITO PEQUENAS: esconder FORM completamente === */
+@media (max-width: 420px) {
+
+  /* Esconde a coluna Form (header e células) */
+  .uefa-table th:last-child,
+  .uefa-table td:last-child {
+    display: none !important;
+  }
+
+  /* Segurança extra: esconde o container do form */
+  .uefa-table .form {
+    display: none !important;
+  }
+}
+
   </style>
 
   <!-- HEADER -->
   <div class="header-box">
-    <h2 class="title">Liga PRO</h2>
+    <h2 class="title">Tabela</h2>
     <div class="tabs">
       <button class="tab active" data-view="simplified">Resumido</button>
       <button class="tab" data-view="full">Completo</button>

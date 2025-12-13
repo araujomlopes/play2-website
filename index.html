@@ -26,7 +26,15 @@
 
     /* ========== RESET LIGHT ========== */
     *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
+
+    html,body{
+  height:100%;
+  overflow-x:hidden; /* FIX do menu sticky */
+}
+
+
+
+
     body{
       margin:0;
       font-family:system-ui, "Segoe UI", Roboto, -apple-system, "Helvetica Neue", Arial;
@@ -52,13 +60,16 @@
 
     /* ========== HEADER ========== */
     header{
-      background:rgba(255,255,255,0.85);
-      backdrop-filter:blur(4px);
-      border-bottom:1px solid #e5e7eb;
-      position:sticky;
-      top:0;
-      z-index:50;
-    }
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(4px);
+  border-bottom:1px solid #e5e7eb;
+  position:sticky;
+  top:0;
+  z-index:999;        /* reforço */
+  isolation:isolate;  /* evita interferência */
+  will-change:transform;
+}
+
     .site-header{height:64px;display:flex;align-items:center;gap:1rem}
     .brand{color:var(--accent);text-decoration:none;font-weight:700;font-size:1.15rem}
     .top-links{margin-left:auto;display:flex;gap:1rem}
@@ -133,37 +144,37 @@
 
 <body>
   <!-- ========== HEADER ========== -->
-  <header>
-    <div class="container site-header">
-      <a href="index.html" class="brand">Rios</a>
+  <header class="main-header">
+  <div class="container site-header">
+    <a href="index.html" class="brand">Rios</a>
 
-      <!-- LINKS FIXOS NO HEADER -->
-      <div class="top-links">
-        <a href="jogos.html">Jogos</a>
-        <a href="tabeladepontuacao.html">Tabela</a>
-      </div>
-
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="
-        const nav = document.getElementById('nav');
-        nav.classList.toggle('show');
-        this.setAttribute('aria-expanded', nav.classList.contains('show') ? 'true' : 'false');
-      ">☰</button>
-
-      <nav>
-        <ul class="nav-list" id="nav" aria-label="Main navigation">
-          <li class="has-submenu">
-            <a href="#estatistica">Estatística</a>
-            <ul class="submenu" aria-label="Estatística submenu">
-              <li><a href="estatisticasjogadores.html">Jogadores</a></li>
-              <li><a href="estatisticasequipa.html">Equipas</a></li>
-              <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
-            </ul>
-          </li>
-          <li><a href="equipas.html">Equipas</a></li>
-        </ul>
-      </nav>
+    <!-- LINKS FIXOS NO HEADER -->
+    <div class="top-links">
+      <a href="jogos.html">Jogos</a>
+      <a href="tabeladepontuacao.html">Tabela</a>
     </div>
-  </header>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="
+      const nav = document.getElementById('nav');
+      nav.classList.toggle('show');
+      this.setAttribute('aria-expanded', nav.classList.contains('show') ? 'true' : 'false');
+    ">☰</button>
+
+    <nav>
+      <ul class="nav-list" id="nav" aria-label="Main navigation">
+        <li class="has-submenu">
+          <a href="#estatistica">Estatística</a>
+          <ul class="submenu" aria-label="Estatística submenu">
+            <li><a href="estatisticasjogadores.html">Jogadores</a></li>
+            <li><a href="estatisticasequipa.html">Equipas</a></li>
+            <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
+          </ul>
+        </li>
+        <li><a href="equipas.html">Equipas</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
   <!-- ========== MAIN ========== -->
   <main id="main">
@@ -210,7 +221,8 @@
          MODAL — LISTA COMPLETA
          ========================================================= -->
     <div id="modal-full-list"
-      style="position:fixed; inset:0; background:rgba(0,0,0,0.45); display:none; justify-content:center; align-items:flex-start; padding-top:60px; z-index:9999; overflow-x:hidden;">
+      style="position:fixed; inset:0; background:rgba(0,0,0,0.45); display:none; justify-content:center; align-items:flex-start; padding-top:60px; z-index:9999;">
+
       <div style="background:#f1f3f8; width:95%; max-width:1100px; max-height:90vh; overflow-y:auto; padding:20px; border-radius:12px; position:relative; margin:0 auto;">
 
         <!-- Fechar Modal -->
