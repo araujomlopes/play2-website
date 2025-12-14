@@ -303,10 +303,10 @@
 
     <div class="club-header-background">
       <picture>
-        <source media="(min-width: 1440px)" srcset="assets/images/banner/Bahatas/3840x.webp">
-        <source media="(min-width: 768px)" srcset="assets/images/banner/Bahatas/2560x400.webp">
-        <source media="(max-width: 767px)" srcset="assets/images/banner/Bahatas/920x433.webp">
-        <img src="assets/images/banner/Bahatas/3840x.webp" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;">
+        <source media="(min-width: 1440px)" srcset="/assets/images/banner/Bahatas/3840x.webp">
+        <source media="(min-width: 768px)" srcset="/assets/images/banner/Bahatas/2560x400.webp">
+        <source media="(max-width: 767px)" srcset="/assets/images/banner/Bahatas/920x433.webp">
+        <img src="/assets/images/banner/Bahatas/3840x.webp" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;">
       </picture>
     </div>
 
@@ -676,8 +676,6 @@ buttons[1].addEventListener('click', () => { carousel.scrollBy({ left:300, behav
 
 
 
-
-
 <script>
 // ----------------------
 // CONFIGURAÇÃO DOS SHEETS
@@ -753,17 +751,16 @@ async function loadTeamData() {
     if(sponsorElem && sponsorData && sponsorData.Sponsor) sponsorElem.textContent = sponsorData.Sponsor;
 
     // Atualiza banner a partir da pasta local \assets\images\banner\[nome equipa]\
-const bgPicture = document.querySelector(".club-header-background picture");
-if(bgPicture){
-    // Limpa qualquer conteúdo antigo
-    bgPicture.innerHTML = `
-        <source media="(min-width: 1440px)" srcset="assets/images/banner/${TEAM_NAME}/3840x.webp">
-        <source media="(min-width: 768px)" srcset="assets/images/banner/${TEAM_NAME}/2560x400.webp">
-        <source media="(max-width: 767px)" srcset="assets/images/banner/${TEAM_NAME}/920x433.webp">
-        <img src="assets/images/banner/${TEAM_NAME}/3840x.webp" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;">
-    `;
-}
-
+    const bgPicture = document.querySelector(".club-header-background picture");
+    if(bgPicture){
+        // Limpa qualquer conteúdo antigo
+        bgPicture.innerHTML = `
+            <source media="(min-width: 1440px)" srcset="assets/images/banner/${TEAM_NAME}/3840x.webp">
+            <source media="(min-width: 768px)" srcset="assets/images/banner/${TEAM_NAME}/2560x400.webp">
+            <source media="(max-width: 767px)" srcset="assets/images/banner/${TEAM_NAME}/920x433.webp">
+            <img src="assets/images/banner/${TEAM_NAME}/3840x.webp" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;">
+        `;
+    }
 }
 
 // ----------------------
@@ -788,11 +785,10 @@ async function loadMatches() {
             <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
             <p class="info">${j.Data}, ${j.Time}, ${j["Local do jogo"]}</p>
             <div class="score">
-    <img src="assets/images/team-logo/${homeTeamData?.Logopng || 'placeholder.svg'}" alt="${home}">
-    <span>${scoreHome} - ${scoreAway}</span>
-    <img src="assets/images/team-logo/${awayTeamData?.Logopng || 'placeholder.svg'}" alt="${away}">
-</div>
-
+                <img src="assets/images/team-logo/${homeTeamData?.Logopng || 'placeholder.svg'}" alt="${home}">
+                <span>${scoreHome} - ${scoreAway}</span>
+                <img src="assets/images/team-logo/${awayTeamData?.Logopng || 'placeholder.svg'}" alt="${away}">
+            </div>
             <div class="teams"><span>${home}</span><span>VS</span><span>${away}</span></div>
         `;
         track.appendChild(card);
@@ -1036,4 +1032,3 @@ document.addEventListener("DOMContentLoaded", () => {
   </script>
 </body>
 </html>
-
