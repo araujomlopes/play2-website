@@ -220,7 +220,7 @@
 }
 
 .header-banner {
-  background: url("/assets/3840x.webp") center center / cover no-repeat;
+  background: url("/assets/images/banner/Bahatas/3840x.webp") center center / cover no-repeat;
 }
 
 .team-info{
@@ -303,10 +303,10 @@
 
     <div class="club-header-background">
       <picture>
-        <source media="(min-width: 1440px)" srcset="/assets/3840x.webp">
-        <source media="(min-width: 768px)" srcset="/assets/2560x400.webp">
-        <source media="(max-width: 767px)" srcset="/assets/920x433.webp">
-        <img src="/assets/920x433.webp" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;">
+        <source media="(min-width: 1440px)" srcset="/assets/images/banner/Bahatas/3840x.webp">
+        <source media="(min-width: 768px)" srcset="/assets/images/banner/Bahatas/2560x400.webp">
+        <source media="(max-width: 767px)" srcset="/assets/images/banner/Bahatas/920x433.webp">
+        <img src="/assets/images/banner/Bahatas/3840x.webp" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;">
       </picture>
     </div>
 
@@ -685,7 +685,8 @@ buttons[1].addEventListener('click', () => { carousel.scrollBy({ left:300, behav
 const SHEETS = {
     jogos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=0&single=true&output=csv",
     equipas: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1253685309&single=true&output=csv",
-    jogadores: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1795344515&single=true&output=csv"
+    jogadores: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1795344515&single=true&output=csv",
+    sponsors: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1241588928&single=true&output=csv"
 };
 
 // ----------------------
@@ -706,7 +707,7 @@ async function fetchCSV(url) {
     const lines = text.trim().split("\n");
     const headers = lines.shift().split(",");
     return lines.map(line => {
-        const values = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/); // respeita aspas
+        const values = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/); 
         let obj = {};
         headers.forEach((h,i) => obj[h.trim()] = values[i] ? values[i].trim().replace(/^"|"$/g, "") : "");
         return obj;
@@ -725,35 +726,49 @@ function cleanPlayerName(name) {
 }
 
 // ----------------------
-// CARREGAR DADOS DA EQUIPA
+// VARIÁVEIS GLOBAIS
 // ----------------------
 let allTeams = [];
 let allPlayers = [];
+let allMatches = [];
+
+// ----------------------
+// CARREGAR DADOS DA EQUIPA
+// ----------------------
 async function loadTeamData() {
     allTeams = await fetchCSV(SHEETS.equipas);
     const team = allTeams.find(t => t.Team === TEAM_NAME);
     if(!team) return console.error("Team not found:", TEAM_NAME);
 
-    document.querySelector(".page-title").textContent = team.Team;
+    // Atualiza título da equipa
+    const headerTitle = document.querySelector(".team-title");
+    if(headerTitle) headerTitle.textContent = team.Team;
 
-    if(team.Logo){
-        let logo = document.createElement("img");
-        logo.src = team.Logo;
-        logo.alt = team.Team;
-        logo.style.height = "60px";
-        logo.style.marginTop = "10px";
-        document.querySelector(".page-header .dcell .container").appendChild(logo);
-    }
+    // ----------------------
+    // Atualiza nome do sponsor usando a sheet "sponsors"
+    // ----------------------
+    const allSponsors = await fetchCSV(SHEETS.sponsors);
+    const sponsorData = allSponsors.find(s => s.Equipa === TEAM_NAME);
+    const sponsorElem = document.querySelector(".team-sponsor");
+    if(sponsorElem && sponsorData && sponsorData.Sponsor) sponsorElem.textContent = sponsorData.Sponsor;
 
-    if(team["background picture"]){
-        document.querySelector(".page-header").style.backgroundImage = `url('${team["background picture"]}')`;
-    }
+    // Atualiza banner a partir da pasta local \assets\images\banner\[nome equipa]\
+const bgPicture = document.querySelector(".club-header-background picture");
+if(bgPicture){
+    // Limpa qualquer conteúdo antigo
+    bgPicture.innerHTML = `
+        <source media="(min-width: 1440px)" srcset="/assets/images/banner/${TEAM_NAME}/3840x.webp">
+        <source media="(min-width: 768px)" srcset="/assets/images/banner/${TEAM_NAME}/2560x400.webp">
+        <source media="(max-width: 767px)" srcset="/assets/images/banner/${TEAM_NAME}/920x433.webp">
+        <img src="/assets/images/banner/${TEAM_NAME}/3840x.webp" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;">
+    `;
+}
+
 }
 
 // ----------------------
 // CARREGAR JOGOS
 // ----------------------
-let allMatches = [];
 async function loadMatches() {
     allMatches = await fetchCSV(SHEETS.jogos);
     const teamMatches = allMatches.filter(j => j.HomeTeam === TEAM_NAME || j.AwayTeam === TEAM_NAME);
@@ -773,10 +788,11 @@ async function loadMatches() {
             <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
             <p class="info">${j.Data}, ${j.Time}, ${j["Local do jogo"]}</p>
             <div class="score">
-                <img src="${homeTeamData?.Logo || '//via.placeholder.com/42'}" alt="${home}">
-                <span>${scoreHome} - ${scoreAway}</span>
-                <img src="${awayTeamData?.Logo || '//via.placeholder.com/42'}" alt="${away}">
-            </div>
+    <img src="/assets/images/team-logo/${homeTeamData?.Logopng || 'placeholder.svg'}" alt="${home}">
+    <span>${scoreHome} - ${scoreAway}</span>
+    <img src="/assets/images/team-logo/${awayTeamData?.Logopng || 'placeholder.svg'}" alt="${away}">
+</div>
+
             <div class="teams"><span>${home}</span><span>VS</span><span>${away}</span></div>
         `;
         track.appendChild(card);
@@ -799,7 +815,7 @@ async function loadSquad() {
         div.className = "squad-player";
         div.innerHTML = `
             <a href="jogador.html?player=${encodeURIComponent(id)}">
-                <div class="squad-player-img"><img src="${p.Image}" alt="${display}"></div>
+                <div class="squad-player-img"><img src="${p["Image png 75x75px"] || p.Image}" alt="${display}"></div>
                 <div class="squad-player-name">${display}</div>
                 <div class="squad-player-role">${p.Position}</div>
             </a>
@@ -809,17 +825,27 @@ async function loadSquad() {
 }
 
 // ----------------------
-// CARREGAR ESTATÍSTICAS
+// CALCULAR E ANIMAR ESTATÍSTICAS
 // ----------------------
+function animateDonut(fromValue, toValue, duration, callback) {
+    const start = performance.now();
+    function animate(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = fromValue + (toValue - fromValue) * progress;
+        callback(value);
+        if(progress < 1) requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+}
+
 function calculateStats() {
-    // filtrar apenas jogos com resultado
-    const teamMatches = allMatches.filter(j => 
+    const teamMatches = allMatches.filter(j =>
         (j.HomeTeam === TEAM_NAME || j.AwayTeam === TEAM_NAME) &&
         j.HomeGoals !== "" && j.AwayGoals !== ""
     );
 
-    let played = teamMatches.length;
-    let wins=0, draws=0, losses=0;
+    let wins=0, draws=0, defeats=0;
     let goalsFor=0, goalsAgainst=0, yellows=0, reds=0;
 
     teamMatches.forEach(j => {
@@ -829,39 +855,65 @@ function calculateStats() {
         if(j.HomeTeam === TEAM_NAME){
             goalsFor += homeScore;
             goalsAgainst += awayScore;
-
-            // Contar cartões separando por vírgula, ignorando vazios
-            yellows += j.YellowsHome ? j.YellowsHome.split(",").filter(x => x.trim()!=="").length : 0;
-            reds += j.RedsHome ? j.RedsHome.split(",").filter(x => x.trim()!=="").length : 0;
-
+            yellows += j.YellowsHome ? j.YellowsHome.split(",").filter(x=>x.trim()!=="").length : 0;
+            reds += j.RedsHome ? j.RedsHome.split(",").filter(x=>x.trim()!=="").length : 0;
             if(homeScore > awayScore) wins++;
             else if(homeScore === awayScore) draws++;
-            else losses++;
+            else defeats++;
         } else {
             goalsFor += awayScore;
             goalsAgainst += homeScore;
-
-            yellows += j.YellowsAway ? j.YellowsAway.split(",").filter(x => x.trim()!=="").length : 0;
-            reds += j.RedsAway ? j.RedsAway.split(",").filter(x => x.trim()!=="").length : 0;
-
+            yellows += j.YellowsAway ? j.YellowsAway.split(",").filter(x=>x.trim()!=="").length : 0;
+            reds += j.RedsAway ? j.RedsAway.split(",").filter(x=>x.trim()!=="").length : 0;
             if(awayScore > homeScore) wins++;
             else if(awayScore === homeScore) draws++;
-            else losses++;
+            else defeats++;
         }
     });
 
-    // Atualizar DOM
-    document.querySelector(".donut-value").textContent = played;
-    document.querySelector(".legend-item:nth-child(1) strong").textContent = wins;
-    document.querySelector(".legend-item:nth-child(2) strong").textContent = draws;
-    document.querySelector(".legend-item:nth-child(3) strong").textContent = losses;
+    const total = wins + draws + defeats;
+    const CIRC = 97.4;
 
+    const donutWins  = document.querySelector(".donut-svg-new circle:nth-of-type(2)");
+    const donutDraws = document.querySelector(".donut-svg-new circle:nth-of-type(3)");
+
+    animateDonut(0, total ? (wins/total)*CIRC : 0, 1000, val => {
+        if(donutWins) donutWins.setAttribute("stroke-dasharray", `${val} ${CIRC - val}`);
+        if(donutWins) donutWins.setAttribute("stroke-dashoffset", 0);
+    });
+
+    animateDonut(0, total ? (draws/total)*CIRC : 0, 1000, val => {
+        if(donutDraws) donutDraws.setAttribute("stroke-dasharray", `${val} ${CIRC - val}`);
+        if(donutDraws) donutDraws.setAttribute("stroke-dashoffset", -((wins/total)*CIRC));
+    });
+
+    animateDonut(0, total, 1000, val => {
+        const donutNum = document.querySelector(".donut-number-new");
+        if(donutNum) donutNum.textContent = Math.round(val);
+    });
+
+    // animação das barras
+    const barWin = document.querySelector(".bar-fill.wins");
+    const barDraw = document.querySelector(".bar-fill.draws");
+    const barDef = document.querySelector(".bar-fill.defeats");
+    animateDonut(0, total ? (wins/total*100) : 0, 1000, val => { if(barWin) barWin.style.width = val+"%"; });
+    animateDonut(0, total ? (draws/total*100) : 0, 1000, val => { if(barDraw) barDraw.style.width = val+"%"; });
+    animateDonut(0, total ? (defeats/total*100) : 0, 1000, val => { if(barDef) barDef.style.width = val+"%"; });
+
+    // Atualiza números das barras
+    const barValues = document.querySelectorAll(".bar-row .bar-value");
+    if(barValues.length>=3){
+        barValues[0].textContent = wins;
+        barValues[1].textContent = draws;
+        barValues[2].textContent = defeats;
+    }
+
+    // Cards da direita
     document.getElementById("stat-team").textContent = goalsFor;
     document.getElementById("stat-goals").textContent = goalsAgainst;
     document.getElementById("stat-yellows").textContent = yellows;
     document.getElementById("stat-reds").textContent = reds;
 }
-
 
 // ----------------------
 // INICIALIZAR TUDO
@@ -882,18 +934,37 @@ const squadCarousel = document.querySelector('.squad-carousel');
 const squadButtons = document.querySelectorAll('.squad-nav-btn');
 if(squadButtons[0]) squadButtons[0].addEventListener('click', () => { squadCarousel.scrollBy({ left:-300, behavior:'smooth' }); });
 if(squadButtons[1]) squadButtons[1].addEventListener('click', () => { squadCarousel.scrollBy({ left:300, behavior:'smooth' }); });
+
+// ----------------------
+// SLIDER DE JOGOS
+// ----------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const track = document.querySelector('.mu-slider-track');
+    const btnPrev = document.querySelector('.mu-slider-btn.prev');
+    const btnNext = document.querySelector('.mu-slider-btn.next');
+    if(!track) return;
+    const scrollAmount = 283;
+    const smoothScrollBy = (distance) => { track.scrollTo({ left: track.scrollLeft + distance, behavior:'smooth' }); };
+    btnPrev?.addEventListener('click', () => smoothScrollBy(-scrollAmount));
+    btnNext?.addEventListener('click', () => smoothScrollBy(scrollAmount));
+
+    let isDown=false, startX, scrollLeft;
+    const start=(x)=>{isDown=true; track.classList.add('dragging'); startX=x; scrollLeft=track.scrollLeft;};
+    const move=(x)=>{if(isDown) track.scrollLeft=scrollLeft-(x-startX);};
+    const end=()=>{isDown=false; track.classList.remove('dragging');};
+    track.addEventListener('mousedown', e=>start(e.pageX));
+    track.addEventListener('mousemove', e=>move(e.pageX));
+    window.addEventListener('mouseup', end);
+    track.addEventListener('touchstart', e=>start(e.touches[0].pageX),{passive:true});
+    track.addEventListener('touchmove', e=>move(e.touches[0].pageX),{passive:true});
+    track.addEventListener('touchend', end);
+});
 </script>
-</div><!-- #content -->
 
 
-
-
-
-
-
-
-
-    <!-- ========== EQUIPA FIM ========== -->
+</div>
+<!-- #content -->
+<!-- ========== EQUIPA FIM ========== -->
 
 
     
