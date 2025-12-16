@@ -205,6 +205,7 @@
     gap:22px;
   }
 
+  
   .team-card {
     background:#ffffff;
     border:1px solid #e5e7eb;
@@ -240,6 +241,7 @@
     color:#0a0f1c;
     letter-spacing:-0.2px;
   }
+  
 
   .team-stadium {
     font-size:15px;
@@ -271,6 +273,8 @@
       font-size:14px;
     }
   }
+
+  
 </style>
 
 
@@ -374,6 +378,17 @@
 
 <!-- SCRIPT GOOGLE SHEETS SPONSORS -->
 <script>
+  // Cores oficiais de cada equipa inicio
+const teamColors = {
+  "007Q FC": "#d6002f",
+  "Ubuntu UD": "#ff9f00",
+  "Bahatas": "#0066cc",
+  "Proletariado": "#009944",
+  "Vanghanu VM": "#800080",
+  "Chitas De Aço": "#f2c500"
+};
+ // Cores oficiais de cada equipa fim
+
 async function loadSponsors() {
   const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1241588928&single=true&output=csv";
 
@@ -410,6 +425,32 @@ async function loadSponsors() {
 }
 
 loadSponsors();
+
+
+
+
+// Hover com cor da equipa inicio
+// Hover com cor da equipa e texto branco temporário
+document.querySelectorAll(".team-card").forEach(card => {
+  const teamName = card.querySelector(".team-name").textContent.trim();
+  const color = teamColors[teamName] || "#e5e7eb"; // fallback cor da equipa
+
+  card.addEventListener("mouseenter", () => {
+    card.style.backgroundColor = color;
+    // todo o texto branco enquanto o mouse estiver sobre o card
+    card.querySelectorAll("*").forEach(el => el.style.color = "#fff");
+    card.style.transition = "0.3s ease";
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.backgroundColor = "#fff"; // cor original do card
+    // todo o texto volta à cor preta
+    card.querySelectorAll("*").forEach(el => el.style.color = "#000");
+  });
+});
+
+
+// Hover com cor da equipa fim
 </script>
 
 

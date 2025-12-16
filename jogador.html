@@ -255,7 +255,7 @@ nav{position:relative}
 .player-header-container {
   position: relative;
   width: 100%;
-  max-width: 1920px;
+  
   margin: 0 auto;
   height: 420px;
 }
@@ -268,12 +268,13 @@ nav{position:relative}
 }
 
 .bg-texture {
+height: 100%;
+  position: relative;
   width: 100%;
-  height: 100%;
   object-fit: cover;
-  opacity: 0.25;
-  mix-blend-mode: multiply;
+  inset: 0px;
 }
+
 
 /* CONTENT */
 .player-content {
@@ -399,6 +400,8 @@ nav{position:relative}
   .lastName { font-size: 38px; }
 }
 
+
+
 /* HEADER BANNER FIM */
 
 
@@ -433,6 +436,7 @@ nav{position:relative}
             <li><a href="estatisticasjogadores.html">Jogadores</a></li>
             <li><a href="estatisticasequipa.html">Equipas</a></li>
             <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
+            <li><a href="player.html?name=Guga">test</a></li>
           </ul>
         </li>
         <li><a href="equipas.html">Equipas</a></li>
@@ -445,52 +449,49 @@ nav{position:relative}
 
 
 
-<!-- ========== background baner start ========== -->
+<!-- ========== NOVO CODICO  start ========== -->
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ========== background baner inicio ========== -->
+<!-- ===============================
+        HEADER + FOTO DO JOGADOR
+================================= -->
 <section class="header-banner">
   <div class="player-header-container">
+<div class="club-header-background">
+  <picture>
+    <!-- Desktop grande / ultra-wide -->
+    <source
+      media="(min-width: 1440px)"
+      srcset="\assets\images\banner_players\1920.webp">
 
-    <div class="club-header-background">
-      <img class="bg-texture" 
-           src="https://assets.bundesliga.com/tachyon/background/club/dot-stripe/DFL-CLU-00000G.png"
-           alt="">
-    </div>
+    <!-- Laptop / tablet -->
+    <source
+      media="(min-width: 640px)"
+      srcset="\assets\images\banner_players\1200.webp">
+
+    <!-- Mobile (fallback) -->
+    <img
+      class="bg-texture"
+      src="\assets\images\banner_players\800.webp"
+      alt="Banner do jogador"
+      loading="eager"
+      decoding="sync">
+  </picture>
+</div>
+
+
 
     <div class="player-content">
-
       <div class="player-info">
         <div class="player-number">1</div>
-
         <div class="player-name">
           <span class="firstName">NOME</span>
           <span class="lastName">APELIDO</span>
         </div>
 
         <div class="club-info">
-          <img class="club-logo"
-               src="/assets/clublogo/DFL-CLU-00000G.svg"
-               alt="Club Logo">
-
+          <img class="club-logo" src="/assets/clublogo/DFL-CLU-00000G.svg" alt="Club Logo">
           <div class="club-text">
             <div class="player-position">POSIÇÃO</div>
             <div class="player-club">EQUIPA</div>
@@ -499,160 +500,29 @@ nav{position:relative}
       </div>
 
       <div class="player-photo">
-        <img src="https://assets.bundesliga.com/player/dfl-obj-0000i4-dfl-clu-00000g-dfl-sea-0001k9-body.png"
-             alt="Player">
+        <img src="https://assets.bundesliga.com/player/dfl-obj-0000i4-dfl-clu-00000g-dfl-sea-0001k9-body.png" alt="Player">
       </div>
-
     </div>
   </div>
 </section>
-<!-- ========== background baner fim ========== -->
 
-
-  <!-- ========== MAIN ========== -->
-  <main id="main">
-   
-
-
-
-     <!-- ========== JOGADOR INICIO ========== -->
-
-     
-
-<style>
-/* ============================
-   HEADER + FOTO DO JOGADOR
-============================ */
-
-.page-header.cr-header {
-    position: relative !important;
-    overflow: hidden !important;
-}
-
-.cristiano-overlay {
-    position: absolute;
-    bottom: 10px;      
-    right: 10px;       
-    width: 500px;      
-    z-index: 20;
-    pointer-events: none;
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.35));
-    transition: 0.3s ease;
-}
-
-/* Nome acima da foto no MOBILE */
-@media (max-width: 700px) {
-    .cristiano-overlay {
-        width: 340px;
-        right: 50%;
-        transform: translateX(50%);
-        bottom: -30px;
-    }
-    #player-name {
-        margin-bottom: 150px;
-        font-size: 28px;
-    }
-}
-
-/* ÍCONES CARTÕES */
-.card-icon {
-    width: 16px;
-    height: 22px;
-    display: inline-block;
-    margin-left: 6px;
-    vertical-align: middle;
-}
-.card-yellow { background: #FFD500; border:1px solid #c7a700; }
-.card-red    { background: #E00000; border:1px solid #9b0000; }
-</style>
-
-
-
-
-
-
-<!-- PAPA PARSE -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-
-
-
-
+<!-- ===============================
+        KEY STATS DO JOGADOR
+================================= -->
 <div class="topscore-container" style="max-width:1200px; margin:0 auto; padding:0 10px;">
-
-<style>
-:root{
-  --bg:#fff; --muted:#6b6f7a; --heading:#0a0f1c;
-  --accent:#0055a4; --pink:#ff3b94; --teal:#00c6b8; --card-bg:#fbfdff; --radius:12px;
-}
-
-.key-stats-card{
-  background:var(--card-bg);
-  border:1px solid #eef2f6;
-  border-radius:var(--radius);
-  padding:28px;
-  display:flex;
-  gap:28px;
-  align-items:flex-start;
-  max-width:1200px;
-  margin:12px auto;
-  box-shadow:0 1px 0 rgba(10,15,28,0.02);
-}
-
-.ks-left{width:260px; min-width:220px}
-.ks-title{font-size:20px; font-weight:700; color:var(--heading); margin-bottom:18px}
-.donut-wrap{display:flex; gap:18px; align-items:center}
-.donut-svg{width:130px; height:130px}
-.donut-center{position:relative; width:130px; height:130px; display:flex; align-items:center; justify-content:center}
-.donut-value{font-size:28px; font-weight:700; color:var(--heading)}
-.donut-sub{font-size:12px; color:var(--muted); margin-top:4px}
-.donut-legend{display:flex; flex-direction:column; gap:12px}
-.legend-item{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted)}
-.legend-dot{width:10px; height:10px; border-radius:10px}
-.see-all{display:inline-block; margin-top:20px; padding:10px 20px; border-radius:8px; border:1px solid #3b73ff; color:#2053ff; text-decoration:none; font-weight:600}
-.ks-right{flex:1}
-.stats-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
-.stat-item{min-height:54px}
-.stat-number{font-size:24px; font-weight:700; color:var(--heading)}
-.stat-label{font-size:13px; color:var(--muted); margin-top:6px}
-
-/* MOBILE */
-@media (max-width:900px){
-  .key-stats-card{flex-direction:column; align-items:stretch;}
-  .stats-grid{grid-template-columns:1fr 1fr; gap:14px;}
-}
-</style>
-
- <!-- KEY STATS -->
- <!-- KEY STATS (substituir o bloco antigo por este) -->
-<div class="topscore-container" style="max-width:1200px; margin:0 auto; padding:0 10px 40px 0px;">
-	
   <section class="key-stats-card">
     <!-- LEFT: donut + barras -->
     <div class="ks-left">
       <div class="ks-title">Estatísticas</div>
-
       <div class="donut-and-bars">
         <!-- DONUT -->
         <div class="donut-new">
           <svg viewBox="0 0 36 36" class="donut-svg-new" aria-hidden="true">
-            <!-- fundo -->
             <circle cx="18" cy="18" r="15.5" fill="none" stroke="#e5e7eb" stroke-width="3"></circle>
-
-            <!-- segmento principal (verde) -->
-            <circle cx="18" cy="18" r="15.5" fill="none"
-              stroke="#00D600" stroke-width="3"
-              stroke-dasharray="330 330"
-              stroke-dashoffset="20"
-              stroke-linecap="round"
-              transform="rotate(-90 18 18)"/>
-
-            <!-- pequeno segmento (azul) -->
-            <circle cx="18" cy="18" r="15.5" fill="none"
-              stroke="#1E40FF" stroke-width="3"
-              stroke-dasharray="30 330"
-              stroke-dashoffset="-310"
-              stroke-linecap="round"
-              transform="rotate(-90 18 18)"/>
+            <circle cx="18" cy="18" r="15.5" fill="none" stroke="#00D600" stroke-width="3"
+                    stroke-dasharray="330 330" stroke-dashoffset="20" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+            <circle cx="18" cy="18" r="15.5" fill="none" stroke="#1E40FF" stroke-width="3"
+                    stroke-dasharray="30 330" stroke-dashoffset="-310" stroke-linecap="round" transform="rotate(-90 18 18)"/>
           </svg>
 
           <div class="donut-center-new">
@@ -667,12 +537,10 @@ nav{position:relative}
             <span class="bar-label">Victórias</span><span class="bar-value">0</span>
             <div class="bar-track"><div class="bar-fill wins" style="width:95%"></div></div>
           </div>
-
           <div class="bar-row">
             <span class="bar-label">Empates</span><span class="bar-value">0</span>
             <div class="bar-track"><div class="bar-fill draws" style="width:10%"></div></div>
           </div>
-
           <div class="bar-row">
             <span class="bar-label">Derrotas</span><span class="bar-value">0</span>
             <div class="bar-track"><div class="bar-fill defeats" style="width:0%"></div></div>
@@ -681,61 +549,177 @@ nav{position:relative}
       </div>
     </div>
 
-    <!-- RIGHT: os 4 estatísticos que devem permanecer -->
+    <!-- RIGHT: grid de estatísticas -->
     <div class="ks-right">
       <div class="stats-grid">
-        <div class="stat-item">
-          <div id="stat-team" class="stat-number">0</div>
-          <div class="stat-label">Posição</div>
-        </div>
-
-        <div class="stat-item">
-          <div id="stat-goals" class="stat-number">0</div>
-          <div class="stat-label">Número</div>
-        </div>
-
-        <div class="stat-item">
-          <div id="stat-yellows" class="stat-number">0</div>
-          <div class="stat-label">Província</div>
-        </div>
-
-        <div class="stat-item">
-          <div id="stat-yellows" class="stat-number">0</div>
-          <div class="stat-label">Data de nascimento</div>
-        </div>
-
-				
-        <div class="stat-item">
-          <div id="stat-yellows" class="stat-number">0</div>
-          <div class="stat-label">Golos</div>
-        </div>
-
-				<div class="stat-item">
-          <div id="stat-yellows" class="stat-number">0</div>
-          <div class="stat-label">Cartão amarelo</div>
-        </div>
-
-				<div class="stat-item">
-          <div id="stat-yellows" class="stat-number">0</div>
-          <div class="stat-label">Cartão vermelho</div>
-        </div>
-
-        <div class="stat-item">
-          <div id="stat-reds" class="stat-number">0</div>
-          <div class="stat-label">Cartão amarelo vermelho</div>
-        </div>
+        <div class="stat-item"><div class="stat-number" id="birthdate">0</div><div class="stat-label">Data de nascimento</div></div>
+        <div class="stat-item"><div class="stat-number" id="birthplace">0</div><div class="stat-label">Local de Nascimento</div></div>
+        <div class="stat-item"><div class="stat-number" id="nationality">0</div><div class="stat-label">Nacionalidade</div></div>
+        <div class="stat-item"><div class="stat-number" id="height">0</div><div class="stat-label">Altura</div></div>
+        <div class="stat-item"><div class="stat-number" id="preferredFoot">0</div><div class="stat-label">Pé preferido</div></div>
+        <div class="stat-item"><div class="stat-number" id="clubSince">0</div><div class="stat-label">No clube desde</div></div>
+        <div class="stat-item"><div class="stat-number" id="goals">0</div><div class="stat-label">Golos</div></div>
+        <div class="stat-item"><div class="stat-number" id="yellowCards">0</div><div class="stat-label">Cartão amarelo</div></div>
+        <div class="stat-item"><div class="stat-number" id="redCards">0</div><div class="stat-label">Cartão vermelho</div></div>
+        <div class="stat-item"><div class="stat-number" id="yellowRedCards">0</div><div class="stat-label">Cartão amarelo vermelho</div></div>
       </div>
     </div>
   </section>
 </div>
 
-<!-- CSS específico desta secção (colar no teu <style> global ou manter aqui) -->
+<!-- ===============================
+        JORNADAS / SLIDER DE JOGOS
+================================= -->
+<div class="tabelapontos-container" style="max-width:1200px; margin:0 auto; padding:0 10px;">
+  <section class="mu-slider-wrapper">
+    <div class="mu-slider-head">
+      <h2 class="mu-slider-title">
+        <span class="jogos">Jogos</span>
+        <a href="#" class="mu-slider-link">Ver todos Jogos</a>
+      </h2>
+    </div>
+
+    <div class="mu-slider">
+      <button class="mu-slider-btn prev" aria-label="Previous">‹</button>
+      <div class="mu-slider-track">
+        <!-- MATCH CARDS aqui serão preenchidas via JS -->
+      </div>
+      <button class="mu-slider-btn next" aria-label="Next">›</button>
+    </div>
+  </section>
+</div>
+
+<!-- ===============================
+        SCRIPTS PARA GOOGLE SHEETS
+================================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+<script>
+  // ===============================
+  // CONFIGURAÇÃO: URL DO CSV / SHEET
+  const SHEET_CSV_URL = 'LINK_DO_SEU_CSV_PUBLICO';
+
+  // ===============================
+  // FUNÇÃO PARA ATUALIZAR ESTATÍSTICAS DO JOGADOR
+  function updatePlayerStats(data) {
+    document.querySelector('.firstName').textContent = data.firstName;
+    document.querySelector('.lastName').textContent = data.lastName;
+    document.querySelector('.player-number').textContent = data.number;
+    document.querySelector('.player-position').textContent = data.position;
+    document.querySelector('.player-club').textContent = data.club;
+    document.querySelector('.club-logo').src = data.clubLogo;
+    document.querySelector('.player-photo img').src = data.photo;
+
+    // Stats
+    document.getElementById('birthdate').textContent = data.birthdate;
+    document.getElementById('birthplace').textContent = data.birthplace;
+    document.getElementById('nationality').textContent = data.nationality;
+    document.getElementById('height').textContent = data.height;
+    document.getElementById('preferredFoot').textContent = data.preferredFoot;
+    document.getElementById('clubSince').textContent = data.clubSince;
+    document.getElementById('goals').textContent = data.goals;
+    document.getElementById('yellowCards').textContent = data.yellowCards;
+    document.getElementById('redCards').textContent = data.redCards;
+    document.getElementById('yellowRedCards').textContent = data.yellowRedCards;
+
+    // Atualiza Donut e Barras
+    document.querySelector('.donut-number-new').textContent = data.games;
+    document.querySelector('.bar-fill.wins').style.width = data.wins + '%';
+    document.querySelector('.bar-value').textContent = data.wins;
+  }
+
+  // ===============================
+  // FUNÇÃO PARA PREENCHER JOGOS (slider)
+  function updatePlayerMatches(matches) {
+    const track = document.querySelector('.mu-slider-track');
+    track.innerHTML = ''; // limpa cards existentes
+    matches.forEach(match => {
+      const card = document.createElement('div');
+      card.classList.add('mu-card');
+      card.innerHTML = `
+        <img class="league" src="${match.leagueLogo}" alt="">
+        <p class="info">${match.date}, ${match.stadium}</p>
+        <div class="score">
+          <img src="${match.teamAlogo}" alt="">
+          <span>${match.score}</span>
+          <img src="${match.teamBlogo}" alt="">
+        </div>
+        <div class="teams"><span>${match.teamA}</span><span>VS</span><span>${match.teamB}</span></div>
+      `;
+      track.appendChild(card);
+    });
+  }
+
+  // ===============================
+  // FUNÇÃO PARA CARREGAR CSV
+  Papa.parse(SHEET_CSV_URL, {
+    download: true,
+    header: true,
+    complete: function(results) {
+      const playerData = results.data[0]; // assume 1 jogador por página
+      updatePlayerStats(playerData);
+
+      const matches = results.data; // ou outro range para jogos
+      updatePlayerMatches(matches);
+    }
+  });
+</script>
+
+
 <style>
-/* --- reutilizamos e adaptamos estilos para encaixar no layout existente --- */
+/* ===========================
+   GLOBAL VARS
+=========================== */
+:root {
+  --bg:#fff; 
+  --muted:#6b6f7a; 
+  --heading:#0a0f1c;
+  --accent:#0055a4; 
+  --pink:#ff3b94; 
+  --teal:#00c6b8; 
+  --card-bg:#fbfdff; 
+  --radius:12px;
+}
+
+/* ===========================
+   HEADER + FOTO DO JOGADOR
+=========================== */
+.page-header.cr-header { position: relative !important; overflow: hidden !important; }
+
+.cristiano-overlay {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 500px;
+  z-index: 20;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.35));
+  transition: 0.3s ease;
+}
+
+@media (max-width:700px){
+  .cristiano-overlay { width:340px; right:50%; transform:translateX(50%); bottom:-30px; }
+  #player-name { margin-bottom:150px; font-size:28px; }
+}
+
+.player-header-container { position:relative; width:100%; }
+.player-content { display:flex; justify-content:space-between; align-items:center; gap:20px; }
+.player-info { display:flex; flex-direction:column; gap:12px; }
+.player-number { font-size:36px; font-weight:700; color:#0a0f1c; }
+.player-name { font-size:28px; font-weight:700; color:#0a0f1c; }
+.player-name span { display:block; }
+.club-info { display:flex; align-items:center; gap:12px; }
+.club-logo { width:48px; height:48px; object-fit:contain; }
+.club-text { display:flex; flex-direction:column; gap:4px; }
+.player-position, .player-club { font-size:14px; color:#6b6f7a; }
+.player-photo img { max-width:200px; height:auto; object-fit:contain; }
+
+/* ===========================
+   KEY STATS
+=========================== */
 .key-stats-card {
-  background:#fbfdff;
+  background:var(--card-bg);
   border:1px solid #eef2f6;
-  border-radius:12px;
+  border-radius:var(--radius);
   padding:18px 28px;
   display:flex;
   gap:28px;
@@ -745,28 +729,22 @@ nav{position:relative}
   box-shadow:0 1px 0 rgba(10,15,28,0.02);
 }
 
-/* Left column */
+/* LEFT COLUMN */
 .ks-left { width:320px; min-width:260px; }
-.ks-title { font-size:20px; font-weight:700; color:#0a0f1c; margin-bottom:12px; }
+.ks-title { font-size:20px; font-weight:700; color:var(--heading); margin-bottom:12px; }
 
-/* container donut + barras */
+/* DONUT + BARRAS */
 .donut-and-bars { display:flex; gap:18px; align-items:center; }
-
-/* donut */
-.donut-new { position: relative; width:130px; height:130px; flex:0 0 130px; }
+.donut-new { position:relative; width:130px; height:130px; flex:0 0 130px; }
 .donut-svg-new { width:100%; height:100%; display:block; }
-
 .donut-center-new {
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
   text-align:center;
 }
-.donut-number-new { font-size:26px; font-weight:700; color:#0a0f1c; }
-.donut-label-new { font-size:12px; color:#6b6f7a; margin-top:4px; }
+.donut-number-new { font-size:26px; font-weight:700; color:var(--heading); }
+.donut-label-new { font-size:12px; color:var(--muted); margin-top:4px; }
 
-/* barras */
+/* BARRAS */
 .bars-list { width:160px; display:flex; flex-direction:column; gap:10px; }
 .bar-row { display:block; }
 .bar-label { font-size:13px; color:#374151; font-weight:600; display:inline-block; }
@@ -777,188 +755,276 @@ nav{position:relative}
 .bar-fill.draws { background:#1E40FF; }
 .bar-fill.defeats { background:#9CA3AF; }
 
-/* Right column (mantemos o teu grid de estatísticas) */
+/* RIGHT COLUMN */
 .ks-right { flex:1; }
 .stats-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
-
 .stat-item {
-  display:flex;
-  flex-flow:column nowrap;
-  justify-content:center;
-  border-radius:.8rem;
-  gap:.6rem;
-  color:#0a0f1c;
-  background:#f8fafc;
-  text-align:left;
-  min-height:7.2rem;
-  padding:1.2rem;
+  display:flex; flex-flow:column nowrap; justify-content:center;
+  border-radius:.8rem; gap:.6rem; color:var(--heading);
+  background:#f8fafc; text-align:left; min-height:7.2rem; padding:1.2rem;
   border:1px solid #eef2f6;
 }
+.stat-number { font-size:24px; font-weight:700; color:var(--heading); }
+.stat-label { font-size:13px; color:var(--muted); margin-top:6px; }
 
-.stat-number { font-size:24px; font-weight:700; color:#0a0f1c; }
-.stat-label { font-size:13px; color:#6b6f7a; margin-top:6px; }
+/* ===========================
+   SLIDER DE JOGOS
+=========================== */
+.mu-slider-wrapper {
+  background:#fff; border-radius:8px; border:1px solid #dbdde9; padding:40px 0;
+  font-family:'Source Sans Pro', sans-serif; margin-bottom:40px;
+}
+.mu-slider-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding-inline:24px; }
+.mu-slider-title { font-family:'Bebas Neue', sans-serif; font-size:28px; color:#111; display:flex; justify-content:space-between; align-items:center; width:100%; }
+.mu-slider-link { color:#0232ff; font-size:16px; font-weight:700; text-decoration:none; border-style:none; cursor:pointer; }
+.mu-slider { position:relative; overflow:hidden; padding-inline:24px; }
+.mu-slider-track { display:flex; gap:16px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; cursor:grab; padding:8px 0; }
+.mu-slider-track::-webkit-scrollbar { display:none; }
+.mu-card { background:#fff; border:1px solid #dbdde9; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,.08); padding:20px; flex:0 0 267px; height:300px; text-align:center; user-select:none; }
+.mu-card img { pointer-events:none; }
+.mu-card .league { width:150px; margin-bottom:10px; }
+.mu-card .info { font-size:14px; color:#333; margin-bottom:15px; line-height:1.4; }
+.mu-card .score { display:flex; align-items:center; justify-content:center; gap:12px; font-weight:700; font-size:18px; margin:10px 0; }
+.mu-card .score img { width:42px; height:42px; }
+.mu-card .teams { display:flex; justify-content:center; gap:8px; font-weight:600; margin:10px 0; font-size:14px; }
+.mu-card .cta { color:#c70101; font-weight:700; text-transform:uppercase; font-size:13px; text-decoration:none; }
+.mu-slider-btn { background:#fff; border:1px solid #ccc; border-radius:50%; width:36px; height:36px; font-size:22px; color:#000; cursor:pointer; position:absolute; top:45%; transform:translateY(-50%); transition:all .2s ease; }
+.mu-slider-btn:hover { background:#c70101; color:#fff; }
+.mu-slider-btn.prev { left:0; }
+.mu-slider-btn.next { right:0; }
 
-/* Responsivo */
-@media (max-width:900px) {
+/* ===========================
+   RESPONSIVO
+=========================== */
+@media (max-width:1024px){ .mu-card{flex:0 0 48%;} }
+@media (max-width:900px){
   .key-stats-card { flex-direction:column; align-items:stretch; padding:18px; }
   .donut-and-bars { justify-content:flex-start; }
   .stats-grid { grid-template-columns:1fr 1fr; }
   .ks-left { width:auto; min-width:0; }
 }
-@media (max-width:480px) {
+@media (max-width:600px){ 
+  .mu-card{flex:0 0 85%;} 
+  .mu-slider-btn{display:none;} 
+}
+@media (max-width:480px){
   .bars-list { width:100%; }
   .donut-new { width:110px; height:110px; }
   .donut-number-new { font-size:20px; }
 }
 </style>
-</div><!-- #content -->
 
 
 
+<!-- ========== NOVO CODICO FIM ========== -->
 
 
-
-
-
-
-
-
-
-
-    <!-- JORNADAS / SLIDER DE JOGOS -->
- 
-    <!-- JORNADAS / SLIDER DE JOGOS -->
-    <div class="tabelapontos-container" style="max-width:1200px; margin:0 auto; padding:0 10px; padding-top:0px;">
-        <section class="mu-slider-wrapper">
-            <div class="mu-slider-head">
-                <h2 class="mu-slider-title">
-                    <span class="jogos">Jogos</span>
-                    <a href="#" class="mu-slider-link">Ver todos Jogos</a>
-                </h2>
-            </div>
-
-            <div class="mu-slider">
-                <button class="mu-slider-btn prev" aria-label="Previous">‹</button>
-                <div class="mu-slider-track">
-                    <!-- MATCH CARDS -->
-                    <div class="mu-card">
-                        <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
-                        <p class="info">Saturday 25 October 2025, 18:30, Estádio Central</p>
-                        <div class="score">
-                            <img src="//via.placeholder.com/42" alt="">
-                            <span>0 - 0</span>
-                            <img src="//via.placeholder.com/42" alt="">
-                        </div>
-                        <div class="teams"><span>Team A</span><span>VS</span><span>Team B</span></div>
-                        <a href="#" class="cta"></a>
-                    </div>
-                    <div class="mu-card">
-                        <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
-                        <p class="info">Saturday 01 November 2025, 17:00, Arena Norte</p>
-                        <div class="score">
-                            <img src="//via.placeholder.com/42" alt="">
-                            <span>0 - 0</span>
-                            <img src="//via.placeholder.com/42" alt="">
-                        </div>
-                        <div class="teams"><span>Team C</span><span>VS</span><span>Team A</span></div>
-                        <a href="#" class="cta"></a>
-                    </div>
-                    <div class="mu-card">
-                        <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
-                        <p class="info">Monday 24 November 2025, 22:00, Estádio Central</p>
-                        <div class="score">
-                            <img src="//via.placeholder.com/42" alt="">
-                            <span>22:00</span>
-                            <img src="//via.placeholder.com/42" alt="">
-                        </div>
-                        <div class="teams"><span>Team A</span><span>VS</span><span>Team D</span></div>
-                        <a href="#" class="cta"></a>
-                    </div>
-                    <div class="mu-card">
-                        <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
-                        <p class="info">Sunday 30 November 2025, 14:00, Estádio Sul</p>
-                        <div class="score">
-                            <img src="//via.placeholder.com/42" alt="">
-                            <span>14:00</span>
-                            <img src="//via.placeholder.com/42" alt="">
-                        </div>
-                        <div class="teams"><span>Team E</span><span>VS</span><span>Team A</span></div>
-                        <a href="#" class="cta"></a>
-                    </div>
-                    <div class="mu-card">
-                        <img class="league" src="//via.placeholder.com/150x50?text=League" alt="">
-                        <p class="info">Thursday 04 December 2025, 22:00, Estádio Central</p>
-                        <div class="score">
-                            <img src="//via.placeholder.com/42" alt="">
-                            <span>22:00</span>
-                            <img src="//via.placeholder.com/42" alt="">
-                        </div>
-                        <div class="teams"><span>Team A</span><span>VS</span><span>Team F</span></div>
-                        <a href="#" class="cta"></a>
-                    </div>
-                </div>
-                <button class="mu-slider-btn next" aria-label="Next">›</button>
-            </div>
-        </section>
-    </div>
-
-    <style>
-        .mu-slider-wrapper { background:#fff; border-radius:8px; border:1px solid #dbdde9; padding:40px 0; font-family:'Source Sans Pro', sans-serif; margin-bottom:40px;}
-        .jogos { font-size:24px; font-weight:700; color:#374151; margin:20px 0 16px;}
-        .mu-slider-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding-inline:24px; }
-        .mu-slider-title { font-family:'Bebas Neue', sans-serif; font-size:28px; color:#111; display:flex; justify-content:space-between; align-items:center; width:100%; }
-        .mu-slider-link { color:#0232ff; font-size:16px; font-weight:700; text-decoration:none; border-style:none; cursor:pointer; }
-        .mu-slider { position:relative; overflow:hidden; padding-inline:24px; }
-        .mu-slider-track { display:flex; gap:16px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; cursor:grab; padding:8px 0; }
-        .mu-slider-track::-webkit-scrollbar { display:none; }
-        .mu-card { background:#fff; border:1px solid #dbdde9; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,.08); padding:20px; flex:0 0 267px; height:300px; text-align:center; user-select:none; }
-        .mu-card img { pointer-events:none; }
-        .mu-card .league { width:150px; margin-bottom:10px; }
-        .mu-card .info { font-size:14px; color:#333; margin-bottom:15px; line-height:1.4; }
-        .mu-card .score { display:flex; align-items:center; justify-content:center; gap:12px; font-weight:700; font-size:18px; margin:10px 0; }
-        .mu-card .score img { width:42px; height:42px; }
-        .mu-card .teams { display:flex; justify-content:center; gap:8px; font-weight:600; margin:10px 0; font-size:14px; }
-        .mu-card .cta { color:#c70101; font-weight:700; text-transform:uppercase; font-size:13px; text-decoration:none; }
-        .mu-slider-btn { background:#fff; border:1px solid #ccc; border-radius:50%; width:36px; height:36px; font-size:22px; color:#000; cursor:pointer; position:absolute; top:45%; transform:translateY(-50%); transition:all .2s ease; }
-        .mu-slider-btn:hover { background:#c70101; color:#fff; }
-        .mu-slider-btn.prev { left:0; }
-        .mu-slider-btn.next { right:0; }
-        @media (max-width:1024px){ .mu-card{flex:0 0 48%;} }
-        @media (max-width:600px){ .mu-card{flex:0 0 85%;} .mu-slider-btn{display:none;} }
-        .mu-slider-track.dragging{cursor:grabbing;}
-    </style>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const track = document.querySelector('.mu-slider-track');
-            const btnPrev = document.querySelector('.mu-slider-btn.prev');
-            const btnNext = document.querySelector('.mu-slider-btn.next');
-            const scrollAmount = 283;
-            const smoothScrollBy = (distance) => { track.scrollTo({ left: track.scrollLeft + distance, behavior:'smooth' }); };
-            btnPrev.addEventListener('click', () => smoothScrollBy(-scrollAmount));
-            btnNext.addEventListener('click', () => smoothScrollBy(scrollAmount));
-            let isDown=false, startX, scrollLeft;
-            const start=(x)=>{isDown=true; track.classList.add('dragging'); startX=x; scrollLeft=track.scrollLeft;};
-            const move=(x)=>{if(isDown) track.scrollLeft=scrollLeft-(x-startX);};
-            const end=()=>{isDown=false; track.classList.remove('dragging');};
-            track.addEventListener('mousedown', e=>start(e.pageX));
-            track.addEventListener('mousemove', e=>move(e.pageX));
-            window.addEventListener('mouseup', end);
-            track.addEventListener('touchstart', e=>start(e.touches[0].pageX),{passive:true});
-            track.addEventListener('touchmove', e=>move(e.touches[0].pageX),{passive:true});
-            track.addEventListener('touchend', end);
-        });
-    </script>
-
-
-      <!-- ========== JOGADOR FIM ========== -->
 
 
 
     
-  
 
-  
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const PLAYER_NAME = urlParams.get("player") || "Dickson";
+
+  const SHEETS = {
+    jogos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=0&single=true&output=csv",
+    equipas: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1253685309&single=true&output=csv",
+    jogadores: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1795344515&single=true&output=csv"
+  };
+
+  const loadCSV = url => new Promise(res =>
+    Papa.parse(url,{download:true,header:true,complete:r=>res(r.data)})
+  );
+
+  const normalize = s => (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+  const safeNumber = val => { const n = Number(String(val||"0").replace(",",".").trim()); return isNaN(n)?0:n; };
+  const countCards = val => {
+    if(!val) return 0;
+    const v = String(val).trim();
+    if(!isNaN(v)) return Number(v);
+    return v.split(",").filter(x=>x.trim()!=="").length;
+  };
+
+  // Carrega todos os CSVs
+  const [jogos,equipas,jogadores] = await Promise.all([
+    loadCSV(SHEETS.jogos),
+    loadCSV(SHEETS.equipas),
+    loadCSV(SHEETS.jogadores)
+  ]);
+
+  const player = jogadores.find(p => normalize(p.Player) === normalize(PLAYER_NAME));
+  if(!player) return;
+
+  const teamKey = normalize(player.Team);
+  const team = equipas.find(e => normalize(e.Team) === teamKey);
+
+  // ===== BANNER RESPONSIVO =====
+  const bannerImg = document.querySelector(".bg-texture");
+  const banners = [
+    { minWidth: 1920, src: "\\assets\\images\\banner_players\\1920.webp" },
+    { minWidth: 1200, src: "\\assets\\images\\banner_players\\1200.webp" },
+    { minWidth: 800,  src: "\\assets\\images\\banner_players\\800.webp" },
+    { minWidth: 0,    src: "\\assets\\images\\banner_players\\800.webp" }
+  ];
+  const setBanner = () => {
+    const width = window.innerWidth;
+    const banner = banners.find(b => width >= b.minWidth);
+    if (banner && bannerImg.src !== banner.src) bannerImg.src = banner.src;
+  };
+  setBanner();
+  window.addEventListener("resize", setBanner);
+
+  // ===== HEADER DO JOGADOR =====
+  document.querySelector(".player-number").textContent = player.Number;
+  document.querySelector(".firstName").textContent = player.Player;
+  document.querySelector(".lastName").textContent = player.Apelido;
+  document.querySelector(".player-position").textContent = player.Position;
+  document.querySelector(".player-club").textContent = player.Team;
+
+  document.querySelector(".player-photo img").src =
+    `\\assets\\images\\player_stats_perfil_images\\${PLAYER_NAME}.webp`;
+  document.querySelector(".player-photo img").loading = "lazy";
+
+  if(team){
+    const clubLogo = document.querySelector(".club-logo");
+    clubLogo.src = `\\assets\\images\\team-logo\\${team.Logopng}`;
+    clubLogo.loading = "lazy";
+  }
+
+  // ===== FILTRAR JOGOS DO JOGADOR =====
+  const jogosTeam = jogos.filter(j =>
+    normalize(j.HomeTeam) === teamKey || normalize(j.AwayTeam) === teamKey
+  );
+
+  let wins=0, draws=0, defeats=0, goals=0, yellow=0, red=0, yellowRed=0;
+
+  jogosTeam.forEach(j => {
+    const hg = safeNumber(j.HomeGoals);
+    const ag = safeNumber(j.AwayGoals);
+    const isHome = normalize(j.HomeTeam) === teamKey;
+
+    if(hg === ag) draws++;
+    else if((hg > ag && isHome) || (ag > hg && !isHome)) wins++;
+    else defeats++;
+
+    goals += isHome ? hg : ag;
+    yellow += countCards(isHome ? j.YellowsHome : j.YellowsAway);
+    red += countCards(isHome ? j.RedsHome : j.RedsAway);
+    yellowRed += countCards(isHome ? j["Yellow red Home"] : j["Yellow red Away"]);
+  });
+
+  const totalGames = Math.max(jogosTeam.length, 1);
+
+  // ===== DONUT =====
+  const donut = document.querySelector(".donut-svg-new");
+  const c = 2*Math.PI*15.5;
+  const w = (wins/totalGames)*c;
+  const d = (draws/totalGames)*c;
+  const l = (defeats/totalGames)*c;
+
+  donut.innerHTML = `
+    <circle cx="18" cy="18" r="15.5" fill="none" stroke="#e5e7eb" stroke-width="3"/>
+    <circle cx="18" cy="18" r="15.5" fill="none" stroke="#00D600" stroke-width="3"
+      stroke-dasharray="0 ${c}" transform="rotate(-90 18 18)"/>
+    <circle cx="18" cy="18" r="15.5" fill="none" stroke="#1E40FF" stroke-width="3"
+      stroke-dasharray="0 ${c}" stroke-dashoffset="0" transform="rotate(-90 18 18)"/>
+    <circle cx="18" cy="18" r="15.5" fill="none" stroke="#9CA3AF" stroke-width="3"
+      stroke-dasharray="0 ${c}" stroke-dashoffset="0" transform="rotate(-90 18 18)"/>
+  `;
+
+  const animateDonut = () => {
+    const circles = donut.querySelectorAll("circle");
+    circles[1].animate([{strokeDasharray:`0 ${c}`},{strokeDasharray:`${w} ${c}`}],{duration:800,fill:"forwards"});
+    circles[2].animate([{strokeDasharray:`0 ${c}`,strokeDashoffset:`0`},{strokeDasharray:`${d} ${c}`,strokeDashoffset:`-${w}`}],{duration:800,fill:"forwards"});
+    circles[3].animate([{strokeDasharray:`0 ${c}`,strokeDashoffset:`0`},{strokeDasharray:`${l} ${c}`,strokeDashoffset:`-${w+d}`}],{duration:800,fill:"forwards"});
+  };
+  animateDonut();
+  document.querySelector(".donut-number-new").textContent = jogosTeam.length;
+
+  // ===== STATS =====
+  const stats = document.querySelectorAll(".ks-right .stat-number");
+  [
+    player["Data de nascimento"],
+    player["Local de Nascimento"],
+    player["Nacionalidade"],
+    player["Altura"],
+    player["Pé preferido"],
+    player["No clube desde"],
+    goals, yellow, red, yellowRed
+  ].forEach((v,i)=>{ stats[i].textContent = v ?? 0; });
+
+  // ===== BARRAS =====
+  const bars = {
+    wins: document.querySelector(".bar-fill.wins"),
+    draws: document.querySelector(".bar-fill.draws"),
+    defeats: document.querySelector(".bar-fill.defeats")
+  };
+  const barValues = [wins, draws, defeats];
+  Object.keys(bars).forEach((key,i)=>{
+    bars[key].style.width = "0%";
+    bars[key].style.transition = "width 0.8s ease";
+    setTimeout(()=> bars[key].style.width = (barValues[i]/totalGames*100)+"%", 50);
+  });
+
+  const barTexts = document.querySelectorAll(".bar-row .bar-value");
+  barTexts[0].textContent = wins;
+  barTexts[1].textContent = draws;
+  barTexts[2].textContent = defeats;
+
+  // ===== SLIDER JOGOS =====
+  const track = document.querySelector(".mu-slider-track");
+  track.innerHTML = "";
+  const fragment = document.createDocumentFragment();
+
+  jogosTeam.forEach(j => {
+    const home = equipas.find(e=>normalize(e.Team)===normalize(j.HomeTeam));
+    const away = equipas.find(e=>normalize(e.Team)===normalize(j.AwayTeam));
+    const homeGoals = j.HomeGoals?.trim()!=="" ? safeNumber(j.HomeGoals) : null;
+    const awayGoals = j.AwayGoals?.trim()!=="" ? safeNumber(j.AwayGoals) : null;
+    const scoreDisplay = (homeGoals===null && awayGoals===null) ? j["Time"] : `${homeGoals} - ${awayGoals}`;
+
+    const card = document.createElement("div");
+    card.className = "mu-card";
+    card.innerHTML = `
+      <p class="info">${j.Data}, ${j["Local do jogo"]}</p>
+      <div class="score">
+        <img src="\\assets\\images\\team-logo\\${home?.Logopng||""}" loading="lazy">
+        <span>${scoreDisplay}</span>
+        <img src="\\assets\\images\\team-logo\\${away?.Logopng||""}" loading="lazy">
+      </div>
+      <div class="teams"><span>${j.HomeTeam}</span><span>VS</span><span>${j.AwayTeam}</span></div>
+    `;
+    fragment.appendChild(card);
+  });
+  track.appendChild(fragment);
+
+  // ===== SLIDER NAV =====
+  const btnPrev = document.querySelector(".mu-slider-btn.prev");
+  const btnNext = document.querySelector(".mu-slider-btn.next");
+  const STEP = 280;
+  btnPrev.onclick = () => track.scrollBy({ left:-STEP, behavior:"smooth" });
+  btnNext.onclick = () => track.scrollBy({ left: STEP, behavior:"smooth" });
+
+  // ===== SLIDER DRAG & SWIPE =====
+  let isDown=false, startX, scrollLeft;
+  track.addEventListener("mousedown", e=>{ isDown=true; startX=e.pageX-track.offsetLeft; scrollLeft=track.scrollLeft; });
+  track.addEventListener("mouseleave", ()=>{ isDown=false; });
+  track.addEventListener("mouseup", ()=>{ isDown=false; });
+  track.addEventListener("mousemove", e=>{ if(!isDown) return; e.preventDefault(); track.scrollLeft = scrollLeft - (e.pageX-startX)*2; });
+  track.addEventListener("touchstart", e=>{ isDown=true; startX=e.touches[0].pageX-track.offsetLeft; scrollLeft=track.scrollLeft; });
+  track.addEventListener("touchend", ()=>{ isDown=false; });
+  track.addEventListener("touchmove", e=>{ if(!isDown) return; track.scrollLeft = scrollLeft - (e.touches[0].pageX-startX)*2; });
+
+});
+</script>
+
   <!-- ========== FOOTER (Bayern-style adapted, minimalized for production) ========== -->
   <footer class="rio-footer" role="contentinfo" aria-label="Rodapé do site">
     <div class="rio-footer-top">
