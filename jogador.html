@@ -90,14 +90,7 @@ header{
   gap:1rem;
 }
 
-.top-links a{
-  text-decoration:none;
-  padding:.4rem .8rem;
-  border:1px solid #e5e7eb;
-  border-radius:8px;
-  color:var(--muted);
-  font-weight:600;
-}
+
 
 .nav-toggle{
   font-size:1.5rem;
@@ -166,7 +159,7 @@ nav{position:relative}
     .site-header{height:64px;display:flex;align-items:center;gap:1rem}
     .brand{color:var(--accent);text-decoration:none;font-weight:700;font-size:1.15rem}
     .top-links{margin-left:auto;display:flex;gap:1rem}
-    .top-links a{ text-decoration:none;padding:.38rem .7rem;font-size:.9rem;color:var(--muted);border:1px solid #e5e7eb;border-radius:8px;background:transparent;display:flex;align-items:center;justify-content:center;font-weight:600}
+    .top-links a{ text-decoration:none;padding:.38rem .7rem;font-size:16px;color:#888c90;background:transparent;display:flex;align-items:center;justify-content:center;font-weight:400}
     .top-links a:hover{ color:var(--accent); background:#f0f4ff }
     .nav-toggle{font-size:1.5rem;background:none;border:none;display:block;cursor:pointer}
 
@@ -463,17 +456,17 @@ height: 100%;
     <!-- Desktop grande / ultra-wide -->
     <source
       media="(min-width: 1440px)"
-      srcset="\assets\images\banner_players\1920.webp">
+      srcset="assets\images\banner_players\1920.webp">
 
     <!-- Laptop / tablet -->
     <source
       media="(min-width: 640px)"
-      srcset="\assets\images\banner_players\1200.webp">
+      srcset="assets\images\banner_players\1200.webp">
 
     <!-- Mobile (fallback) -->
     <img
       class="bg-texture"
-      src="\assets\images\banner_players\800.webp"
+      src="assets\images\banner_players\800.webp"
       alt="Banner do jogador"
       loading="eager"
       decoding="sync">
@@ -491,7 +484,7 @@ height: 100%;
         </div>
 
         <div class="club-info">
-          <img class="club-logo" src="/assets/clublogo/DFL-CLU-00000G.svg" alt="Club Logo">
+          <img class="club-logo" src="assets/clublogo/DFL-CLU-00000G.svg" alt="Club Logo">
           <div class="club-text">
             <div class="player-position">POSIÇÃO</div>
             <div class="player-club">EQUIPA</div>
@@ -868,10 +861,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   // ===== BANNER RESPONSIVO =====
   const bannerImg = document.querySelector(".bg-texture");
   const banners = [
-    { minWidth: 1920, src: "\\assets\\images\\banner_players\\1920.webp" },
-    { minWidth: 1200, src: "\\assets\\images\\banner_players\\1200.webp" },
-    { minWidth: 800,  src: "\\assets\\images\\banner_players\\800.webp" },
-    { minWidth: 0,    src: "\\assets\\images\\banner_players\\800.webp" }
+    { minWidth: 1920, src: "assets\\images\\banner_players\\1920.webp" },
+    { minWidth: 1200, src: "assets\\images\\banner_players\\1200.webp" },
+    { minWidth: 800,  src: "assets\\images\\banner_players\\800.webp" },
+    { minWidth: 0,    src: "assets\\images\\banner_players\\800.webp" }
   ];
   const setBanner = () => {
     const width = window.innerWidth;
@@ -889,12 +882,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelector(".player-club").textContent = player.Team;
 
   document.querySelector(".player-photo img").src =
-    `\\assets\\images\\player_stats_perfil_images\\${PLAYER_NAME}.webp`;
+    `assets\\images\\player_stats_perfil_images\\${PLAYER_NAME}.webp`;
   document.querySelector(".player-photo img").loading = "lazy";
 
   if(team){
     const clubLogo = document.querySelector(".club-logo");
-    clubLogo.src = `\\assets\\images\\team-logo\\${team.Logopng}`;
+    clubLogo.src = `assets\\images\\team-logo\\${team.Logopng}`;
     clubLogo.loading = "lazy";
   }
 
@@ -995,9 +988,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     card.innerHTML = `
       <p class="info">${j.Data}, ${j["Local do jogo"]}</p>
       <div class="score">
-        <img src="\\assets\\images\\team-logo\\${home?.Logopng||""}" loading="lazy">
+        <img src="assets\\images\\team-logo\\${home?.Logopng||""}" loading="lazy">
         <span>${scoreDisplay}</span>
-        <img src="\\assets\\images\\team-logo\\${away?.Logopng||""}" loading="lazy">
+        <img src="assets\\images\\team-logo\\${away?.Logopng||""}" loading="lazy">
       </div>
       <div class="teams"><span>${j.HomeTeam}</span><span>VS</span><span>${j.AwayTeam}</span></div>
     `;

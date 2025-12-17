@@ -6,6 +6,7 @@
   <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
   <title>Rios — Website Leve e Responsivo</title>
 
+  
   <style>
     /* ========== :ROOT / VARS ========== */
     :root{
@@ -27,11 +28,11 @@
     /* ========== RESET LIGHT ========== */
     *,*::before,*::after{box-sizing:border-box}
 
-
     html,body{
   height:100%;
   overflow-x:hidden; /* FIX do menu sticky */
 }
+
 
 
 
@@ -73,14 +74,14 @@
     .site-header{height:64px;display:flex;align-items:center;gap:1rem}
     .brand{color:var(--accent);text-decoration:none;font-weight:700;font-size:1.15rem}
     .top-links{margin-left:auto;display:flex;gap:1rem}
-    .top-links a{ text-decoration:none;padding:.38rem .7rem;font-size:.9rem;color:var(--muted);border:1px solid #e5e7eb;border-radius:8px;background:transparent;display:flex;align-items:center;justify-content:center;font-weight:600}
+    .top-links a{ text-decoration:none;padding:.38rem .7rem;font-size:16px;color:#888c90;background:transparent;display:flex;align-items:center;justify-content:center;font-weight:400}
     .top-links a:hover{ color:var(--accent); background:#f0f4ff }
     .nav-toggle{font-size:1.5rem;background:none;border:none;display:block;cursor:pointer}
 
     nav{margin-left:1rem;position:relative}
     .nav-list{list-style:none;margin:0;padding:0;display:none;flex-direction:column;gap:.25rem;background:var(--surface);position:absolute;right:0;top:64px;width:224px;padding:.75rem;border-radius:10px;box-shadow:var(--shadow)}
     .nav-list.show{display:flex}
-    .nav-list a{ text-decoration:none;padding:.55rem .8rem;color:var(--muted);font-weight:600;display:block;border-radius:8px }
+    .nav-list a{ text-decoration:none;padding:.55rem .8rem;color:#888c90;font-weight:400;display:block;border-radius:8px }
     .nav-list a:hover{ color:var(--accent); background:#f0f4ff }
     .has-submenu{position:relative}
     .submenu{list-style:none;margin:0;padding:.5rem 0 .5rem 1rem;display:none;flex-direction:column;gap:.25rem}
@@ -117,7 +118,7 @@
 
     /* ========== FOOTER (MINIMAL + STUDIO-GRADE) ========== */
     /* big footer inspired by modern club sites but kept minimal and modular */
-    .rio-footer{ background:var(--footer-surface); color:var(--footer-contrast); margin-top:3rem; font-size:0.95rem }
+    .rio-footer{ background:#191e24; color:var(--footer-contrast); margin-top:3rem; font-size:0.95rem }
     .rio-footer-top{ padding:3rem 0 2rem; border-bottom:1px solid rgba(255,255,255,0.04) }
     .rio-ct{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter); display:flex; gap:2rem; flex-wrap:wrap; align-items:flex-start }
     .rio-brand{ display:flex; gap:1rem; align-items:center; min-width:220px }
@@ -128,10 +129,10 @@
     @media(max-width:840px){ .rio-links{ grid-template-columns:repeat(2,1fr) } .rio-brand{ min-width:unset; width:100% } .rio-ct{ flex-direction:column } }
 
     .rio-links h4{ margin:0 0 .5rem; color: #fff; font-size:.95rem; font-weight:700 }
-    .rio-links a{ display:block; color:var(--footer-muted); text-decoration:none; margin:.28rem 0; font-size:.9rem }
+    .rio-links a{ display:block; color:#c9cccf; text-decoration:none; margin:.28rem 0; font-size:.9rem }
     .rio-links a:hover{ color:var(--footer-contrast) }
 
-    .rio-footer-bottom{ background:#090909; padding:1rem 0; font-size:.85rem }
+    .rio-footer-bottom{ background:#191e24; padding:1rem 0; font-size:.85rem }
     .rio-bottom-inner{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter); display:flex; justify-content:space-between; align-items:center; gap:.75rem; flex-wrap:wrap }
     .rio-legal a{ color:var(--footer-muted); text-decoration:none; margin-left:1rem }
     .rio-legal a:hover{ color:var(--footer-contrast) }
