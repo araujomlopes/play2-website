@@ -811,7 +811,7 @@ function cleanName(s) {
         card.setAttribute('data-team', data.team.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,'').trim());
         card.innerHTML = `
           <div class="rider-img">
-            <img src="${data.image}" onerror="this.onerror=null; this.src='/assets/images/silhouette/silhouetteperfil.png';">
+            <img src="${data.image}" onerror="this.onerror=null; this.src='assets/images/silhouette/silhouetteperfil.png';">
           </div>
           <div class="rider-content">
             <h3 class="rider-name">${name}</h3>
