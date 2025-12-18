@@ -166,7 +166,7 @@ nav{position:relative}
     nav{margin-left:1rem;position:relative}
     .nav-list{list-style:none;margin:0;padding:0;display:none;flex-direction:column;gap:.25rem;background:var(--surface);position:absolute;right:0;top:64px;width:224px;padding:.75rem;border-radius:10px;box-shadow:var(--shadow)}
     .nav-list.show{display:flex}
-    .nav-list a{ text-decoration:none;padding:.55rem .8rem;color:var(--muted);font-weight:600;display:block;border-radius:8px }
+    .nav-list a{ text-decoration:none;padding:.55rem .8rem;color:#888c90;font-weight:400;display:block;border-radius:8px }
     .nav-list a:hover{ color:var(--accent); background:#f0f4ff }
     .has-submenu{position:relative}
     .submenu{list-style:none;margin:0;padding:.5rem 0 .5rem 1rem;display:none;flex-direction:column;gap:.25rem}
@@ -203,7 +203,7 @@ nav{position:relative}
 
     /* ========== FOOTER (MINIMAL + STUDIO-GRADE) ========== */
     /* big footer inspired by modern club sites but kept minimal and modular */
-    .rio-footer{ background:var(--footer-surface); color:var(--footer-contrast); margin-top:3rem; font-size:0.95rem }
+    .rio-footer{ background:#191e24; color:var(--footer-contrast); margin-top:3rem; font-size:0.95rem }
     .rio-footer-top{ padding:3rem 0 2rem; border-bottom:1px solid rgba(255,255,255,0.04) }
     .rio-ct{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter); display:flex; gap:2rem; flex-wrap:wrap; align-items:flex-start }
     .rio-brand{ display:flex; gap:1rem; align-items:center; min-width:220px }
@@ -214,10 +214,10 @@ nav{position:relative}
     @media(max-width:840px){ .rio-links{ grid-template-columns:repeat(2,1fr) } .rio-brand{ min-width:unset; width:100% } .rio-ct{ flex-direction:column } }
 
     .rio-links h4{ margin:0 0 .5rem; color: #fff; font-size:.95rem; font-weight:700 }
-    .rio-links a{ display:block; color:var(--footer-muted); text-decoration:none; margin:.28rem 0; font-size:.9rem }
+    .rio-links a{ display:block; color:#c9cccf; text-decoration:none; margin:.28rem 0; font-size:.9rem }
     .rio-links a:hover{ color:var(--footer-contrast) }
 
-    .rio-footer-bottom{ background:#090909; padding:1rem 0; font-size:.85rem }
+    .rio-footer-bottom{ background:#191e24; padding:1rem 0; font-size:.85rem }
     .rio-bottom-inner{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter); display:flex; justify-content:space-between; align-items:center; gap:.75rem; flex-wrap:wrap }
     .rio-legal a{ color:var(--footer-muted); text-decoration:none; margin-left:1rem }
     .rio-legal a:hover{ color:var(--footer-contrast) }
@@ -233,170 +233,144 @@ nav{position:relative}
 
 
 
+/* ==================== HEADER-BANNER INICIO ==================== */
+/* ==================== HEADER-BANNER INICIO ==================== */
 
-
-/* HEADER-BANER INICIO */
-/* MAIN WRAPPER */
+/* ====================
+   HEADER-BANNER JOGADOR
+==================== */
 .header-banner {
   width: 100%;
   background: #d6002f;
   overflow: hidden;
   position: relative;
 }
-
-/* CONTAINER */
 .player-header-container {
   position: relative;
   width: 100%;
-  
   margin: 0 auto;
-  height: 420px;
+  height: 360px;
+  min-height: 360px;
+  max-height: 360px;
 }
-
-/* BACKGROUND */
 .club-header-background {
   position: absolute;
   inset: 0;
   overflow: hidden;
 }
-
 .bg-texture {
-height: 100%;
-  position: relative;
   width: 100%;
+  height: 100%;
   object-fit: cover;
-  inset: 0px;
+  position: absolute;
+  inset: 0;
+  display: block;
 }
-
-
-/* CONTENT */
 .player-content {
   position: relative;
   z-index: 5;
   display: flex;
   height: 100%;
   justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  padding: 0 10px;
+  align-items: flex-end;
+  padding: 0 15px;
   max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
 }
-
-/* LEFT INFO */
 .player-info {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-}
-
-/* NUMBER */
-.player-number {
-  font-size: 110px;
-  font-weight: 900;
-  line-height: 0.9;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
   color: #fff;
 }
-
-/* NAME */
+.player-number {
+  font-size: 95px;
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .player-name {
   display: flex;
   flex-direction: column;
   font-weight: 800;
   text-transform: uppercase;
   color: #fff;
+  line-height: 1.1;
 }
-
-.firstName {
-  font-size: 40px;
-}
-
-.lastName {
-  font-size: 48px;
-  margin-top: -8px;
-}
-
-/* CLUB INFO */
+.firstName { font-size: 32px; }
+.lastName { font-size: 40px; margin-top:-6px; }
 .club-info {
   display: flex;
   align-items: center;
-  gap: 18px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 6px;
 }
-
 .club-logo {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
 }
-
 .club-text {
   display: flex;
   flex-direction: column;
   color: #fff;
   font-weight: 600;
+  min-width: 0;
+}
+.player-position { font-size: 14px; opacity: 0.9; color:#fff; }
+.player-club { font-size: 16px; font-weight: 700; color:#fff; }
+
+/* ==================== CORREÇÃO FOTO ==================== */
+.player-photo {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+  width: auto;        /* ajusta dinamicamente */
+  min-width: 35%;     /* evita ficar muito pequeno */
+  height: 100%;
+  overflow: visible;  /* não corta a imagem */
+}
+.player-photo img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  margin-left: auto;
+  transform: translateY(2%);
+  transition: transform 0.3s ease;
 }
 
-.player-position {
-  font-size: 16px;
-  opacity: 0.9;
-}
-
-.player-club {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-/* PLAYER PHOTO */
-.player-photo img
- {
-    width: auto;
-    height: 90%;
-   
-    inset: auto 0px 0px auto;
-    /* object-fit: contain; */
-    position: absolute;
-}
-
-/* RESPONSIVE */
+/* ==================== RESPONSIVE ==================== */
 @media (max-width: 1024px) {
-  .player-content {
-    padding: 30px 35px;
-  }
-  .player-photo img {
-    height: 300px;
-  }
-  .player-number {
-    font-size: 90px;
-  }
+  .player-header-container { height: 300px; }
+  .player-number { font-size: 80px; }
+  .firstName { font-size: 28px; }
+  .lastName { font-size: 36px; }
+  .player-photo { min-width: 30%; }
+  .player-photo img { height: 100%; transform: translateY(3%); }
 }
 
 @media (max-width: 768px) {
-  .player-header-container {
-    height: auto;
-    padding-bottom: 40px;
-  }
-
-  .player-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 30px;
-  }
-
-  .player-photo img {
-    align-self: center;
-    height: 260px;
-  }
-
-  .player-number {
-    font-size: 70px;
-  }
-  .firstName { font-size: 32px; }
-  .lastName { font-size: 38px; }
+  .player-header-container { height: 280px; min-height: 280px; }
+  .player-content { flex-direction: row; align-items: center; justify-content: space-between; gap: 10px; }
+  .player-info { flex: 1 1 55%; gap: 6px; }
+  .player-number { font-size: 60px; }
+  .firstName { font-size: 24px; }
+  .lastName { font-size: 32px; }
+  .player-photo { flex: 0 0 40%; min-width: 40%; height: auto; }
+  .player-photo img { height: 180px; transform: none; }
 }
+/* ==================== HEADER-BANNER FIM ==================== */
 
-
-
-/* HEADER BANNER FIM */
-
+/* ==================== HEADER BANNER FIM ==================== */
 
 
   </style>
@@ -452,25 +426,13 @@ height: 100%;
 <section class="header-banner">
   <div class="player-header-container">
 <div class="club-header-background">
-  <picture>
-    <!-- Desktop grande / ultra-wide -->
-    <source
-      media="(min-width: 1440px)"
-      srcset="assets\images\banner_players\1920.webp">
+  <picture class="bg-texture-container">
+  <source media="(min-width:1920px)" srcset="assets/images/banner_players/DEFAULT_TEAM/1920.webp">
+  <source media="(min-width:1200px)" srcset="assets/images/banner_players/DEFAULT_TEAM/1200.webp">
+  <source media="(min-width:800px)"  srcset="assets/images/banner_players/DEFAULT_TEAM/800.webp">
+  <img class="bg-texture" src="assets/images/banner_players/DEFAULT_TEAM/800.webp" alt="Banner do jogador">
+</picture>
 
-    <!-- Laptop / tablet -->
-    <source
-      media="(min-width: 640px)"
-      srcset="assets\images\banner_players\1200.webp">
-
-    <!-- Mobile (fallback) -->
-    <img
-      class="bg-texture"
-      src="assets\images\banner_players\800.webp"
-      alt="Banner do jogador"
-      loading="eager"
-      decoding="sync">
-  </picture>
 </div>
 
 
@@ -697,13 +659,13 @@ height: 100%;
 .player-header-container { position:relative; width:100%; }
 .player-content { display:flex; justify-content:space-between; align-items:center; gap:20px; }
 .player-info { display:flex; flex-direction:column; gap:12px; }
-.player-number { font-size:36px; font-weight:700; color:#0a0f1c; }
-.player-name { font-size:28px; font-weight:700; color:#0a0f1c; }
+.player-number { font-size:36px; font-weight:700; color:#ffffff; }
+.player-name { font-size:28px; font-weight:700; color:#ffffff; }
 .player-name span { display:block; }
 .club-info { display:flex; align-items:center; gap:12px; }
 .club-logo { width:48px; height:48px; object-fit:contain; }
 .club-text { display:flex; flex-direction:column; gap:4px; }
-.player-position, .player-club { font-size:14px; color:#6b6f7a; }
+.player-position, .player-club { font-size:14px; color:#ffffff; }
 .player-photo img { max-width:200px; height:auto; object-fit:contain; }
 
 /* ===========================
@@ -820,6 +782,8 @@ height: 100%;
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+
+
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -858,21 +822,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   const teamKey = normalize(player.Team);
   const team = equipas.find(e => normalize(e.Team) === teamKey);
 
-  // ===== BANNER RESPONSIVO =====
-  const bannerImg = document.querySelector(".bg-texture");
-  const banners = [
-    { minWidth: 1920, src: "assets\\images\\banner_players\\1920.webp" },
-    { minWidth: 1200, src: "assets\\images\\banner_players\\1200.webp" },
-    { minWidth: 800,  src: "assets\\images\\banner_players\\800.webp" },
-    { minWidth: 0,    src: "assets\\images\\banner_players\\800.webp" }
-  ];
-  const setBanner = () => {
-    const width = window.innerWidth;
-    const banner = banners.find(b => width >= b.minWidth);
-    if (banner && bannerImg.src !== banner.src) bannerImg.src = banner.src;
-  };
-  setBanner();
-  window.addEventListener("resize", setBanner);
+  // ===== BANNER RESPONSIVO (lazy-load) =====
+  if(player && team){
+    const teamFolder = team.Team.replace(/\s+/g,'_'); // Substitui espaços por underline
+    const picture = document.querySelector(".bg-texture-container");
+    const img = picture.querySelector("img");
+    const sources = picture.querySelectorAll("source");
+
+    sources[0].dataset.srcset = `assets/images/banner_players/${teamFolder}/1920.webp`;
+    sources[1].dataset.srcset = `assets/images/banner_players/${teamFolder}/1200.webp`;
+    sources[2].dataset.srcset = `assets/images/banner_players/${teamFolder}/800.webp`;
+    img.dataset.src = `assets/images/banner_players/${teamFolder}/800.webp`;
+
+    // Lazy load usando IntersectionObserver
+    const obs = new IntersectionObserver((entries, observer)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          sources.forEach(s=>s.srcset=s.dataset.srcset);
+          img.src = img.dataset.src;
+          observer.disconnect();
+        }
+      });
+    });
+    obs.observe(picture);
+  }
 
   // ===== HEADER DO JOGADOR =====
   document.querySelector(".player-number").textContent = player.Number;
@@ -881,14 +854,31 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelector(".player-position").textContent = player.Position;
   document.querySelector(".player-club").textContent = player.Team;
 
-  document.querySelector(".player-photo img").src =
-    `assets\\images\\player_stats_perfil_images\\${PLAYER_NAME}.webp`;
-  document.querySelector(".player-photo img").loading = "lazy";
+  const playerImg = document.querySelector(".player-photo img");
+  playerImg.dataset.src = `assets/images/player_stats_perfil_images/${PLAYER_NAME}.webp`;
+
+  const playerImgObserver = new IntersectionObserver((entries, observer)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        playerImg.src = playerImg.dataset.src;
+        observer.disconnect();
+      }
+    });
+  });
+  playerImgObserver.observe(playerImg);
 
   if(team){
     const clubLogo = document.querySelector(".club-logo");
-    clubLogo.src = `assets\\images\\team-logo\\${team.Logopng}`;
-    clubLogo.loading = "lazy";
+    clubLogo.dataset.src = `assets/images/team-logo/${team.Logopng}`;
+    const clubObserver = new IntersectionObserver((entries, observer)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          clubLogo.src = clubLogo.dataset.src;
+          observer.disconnect();
+        }
+      });
+    });
+    clubObserver.observe(clubLogo);
   }
 
   // ===== FILTRAR JOGOS DO JOGADOR =====
@@ -915,7 +905,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const totalGames = Math.max(jogosTeam.length, 1);
 
-  // ===== DONUT =====
+  // ===== DONUT e BARRAS =====
   const donut = document.querySelector(".donut-svg-new");
   const c = 2*Math.PI*15.5;
   const w = (wins/totalGames)*c;
@@ -931,7 +921,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     <circle cx="18" cy="18" r="15.5" fill="none" stroke="#9CA3AF" stroke-width="3"
       stroke-dasharray="0 ${c}" stroke-dashoffset="0" transform="rotate(-90 18 18)"/>
   `;
-
   const animateDonut = () => {
     const circles = donut.querySelectorAll("circle");
     circles[1].animate([{strokeDasharray:`0 ${c}`},{strokeDasharray:`${w} ${c}`}],{duration:800,fill:"forwards"});
@@ -941,7 +930,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   animateDonut();
   document.querySelector(".donut-number-new").textContent = jogosTeam.length;
 
-  // ===== STATS =====
   const stats = document.querySelectorAll(".ks-right .stat-number");
   [
     player["Data de nascimento"],
@@ -953,7 +941,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     goals, yellow, red, yellowRed
   ].forEach((v,i)=>{ stats[i].textContent = v ?? 0; });
 
-  // ===== BARRAS =====
   const bars = {
     wins: document.querySelector(".bar-fill.wins"),
     draws: document.querySelector(".bar-fill.draws"),
@@ -971,11 +958,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   barTexts[1].textContent = draws;
   barTexts[2].textContent = defeats;
 
-  // ===== SLIDER JOGOS =====
+  // ===== SLIDER JOGOS (lazy-load) =====
   const track = document.querySelector(".mu-slider-track");
   track.innerHTML = "";
-  const fragment = document.createDocumentFragment();
-
   jogosTeam.forEach(j => {
     const home = equipas.find(e=>normalize(e.Team)===normalize(j.HomeTeam));
     const away = equipas.find(e=>normalize(e.Team)===normalize(j.AwayTeam));
@@ -988,15 +973,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     card.innerHTML = `
       <p class="info">${j.Data}, ${j["Local do jogo"]}</p>
       <div class="score">
-        <img src="assets\\images\\team-logo\\${home?.Logopng||""}" loading="lazy">
+        <img data-src="assets/images/team-logo/${home?.Logopng||""}" alt="">
         <span>${scoreDisplay}</span>
-        <img src="assets\\images\\team-logo\\${away?.Logopng||""}" loading="lazy">
+        <img data-src="assets/images/team-logo/${away?.Logopng||""}" alt="">
       </div>
       <div class="teams"><span>${j.HomeTeam}</span><span>VS</span><span>${j.AwayTeam}</span></div>
     `;
-    fragment.appendChild(card);
+    track.appendChild(card);
   });
-  track.appendChild(fragment);
+
+  // Lazy-load de imagens do slider
+  const sliderImages = track.querySelectorAll("img[data-src]");
+  const imgObserver = new IntersectionObserver((entries, obs)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.src = entry.target.dataset.src;
+        entry.target.removeAttribute("data-src");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {root: track, threshold: 0.1});
+  sliderImages.forEach(img=>imgObserver.observe(img));
 
   // ===== SLIDER NAV =====
   const btnPrev = document.querySelector(".mu-slider-btn.prev");
@@ -1005,18 +1002,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   btnPrev.onclick = () => track.scrollBy({ left:-STEP, behavior:"smooth" });
   btnNext.onclick = () => track.scrollBy({ left: STEP, behavior:"smooth" });
 
-  // ===== SLIDER DRAG & SWIPE =====
+  // ===== DRAG & SWIPE =====
   let isDown=false, startX, scrollLeft;
   track.addEventListener("mousedown", e=>{ isDown=true; startX=e.pageX-track.offsetLeft; scrollLeft=track.scrollLeft; });
   track.addEventListener("mouseleave", ()=>{ isDown=false; });
   track.addEventListener("mouseup", ()=>{ isDown=false; });
-  track.addEventListener("mousemove", e=>{ if(!isDown) return; e.preventDefault(); track.scrollLeft = scrollLeft - (e.pageX-startX)*2; });
+  track.addEventListener("mousemove", e=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX-track.offsetLeft; const walk=(x-startX)*1.5; track.scrollLeft=scrollLeft-walk; });
+
   track.addEventListener("touchstart", e=>{ isDown=true; startX=e.touches[0].pageX-track.offsetLeft; scrollLeft=track.scrollLeft; });
   track.addEventListener("touchend", ()=>{ isDown=false; });
-  track.addEventListener("touchmove", e=>{ if(!isDown) return; track.scrollLeft = scrollLeft - (e.touches[0].pageX-startX)*2; });
+  track.addEventListener("touchmove", e=>{ if(!isDown) return; const x=e.touches[0].pageX-track.offsetLeft; const walk=(x-startX)*1.5; track.scrollLeft=scrollLeft-walk; });
 
 });
 </script>
+
+
+
 
   <!-- ========== FOOTER (Bayern-style adapted, minimalized for production) ========== -->
   <footer class="rio-footer" role="contentinfo" aria-label="Rodapé do site">

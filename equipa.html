@@ -159,7 +159,7 @@
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.25);
+  background: ;
 }
 
 .player-content{
@@ -840,7 +840,7 @@ async function loadSquad() {
         const div = document.createElement("div");
         div.className = "squad-player";
         div.innerHTML = `
-            <a href="jogador.html?player=${encodeURIComponent(id)}">
+            <a href="jogador.html?player=${encodeURIComponent(p.Player)}">
                 <div class="squad-player-img"><img src="${p["Image png 75x75px"] || p.Image}" alt="${display}"></div>
                 <div class="squad-player-name">${display}</div>
                 <div class="squad-player-role">${p.Position}</div>
