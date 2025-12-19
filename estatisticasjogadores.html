@@ -4,143 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
-  <title>Rios — Website Leve e Responsivo</title>
+  <title>Rios — Estatísticas de Jogadores</title>
 
- 
-  <style>
-    /* ========== :ROOT / VARS ========== */
-    :root{
-      --bg:#f7f8fb;
-      --surface:#ffffff;
-      --muted:#6b7280;
-      --accent:#0a4fff;
-      --radius:10px;
-      --container:1400px;
-      --gutter:1rem;
-      --shadow:0 6px 18px rgba(15,23,42,0.06);
-      --text:#111827;
-      --footer-bg:#0b0b0b;
-      --footer-surface:#111;
-      --footer-muted:#9ca3af;
-      --footer-contrast:#d1d5db;
-    }
+  <!-- CSS Geral -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <!-- CSS Específico da Página -->
+  <link rel="stylesheet" href="assets/css/pages/estatisticasjogadores.css">
 
-    /* ========== RESET LIGHT ========== */
-    *,*::before,*::after{box-sizing:border-box}
+    <!-- Link o Manifesto inicio -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0a4fff">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    html,body{
-  height:100%;
-  overflow-x:hidden; /* FIX do menu sticky */
-}
-
-
-
-
-    body{
-      margin:0;
-      font-family:system-ui, "Segoe UI", Roboto, -apple-system, "Helvetica Neue", Arial;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.45;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      text-rendering:optimizeLegibility;
-      -webkit-text-size-adjust:100%;
-    }
-
-    /* ========== LAYOUT HELPERS ========== */
-    .container{
-
-      
-      width:100%;
-      max-width:var(--container);
-      margin:0 auto;
-      padding:0 var(--gutter);
-    }
-    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-
-    /* ========== HEADER ========== */
-    header{
-  background:rgba(255,255,255,0.85);
-  backdrop-filter:blur(4px);
-  border-bottom:1px solid #e5e7eb;
-  position:sticky;
-  top:0;
-  z-index:999;        /* reforço */
-  isolation:isolate;  /* evita interferência */
-  will-change:transform;
-}
-
-    .site-header{height:64px;display:flex;align-items:center;gap:1rem}
-    .brand{color:var(--accent);text-decoration:none;font-weight:700;font-size:1.15rem}
-    .top-links{margin-left:auto;display:flex;gap:1rem}
-    .top-links a{ text-decoration:none;padding:.38rem .7rem;font-size:16px;color:#888c90;background:transparent;display:flex;align-items:center;justify-content:center;font-weight:400}
-    .top-links a:hover{ color:var(--accent); background:#f0f4ff }
-    .nav-toggle{font-size:1.5rem;background:none;border:none;display:block;cursor:pointer}
-
-    nav{margin-left:1rem;position:relative}
-    .nav-list{list-style:none;margin:0;padding:0;display:none;flex-direction:column;gap:.25rem;background:var(--surface);position:absolute;right:0;top:64px;width:224px;padding:.75rem;border-radius:10px;box-shadow:var(--shadow)}
-    .nav-list.show{display:flex}
-    .nav-list a{ text-decoration:none;padding:.55rem .8rem;color:#888c90;font-weight:400;display:block;border-radius:8px }
-    .nav-list a:hover{ color:var(--accent); background:#f0f4ff }
-    .has-submenu{position:relative}
-    .submenu{list-style:none;margin:0;padding:.5rem 0 .5rem 1rem;display:none;flex-direction:column;gap:.25rem}
-    .has-submenu:hover .submenu{display:flex}
-
-    @media(min-width:880px){
-      .nav-toggle{display:none}
-      .nav-list{position:static;display:flex !important;flex-direction:row;gap:1rem;background:none;box-shadow:none;width:auto;padding:0}
-      .submenu{position:absolute;top:100%;left:0;background:var(--surface);border-radius:10px;padding:.5rem 0;box-shadow:var(--shadow);width:210px;display:none}
-      .has-submenu:hover .submenu{display:block}
-      .submenu a{padding:.6rem .9rem}
-    }
-
-    /* ========== HERO / CONTENT ========== */
-    .hero{padding:4rem 0;display:grid;gap:2rem;align-items:center}
-    .hero-inner{display:grid;gap:1rem}
-    .eyebrow{ color:var(--muted); font-weight:600; font-size:.9rem }
-    .hero h1{ margin:0; font-size:clamp(1.7rem, 4vw, 2.65rem); line-height:1.05 }
-    .hero p{ margin:0; color:var(--muted); max-width:700px }
-    .cta-row{ display:flex; gap:.75rem; flex-wrap:wrap; margin-top:.75rem }
-    .btn{ display:inline-block; padding:.7rem 1rem; border-radius:10px; text-decoration:none; font-weight:700; font-size:.95rem }
-    .btn-primary{ background:var(--accent); color:#fff }
-    .btn-ghost{ background:transparent; border:1px solid #e5e7eb; color:var(--muted) }
-
-    .grid-3{ display:grid; gap:1.5rem; grid-template-columns:1fr; margin-top:1rem }
-    @media(min-width:700px){ .grid-3{ grid-template-columns:repeat(3,1fr) } .hero{ grid-template-columns: 2fr 1fr; padding:4rem 2rem } }
-
-    .card{ background:var(--surface); border-radius:var(--radius); padding:1rem; box-shadow:var(--shadow) }
-
-    /* ========== CONTACT FORM ========== */
-    form.card input, form.card textarea{
-      width:100%; padding:.6rem; border:1px solid #ddd; border-radius:8px; font:inherit
-    }
-
-    /* ========== FOOTER (MINIMAL + STUDIO-GRADE) ========== */
-    /* big footer inspired by modern club sites but kept minimal and modular */
-    .rio-footer{ background:#191e24; color:var(--footer-contrast); margin-top:3rem; font-size:0.95rem }
-    .rio-footer-top{ padding:3rem 0 2rem; border-bottom:1px solid rgba(255,255,255,0.04) }
-    .rio-ct{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter); display:flex; gap:2rem; flex-wrap:wrap; align-items:flex-start }
-    .rio-brand{ display:flex; gap:1rem; align-items:center; min-width:220px }
-    .rio-brand img{ width:64px; height:64px; object-fit:contain; border-radius:6px; background:transparent }
-    .rio-brand p{ margin:0; color:var(--footer-contrast); font-weight:700 }
-
-    .rio-links{ display:grid; grid-template-columns: repeat(3, minmax(160px,1fr)); gap:1.25rem; flex:1 }
-    @media(max-width:840px){ .rio-links{ grid-template-columns:repeat(2,1fr) } .rio-brand{ min-width:unset; width:100% } .rio-ct{ flex-direction:column } }
-
-    .rio-links h4{ margin:0 0 .5rem; color: #fff; font-size:.95rem; font-weight:700 }
-    .rio-links a{ display:block; color:#c9cccf; text-decoration:none; margin:.28rem 0; font-size:.9rem }
-    .rio-links a:hover{ color:var(--footer-contrast) }
-
-    .rio-footer-bottom{ background:#191e24; padding:1rem 0; font-size:.85rem }
-    .rio-bottom-inner{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter); display:flex; justify-content:space-between; align-items:center; gap:.75rem; flex-wrap:wrap }
-    .rio-legal a{ color:var(--footer-muted); text-decoration:none; margin-left:1rem }
-    .rio-legal a:hover{ color:var(--footer-contrast) }
-
-    /* small utility */
-    .muted{ color:var(--muted) }
-    a{ color:inherit }
-  </style>
+  <!-- Link o Manifesto fim -->
 </head>
 
 <body>
@@ -149,7 +25,6 @@
     <div class="container site-header">
       <a href="index.html" class="brand">Rios</a>
 
-      <!-- LINKS FIXOS NO HEADER -->
       <div class="top-links">
         <a href="jogos.html">Jogos</a>
         <a href="tabeladepontuacao.html">Tabela</a>
@@ -177,393 +52,59 @@
     </div>
   </header>
 
-
   <!-- ========== MAIN ========== -->
   <main id="main">
-   
+    <div id="content" class="site-content">
 
-
-
-     <!-- ========== ESTATISTICAS JOGADORES INICIO ========== -->
-
-     
-
-
-<div  id="content" class="site-content">
-	        
-            <div class="page-header dtable text-center header-transparent"  style="background-image: url(../wp-content/uploads/sites/5/2020/06/pheader-portfolio.jpg);" >
-                <div class="dcell">
-                    <div class="container">
-                                                    <h1 class="page-title">Estatisticas de jogadores</h1>
-                        <ul id="breadcrumbs" class="breadcrumbs none-style"><li><a href="http://wpdemo.archiwp.com/theratio"></a></li></ul>    
-                            </div>
-                </div>
-            </div>
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--/////////////MAIORES MARCADORES GERAL INICIO/////////////-->
-<div class="topscore-container" style="max-width:1200px; margin:0 auto; padding:0 10px; padding-top: 25px;">
-
-<div class="stats-block">
-  <div class="stats-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-    <h2 style="margin:0; font-size:16px; font-family:'Manrope regular', system-ui, sans-serif;">Estatísticas</h2>
-    <button class="view-full-stats" style="padding:0; font-size:14px; cursor:pointer; border:none; background:none; color:#0052cc; border-radius:0; font-family:'Manrope regular', system-ui, sans-serif;">Ver estatística completa</button>
-  </div>
-  <div class="stats-table-wrapper">
-    <table class="stats-table">
-      <thead>
-        <tr>
-          <th class="col-rank">#</th>
-          <th class="col-player">Player</th>
-          <th class="col-j">Jogos</th>
-          <th class="col-yellow">Cartões Amarelos</th>
-          <th class="col-red">Cartões Vermelhos</th>
-          <th class="col-g">Golos</th>
-          <th class="col-gpg">Golos/Jogo</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td class="rank-cell">01</td>
-          <td class="player-cell">
-            <div class="player-info">
-              <div class="avatar-wrapper">
-                <img src="images/sample1.jpg" class="avatar" />
-                <img src="images/team-ajax.png" class="team-stamp bottom-right" />
-              </div>
-              <div class="ptext" style="min-width:0;">
-                <div class="pname" title="Araujo Lopes" style="font-family:'Manrope semibold', system-ui, sans-serif; font-size:14px;">Jogador 1</div>
-                <div class="pteam desktop-only" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:12px;"><span class="team">Equipa</span>-<span class="role">Midfielder</span></div>
-                <div class="pteam mobile-only" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:12px;"><span class="role">Midfielder</span></div>
-              </div>
-            </div>
-          </td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">2</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">0</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">0</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">1</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">0.5</td>
-        </tr>
-        <tr>
-          <td class="rank-cell">02</td>
-          <td class="player-cell">
-            <div class="player-info">
-              <div class="avatar-wrapper">
-                <img src="images/sample.jpg" class="avatar" />
-                <img src="images/team-aja.png" class="team-stamp bottom-right" />
-              </div>
-              <div class="ptext" style="min-width:0;">
-                <div class="pname" title="Regee Long Name Example" style="font-family:'Manrope semibold', system-ui, sans-serif; font-size:14px;">Jogador</div>
-                <div class="pteam desktop-only" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:12px;"><span class="team">Equipa</span>-<span class="role">Midfielder</span></div>
-                <div class="pteam mobile-only" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:12px;"><span class="role">Midfielder</span></div>
-              </div>
-            </div>
-          </td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">4</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">1</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">0</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">2</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">0.5</td>
-        </tr>
-        <tr>
-          <td class="rank-cell">03</td>
-          <td class="player-cell">
-            <div class="player-info">
-              <div class="avatar-wrapper">
-                <img src="images/sample.jpg" class="avatar" />
-                <img src="images/team-aja.png" class="team-stamp bottom-right" />
-              </div>
-              <div class="ptext" style="min-width:0;">
-                <div class="pname" title="Wijnd Wijnd Wijnd Wijnd" style="font-family:'Manrope semibold', system-ui, sans-serif; font-size:14px;">Jogador</div>
-                <div class="pteam desktop-only" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:12px;"><span class="team">Equipa</span>-<span class="role">Defender</span></div>
-                <div class="pteam mobile-only" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:12px;"><span class="role">Defender</span></div>
-              </div>
-            </div>
-          </td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">3</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">0</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">1</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">0</td>
-          <td class="data-cell" style="font-family:'Manrope regular', system-ui, sans-serif; font-size:14px;">0</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<style>
-.stats-block{ font-family:Arial, sans-serif; }
-.stats-block *{ box-sizing:border-box; }
-.stats-block .stats-table-wrapper{ position:relative; }
-.stats-block table.stats-table{ border-collapse:collapse; width:100%; min-width:900px; }
-.stats-block table.stats-table th, .stats-block table.stats-table td{ padding:8px 6px; border-top:1px solid #e6e8ef; border-bottom:1px solid #e6e8ef; background:#fff; }
-.stats-block th{ background:#f8f9fc; font-size:12px; font-family:'Manrope regular', system-ui, sans-serif; font-weight:600; text-align:center; }
-.stats-block tbody tr:nth-child(even) td{ background:#f7f9ff; font-size:14px; font-family:'Manrope regular', system-ui, sans-serif; }
-.stats-block .col-rank, .stats-block .rank-cell{ width:32px !important; min-width:32px !important; max-width:32px !important; padding:0 !important; text-align:center; font-size:12px; font-family:'Manrope regular', system-ui, sans-serif; position:sticky; left:0; background:#fff; z-index:13; }
-.stats-block .col-player, .stats-block .player-cell{ min-width:240px; max-width:260px; overflow:visible; position:relative; font-size:14px; font-family:'Manrope regular', system-ui, sans-serif; }
-.stats-block .player-info{ display:flex; align-items:center; gap:6px; min-width:0; position:relative; }
-.stats-block .avatar-wrapper{ position:relative; display:inline-block; }
-.stats-block .avatar{ width:44px;height:44px;border-radius:50%;object-fit:cover; }
-.stats-block .team-stamp{ position:absolute; width:18px; height:18px; border-radius:50%; border:1px solid #fff; z-index:2; }
-.stats-block .team-stamp.bottom-right{ bottom:0; right:0; }
-.stats-block .pname{ font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block; font-size:14px; font-family:'Manrope semibold', system-ui, sans-serif; }
-.stats-block .pteam{ font-size:12px; color:#777; font-family:'Manrope regular', system-ui, sans-serif; }
-.desktop-only{ display:block; }
-.mobile-only{ display:none; }
-.stats-block .player-cell::after{ content:''; position:absolute; top:0; right:0; width:1px; height:100%; background:rgba(0,0,0,0.3); z-index:10; display:none; }
-@media(max-width:768px){
-  .desktop-only{ display:none !important; }
-  .mobile-only{ display:inline-block !important; }
-  .stats-block .rank-cell, .stats-block .col-rank{ display:table-cell !important; font-size:12px; font-family:'Manrope regular', system-ui, sans-serif; position:sticky; left:0; background:#fff; z-index:13; }
-  .stats-block .player-cell, .stats-block .col-player{
-    position:sticky;
-    left:32px;
-    z-index:11;
-    background:#fff;
-    overflow:hidden;
-    min-width:150px !important;
-    max-width:150px !important;
-    width:150px !important;
-  }
-
-	
-  /* Linha vertical agora ocupa toda a tabela, incluindo cabeçalho */
-  .stats-block .player-cell::after{
-    display:block;
-    top:0;
-    bottom:0;
-    height:100%;
-  }
-  .stats-block .player-info{ max-width:150px; overflow:hidden; min-width:0; }
-  .stats-block .ptext{ min-width:0; }
-  .stats-block .pname{ max-width:150px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block; font-size:14px; font-family:'Manrope semibold', system-ui, sans-serif; }
-  .stats-block .pteam .team, .stats-block .pteam .sep{ display:none !important; }
-  .stats-block .pteam .role{ display:inline-block; font-size:12px; font-family:'Manrope regular', system-ui, sans-serif; }
-  .stats-block th.col-j, .stats-block th.col-yellow, .stats-block th.col-red, .stats-block th.col-g, .stats-block th.col-gpg,
-  .stats-block td.data-cell{
-    white-space:normal;
-    line-height:1.1;
-    font-size:14px;
-    font-family:'Manrope regular', system-ui, sans-serif;
-    padding:2px 4px;
-    text-align:center;
-    width:auto;
-    max-width:50px;
-  }
-  .stats-block .stats-table-wrapper{ overflow-x:auto; }
-}
-@media(min-width:769px){
-  .stats-block th.col-j, .stats-block th.col-yellow, .stats-block th.col-red, .stats-block th.col-g, .stats-block th.col-gpg,
-  .stats-block td.data-cell{ text-align:center; }
-}
-.stats-block{ background-color:#fff; border-radius:8px; border-width:1px; border-style:solid; border-color:#dbdde9; padding:24px; margin-bottom:50px; }
-table,th,td{ border:none; }
-</style>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-// Função para parsear CSV
-function parseCSV(text) {
-  const lines = text.trim().split("\n");
-  const headers = lines[0].match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g).map(h => h.replace(/"/g,'').trim());
-  const data = lines.slice(1).map(line => {
-    const values = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)?.map(v => v.replace(/"/g,'').trim()) || [];
-    const obj = {};
-    headers.forEach((h,i) => obj[h] = values[i] || "");
-    return obj;
-  });
-  return data;
-}
-
-// Função para buscar CSV
-async function fetchCSV(url) {
-  const res = await fetch(url);
-  const text = await res.text();
-  return parseCSV(text);
-}
-
-// Função principal para atualizar estatísticas
-async function updatePlayerStats() {
-  const fichaURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=0&single=true&output=csv";
-  const equipasURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1253685309&single=true&output=csv";
-  const jogadoresURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMKb7nNRenJu0293ElDZ7UYSe0bq-GVqU51hPjnheB1E7gD14KXvzwdGdn2VRlQ3vW_ev3nfxXL_4t/pub?gid=1795344515&single=true&output=csv";
-
-  const [ficha, equipas, jogadores] = await Promise.all([
-    fetchCSV(fichaURL),
-    fetchCSV(equipasURL),
-    fetchCSV(jogadoresURL)
-  ]);
-
-  // Mapeamento de equipas para logos
-  const teamMap = {};
-  equipas.forEach(team => {
-    teamMap[team.Team] = team.Logo;
-  });
-
-  // Inicializa stats de cada jogador
-  const stats = {};
-  jogadores.forEach(j => {
-    stats[j.Player] = {
-      Player: j.Player,
-      Team: j.Team,
-      Position: j.Position,
-      Image: j.Image,
-      Jogos: 0,
-      Golos: 0,
-      Yellows: 0,
-      Reds: 0,
-      GPG: 0
-    };
-  });
-
-  // Calcula estatísticas com base na ficha de jogos
-  ficha.forEach(game => {
-    // Home team
-    if(game.ScorersHome) {
-      const regex = /([^:,]+):?\s*(\d+)?/g;
-      let match;
-      while((match = regex.exec(game.ScorersHome)) !== null) {
-        const player = match[1].trim();
-        const goals = parseInt(match[2]||"1");
-        if(stats[player]) stats[player].Golos += goals;
-      }
-    }
-
-    if(game.YellowsHome) {
-      game.YellowsHome.split(",").forEach(p => {
-        const player = p.trim();
-        if(stats[player]) stats[player].Yellows += 1;
-      });
-    }
-    if(game.RedsHome) {
-      game.RedsHome.split(",").forEach(p => {
-        const player = p.trim();
-        if(stats[player]) stats[player].Reds += 1;
-      });
-    }
-
-    // Away team
-    if(game.ScorersAway) {
-      const regex = /([^:,]+):?\s*(\d+)?/g;
-      let match;
-      while((match = regex.exec(game.ScorersAway)) !== null) {
-        const player = match[1].trim();
-        const goals = parseInt(match[2]||"1");
-        if(stats[player]) stats[player].Golos += goals;
-      }
-    }
-
-    if(game.YellowsAway) {
-      game.YellowsAway.split(",").forEach(p => {
-        const player = p.trim();
-        if(stats[player]) stats[player].Yellows += 1;
-      });
-    }
-    if(game.RedsAway) {
-      game.RedsAway.split(",").forEach(p => {
-        const player = p.trim();
-        if(stats[player]) stats[player].Reds += 1;
-      });
-    }
-
-    // Incrementa jogos
-    if(game.PlayersHome) game.PlayersHome.split(",").forEach(p => { if(stats[p.trim()]) stats[p.trim()].Jogos +=1; });
-    if(game.PlayersAway) game.PlayersAway.split(",").forEach(p => { if(stats[p.trim()]) stats[p.trim()].Jogos +=1; });
-  });
-
-  // Calcula GPG
-  Object.values(stats).forEach(p => {
-    p.GPG = p.Jogos>0 ? (p.Golos/p.Jogos).toFixed(2) : 0;
-  });
-
-  // Ordena por golos
-  const sortedPlayers = Object.values(stats).sort((a,b) => b.Golos - a.Golos);
-
-  // Atualiza tabela HTML
-  const tbody = document.querySelector(".stats-table tbody");
-  tbody.innerHTML = "";
-  sortedPlayers.forEach((p, i) => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td class="rank-cell">${(i+1).toString().padStart(2,'0')}</td>
-      <td class="player-cell">
-        <div class="player-info">
-          <div class="avatar-wrapper">
-            <img src="${p.Image}" class="avatar" />
-            <img src="${teamMap[p.Team]}" class="team-stamp bottom-right" />
-          </div>
-          <div class="ptext">
-            <div class="pname" title="${p.Player}">${p.Player}</div>
-            <div class="pteam desktop-only"><span class="team">${p.Team}</span>-<span class="role">${p.Position}</span></div>
-            <div class="pteam mobile-only"><span class="role">${p.Position}</span></div>
+      <!-- Página Header -->
+      <div class="page-header dtable text-center header-transparent">
+        <div class="dcell">
+          <div class="container">
+            <h1 class="page-title">Estatísticas de Jogadores</h1>
           </div>
         </div>
-      </td>
-      <td class="data-cell">${p.Jogos}</td>
-      <td class="data-cell">${p.Yellows}</td>
-      <td class="data-cell">${p.Reds}</td>
-      <td class="data-cell">${p.Golos}</td>
-      <td class="data-cell">${p.GPG}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
+      </div>
 
-// Chama função
-updatePlayerStats();
-</script>
+      <!-- Tabela de Estatísticas -->
+      <div class="topscore-container">
+        <div class="stats-block">
+          <div class="stats-header">
+            <h2>Estatísticas</h2>
+            <button class="view-full-stats">Ver estatística completa</button>
+          </div>
+          <div class="stats-table-wrapper">
+            <table class="stats-table" aria-label="Tabela de Estatísticas de Jogadores">
+              <thead>
+                <tr>
+                  <th class="col-rank">#</th>
+                  <th class="col-player">Player</th>
+                  <th class="col-j">Jogos</th>
+                  <th class="col-yellow">Cartões Amarelos</th>
+                  <th class="col-red">Cartões Vermelhos</th>
+                  <th class="col-g">Golos</th>
+                  <th class="col-gpg">Golos/Jogo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Linhas preenchidas dinamicamente pelo JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
+    </div><!-- #content -->
+  </main>
 
-						
-
-
-
-	</div><!-- #content -->
-
-      <!-- ========== ESTATISTICAS JOGADORES FIM ========== -->
-
-
-    
-  
-
-  
-  <!-- ========== FOOTER (Bayern-style adapted, minimalized for production) ========== -->
+  <!-- ========== FOOTER ========== -->
   <footer class="rio-footer" role="contentinfo" aria-label="Rodapé do site">
     <div class="rio-footer-top">
       <div class="rio-ct">
         <div class="rio-brand">
-          <!-- substitui a src por um logo próprio quando tiveres -->
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/512px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png" alt="Rios logo" />
           <div>
             <p>Rios</p>
-            <div class="muted" style="font-size:.9rem; margin-top:.2rem">Design & Arquitetura Digital</div>
+            <div class="muted">Design & Arquitetura Digital</div>
           </div>
         </div>
 
@@ -605,17 +146,8 @@ updatePlayerStats();
     </div>
   </footer>
 
-  <!-- ========== JS (mínimo) ========== -->
-  <script>
-    // Ano automático
-    (function(){ var el = document.getElementById('rioYear'); if(el) el.textContent = new Date().getFullYear(); })();
-    // Fechar o nav ao clicar fora (pequena utilidade)
-    document.addEventListener('click', function(e){
-      var nav = document.getElementById('nav');
-      var toggle = document.querySelector('.nav-toggle');
-      if(!nav || !toggle) return;
-      if(!nav.contains(e.target) && !toggle.contains(e.target)) nav.classList.remove('show');
-    });
-  </script>
+  <!-- Scripts -->
+  <script src="assets/js/pages/estatisticasjogadores.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
