@@ -1,8 +1,9 @@
 {
-  "name": "Futebol de Bairro",
+  "name": "Rios desporto",
   "short_name": "Futebol",
   "description": "App de futebol de bairro com estatísticas, jogadores e jogos.",
-  "start_url": "index.html",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#f7f8fb",
   "theme_color": "#0a4fff",
@@ -19,5 +20,3 @@
     }
   ]
 }
-
-

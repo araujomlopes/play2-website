@@ -1,6 +1,7 @@
 const CACHE_NAME = 'futebol-cache-v2';
+
 const urlsToCache = [
-  '',
+  './',
   'index.html',
   'jogador.html',
   'equipa.html',
@@ -25,5 +26,3 @@ self.addEventListener('fetch', event => {
     caches.match(event.request).then(response => response || fetch(event.request))
   );
 });
-
-
