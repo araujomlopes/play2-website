@@ -2,7 +2,7 @@
   "name": "Futebol de Bairro",
   "short_name": "Futebol",
   "description": "App de futebol de bairro com estatísticas, jogadores e jogos.",
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#f7f8fb",
   "theme_color": "#0a4fff",
@@ -19,4 +19,5 @@
     }
   ]
 }
+
 
