@@ -16,7 +16,7 @@
  // “ligar” o Service Worker ao teu site ---inicio
     if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('sw.js')
       .then(() => {
         console.log('Service Worker ativo');
       })
@@ -25,4 +25,5 @@
       });
   });
 }
+
 // “ligar” o Service Worker ao teu site ---fim
