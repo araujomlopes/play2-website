@@ -1,5 +1,7 @@
-const CACHE_NAME = 'futebol-cache-v2';
-const urlsToCache = [
+const CACHE_NAME = 'futebol-cache-v3';
+const STATIC_CACHE = 'static-v3';
+
+const STATIC_ASSETS = [
   './',
   'index.html',
   'assets/css/main.css',
@@ -7,65 +9,68 @@ const urlsToCache = [
   'assets/images/perfil/default.png'
 ];
 
-// Instalação: cache inicial
+// =======================
+// INSTALL
+// =======================
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
-      .then(() => self.skipWaiting())
+    caches.open(STATIC_CACHE).then(cache => cache.addAll(STATIC_ASSETS))
   );
+  self.skipWaiting();
 });
 
-// Ativação: limpar caches antigos
+// =======================
+// ACTIVATE
+// =======================
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
-        keys.filter(key => key !== CACHE_NAME)
-            .map(key => caches.delete(key))
+        keys.map(k => {
+          if (![CACHE_NAME, STATIC_CACHE].includes(k)) {
+            return caches.delete(k);
+          }
+        })
       )
-    ).then(() => self.clients.claim())
+    )
   );
+  self.clients.claim();
 });
 
-// Interceptar fetch
+// =======================
+// FETCH
+// =======================
 self.addEventListener('fetch', event => {
   const url = event.request.url;
 
-  // 1️⃣ GOOGLE SHEETS: network-first
+  // 1️⃣ GOOGLE SHEETS → NETWORK FIRST + FALLBACK
   if (url.includes('docs.google.com')) {
     event.respondWith(
       fetch(event.request)
-        .then(response => {
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, response.clone()));
-          return response;
+        .then(res => {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          return res;
         })
         .catch(() => caches.match(event.request))
     );
     return;
   }
 
-  // 2️⃣ Imagens: cache-first com fallback
+  // 2️⃣ IMAGENS → CACHE FIRST
   if (event.request.destination === 'image') {
     event.respondWith(
-      caches.match(event.request)
-        .then(cached => cached || fetch(event.request))
-        .catch(() => caches.match('/assets/images/perfil/default.png'))
+      caches.match(event.request).then(cached => {
+        return cached || fetch(event.request);
+      })
     );
     return;
   }
 
-  // 3️⃣ HTML/JS/CSS: cache-first, atualizar em background
+  // 3️⃣ RESTO DO SITE
   event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      const fetchPromise = fetch(event.request)
-        .then(fetchResponse => {
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, fetchResponse.clone()));
-          return fetchResponse;
-        })
-        .catch(() => cachedResponse);
-
-      return cachedResponse || fetchPromise;
+    caches.match(event.request).then(cached => {
+      return cached || fetch(event.request);
     })
   );
 });
