@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
+  <title>Rios — Estatísticas das Equipas</title>
+
+  <!-- CSS Global -->
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- CSS específico da página -->
+  <link rel="stylesheet" href="assets/css/pages/estatisticasequipa.css">
+</head>
+
+<body>
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="container site-header">
+      <a href="index.html" class="brand">Rios</a>
+
+      <!-- LINKS FIXOS NO HEADER -->
+      <div class="top-links">
+        <a href="jogos.html">Jogos</a>
+        <a href="tabeladepontuacao.html">Tabela</a>
+      </div>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="
+        const nav = document.getElementById('nav');
+        nav.classList.toggle('show');
+        this.setAttribute('aria-expanded', nav.classList.contains('show') ? 'true' : 'false');
+      ">☰</button>
+
+      <nav>
+        <ul class="nav-list" id="nav" aria-label="Main navigation">
+          <li class="has-submenu">
+            <a href="#estatistica">Estatística</a>
+            <ul class="submenu" aria-label="Estatística submenu">
+              <li><a href="estatisticasjogadores.html">Jogadores</a></li>
+              <li><a href="estatisticasequipa.html">Equipas</a></li>
+              <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
+            </ul>
+          </li>
+          <li><a href="equipas.html">Equipas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== MAIN ========== -->
+  <main id="main">
+    <!-- ========== ESTATISTICAS EQUIPA INICIO ========== -->
+    <section class="uefa-table-card" aria-label="Standings — UEFA style">
+      <div class="uefa-table-head" role="row">
+        <div class="col-rank">#</div>
+        <div class="col-team">Equipa</div>
+        <div class="col-stat matches">Jogos</div>
+        <div class="col-stat">V</div>
+        <div class="col-stat">E</div>
+        <div class="col-stat">D</div>
+        <div class="col-stat">CA</div>
+        <div class="col-stat">CV</div>
+        <div class="col-stat">Golos</div>
+      </div>
+      <div class="uefa-table-body" id="uefaStandings"></div>
+    </section>
+    <!-- ========== ESTATISTICAS EQUIPA FIM ========== -->
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="rio-footer" role="contentinfo" aria-label="Rodapé do site">
+    <div class="rio-footer-top">
+      <div class="rio-ct">
+        <div class="rio-brand">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/512px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png" alt="Rios logo" />
+          <div>
+            <p>Rios</p>
+            <div class="muted" style="font-size:.9rem; margin-top:.2rem">Design & Arquitetura Digital</div>
+          </div>
+        </div>
+
+        <nav class="rio-links" aria-label="Links do rodapé">
+          <div>
+            <h4>Competição</h4>
+            <a href="#jogos">Jogos</a>
+            <a href="#tabela">Tabela</a>
+            <a href="#equipas">Equipas</a>
+            <a href="#melhores-marcadores">Melhores Jogadores</a>
+          </div>
+          <div>
+            <h4>Informação</h4>
+            <a href="#news">Notícias</a>
+            <a href="#estatisticas">Estatísticas</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#hist">Histórico</a>
+          </div>
+          <div>
+            <h4>Clube</h4>
+            <a href="#about">Sobre</a>
+            <a href="#contact">Contacto</a>
+            <a href="#rules">Regulamentos</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="rio-footer-bottom">
+      <div class="rio-bottom-inner">
+        <span>© <span id="rioYear"></span> Rios. Todos os direitos reservados.</span>
+        <div class="rio-legal">
+          <a href="#">Privacidade</a>
+          <a href="#">Termos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="assets/js/pages/estatisticasequipa.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

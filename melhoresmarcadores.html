@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
+  <title>Rios — Website Leve e Responsivo</title>
+
+  <!-- CSS Geral -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/pages/melhoresmarcadores.css">
+</head>
+
+<body>
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="container site-header">
+      <a href="index.html" class="brand">Rios</a>
+
+      <div class="top-links">
+        <a href="jogos.html">Jogos</a>
+        <a href="tabeladepontuacao.html">Tabela</a>
+      </div>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="
+        const nav = document.getElementById('nav');
+        nav.classList.toggle('show');
+        this.setAttribute('aria-expanded', nav.classList.contains('show') ? 'true' : 'false');
+      ">☰</button>
+
+      <nav>
+        <ul class="nav-list" id="nav" aria-label="Main navigation">
+          <li class="has-submenu">
+            <a href="#estatistica">Estatística</a>
+            <ul class="submenu" aria-label="Estatística submenu">
+              <li><a href="estatisticasjogadores.html">Jogadores</a></li>
+              <li><a href="estatisticasequipa.html">Equipas</a></li>
+              <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
+            </ul>
+          </li>
+          <li><a href="equipas.html">Equipas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== MAIN ========== -->
+  <main id="main">
+
+    <!-- ========== TÍTULO ========== -->
+    <div class="page-header_title">
+      <h1 class="section--title bigTitle pk-font-size--xl2 pk-font-size-md--xl4">
+        <span class="page-header_title-text">
+          Melhores marcadores
+        </span>
+      </h1>
+    </div>
+
+    <!-- =========================================================
+         SLIDER 6 MAIORES MARCADORES
+         ========================================================= -->
+    <div class="maioresmarcadores-container">
+
+      <!-- ===== CAROUSEL UEFA ===== -->
+      <section class="uefa-carousel">
+
+        <div class="carousel-header">
+          <h2></h2>
+          <a href="#" class="view-all">Ver todos</a>
+        </div>
+
+        <div class="carousel-container">
+          <button class="carousel-btn left" aria-label="Previous">‹</button>
+
+          <div class="carousel-track"></div>
+
+          <button class="carousel-btn right" aria-label="Next">›</button>
+        </div>
+      </section>
+
+      <!-- ===== BARRA DE PESQUISA ===== -->
+      <div class="ts-search-container">
+        <input type="text" id="ts-search" placeholder="Pesquisar por jogador...">
+      </div>
+
+      <!-- ===== GRID OF OFFICIAL PLAYERS ===== -->
+      <section class="official-section">
+        <h2 class="official-title"></h2>
+        <div class="official-grid" id="official-grid"></div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="rio-footer" role="contentinfo" aria-label="Rodapé do site">
+    <div class="rio-footer-top">
+      <div class="rio-ct">
+        <div class="rio-brand">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/512px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png" alt="Rios logo" />
+          <div>
+            <p>Rios</p>
+            <div class="muted">Design & Arquitetura Digital</div>
+          </div>
+        </div>
+
+        <nav class="rio-links" aria-label="Links do rodapé">
+          <div>
+            <h4>Competição</h4>
+            <a href="#jogos">Jogos</a>
+            <a href="#tabela">Tabela</a>
+            <a href="#equipas">Equipas</a>
+            <a href="#melhores-marcadores">Melhores Jogadores</a>
+          </div>
+          <div>
+            <h4>Informação</h4>
+            <a href="#news">Notícias</a>
+            <a href="#estatisticas">Estatísticas</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#hist">Histórico</a>
+          </div>
+          <div>
+            <h4>Clube</h4>
+            <a href="#about">Sobre</a>
+            <a href="#contact">Contacto</a>
+            <a href="#rules">Regulamentos</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="rio-footer-bottom">
+      <div class="rio-bottom-inner">
+        <span>© <span id="rioYear"></span> Rios. Todos os direitos reservados.</span>
+        <div class="rio-legal">
+          <a href="#">Privacidade</a>
+          <a href="#">Termos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="assets/js/pages/melhoresmarcadores.js"></script>
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
+  <title>Rios — Website Leve e Responsivo</title>
+
+  <!-- CSS Geral -->
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- CSS Página Equipas -->
+  <link rel="stylesheet" href="assets/css/pages/equipas.css">
+</head>
+
+<body>
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="container site-header">
+      <a href="index.html" class="brand">Rios</a>
+
+      <!-- LINKS FIXOS NO HEADER -->
+      <div class="top-links">
+        <a href="jogos.html">Jogos</a>
+        <a href="tabeladepontuacao.html">Tabela</a>
+      </div>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav">☰</button>
+
+      <nav>
+        <ul class="nav-list" id="nav" aria-label="Main navigation">
+          <li class="has-submenu">
+            <a href="#estatistica">Estatística</a>
+            <ul class="submenu" aria-label="Estatística submenu">
+              <li><a href="estatisticasjogadores.html">Jogadores</a></li>
+              <li><a href="estatisticasequipa.html">Equipas</a></li>
+              <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
+            </ul>
+          </li>
+          <li><a href="equipas.html">Equipas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== MAIN ========== -->
+  <main id="main">
+    <!-- ========== EQUIPAS INICIO ========== -->
+    <div class="container teams-container">
+      <section class="teams-section">
+        <h2 class="teams-title">Equipas da</h2>
+        <div class="teams-subtitle">Temporada 2026</div>
+
+        <div class="teams-grid">
+          <!-- CARD MODELO BUNDESLIGA -->
+
+          <!-- 007Q FC -->
+          <a href="equipa.html?team=007Q FC" class="team-link">
+            <div class="team-card">
+              <img src="assets/images/team-logo/logo_quintas.svg" alt="007Q FC Logo" />
+              <div class="team-info">
+                <div class="team-name">007Q FC</div>
+                <div class="team-sponsor" data-team="007Q FC"></div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Ubuntu UD -->
+          <a href="equipa.html?team=Ubuntu UD" class="team-link">
+            <div class="team-card">
+              <img src="assets/images/team-logo/logo_ubuntu.svg" alt="Ubuntu UD Logo" />
+              <div class="team-info">
+                <div class="team-name">Ubuntu UD</div>
+                <div class="team-sponsor" data-team="Ubuntu UD"></div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Bahatas -->
+          <a href="equipa.html?team=Bahatas" class="team-link">
+            <div class="team-card">
+              <img src="assets/images/team-logo/logo_bahatas.svg" alt="Bahatas Logo" />
+              <div class="team-info">
+                <div class="team-name">Bahatas</div>
+                <div class="team-sponsor" data-team="Bahatas"></div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Proletariado -->
+          <a href="equipa.html?team=Proletariado" class="team-link">
+            <div class="team-card">
+              <img src="assets/images/team-logo/logo_proletariado.svg" alt="Proletariado Logo" />
+              <div class="team-info">
+                <div class="team-name">Proletariado</div>
+                <div class="team-sponsor" data-team="Proletariado"></div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Vanghanu VM -->
+          <a href="equipa.html?team=Vanghanu VM" class="team-link">
+            <div class="team-card">
+              <img src="assets/images/team-logo/logo_vanghanu.svg" alt="Vanghanu VM Logo" />
+              <div class="team-info">
+                <div class="team-name">Vanghanu VM</div>
+                <div class="team-sponsor" data-team="Vanghanu VM"></div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Chitas De Aço -->
+          <a href="equipa.html?team=Chitas De Aço" class="team-link">
+            <div class="team-card">
+              <img src="assets/images/team-logo/logo_chitas.svg" alt="Chitas De Aço Logo" />
+              <div class="team-info">
+                <div class="team-name">Chitas De Aço</div>
+                <div class="team-sponsor" data-team="Chitas De Aço"></div>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </section>
+    </div>
+    <!-- ========== EQUIPAS FIM ========== -->
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="rio-footer" role="contentinfo" aria-label="Rodapé do site">
+    <div class="rio-footer-top">
+      <div class="rio-ct">
+        <div class="rio-brand">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/512px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png" alt="Rios logo" />
+          <div>
+            <p>Rios</p>
+            <div class="muted">Design & Arquitetura Digital</div>
+          </div>
+        </div>
+
+        <nav class="rio-links" aria-label="Links do rodapé">
+          <div>
+            <h4>Competição</h4>
+            <a href="#jogos">Jogos</a>
+            <a href="#tabela">Tabela</a>
+            <a href="#equipas">Equipas</a>
+            <a href="#melhores-marcadores">Melhores Jogadores</a>
+          </div>
+          <div>
+            <h4>Informação</h4>
+            <a href="#news">Notícias</a>
+            <a href="#estatisticas">Estatísticas</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#hist">Histórico</a>
+          </div>
+          <div>
+            <h4>Clube</h4>
+            <a href="#about">Sobre</a>
+            <a href="#contact">Contacto</a>
+            <a href="#rules">Regulamentos</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="rio-footer-bottom">
+      <div class="rio-bottom-inner">
+        <span>© <span id="rioYear"></span> Rios. Todos os direitos reservados.</span>
+        <div class="rio-legal">
+          <a href="#">Privacidade</a>
+          <a href="#">Termos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <!-- Scripts da página -->
+  <script src="assets/js/pages/slider.js"></script>
+  <script src="assets/js/pages/equipas.js"></script>
+
+  <!-- Scripts gerais -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>
