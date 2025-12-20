@@ -1,142 +1,152 @@
-// =======================
-// FUNÇÕES AUXILIARES
-// =======================
-const normalize = s => (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
+  <title>Rios — Website Leve e Responsivo</title>
 
-// Parser CSV robusto: ignora aspas e vírgulas extras
-function parseCSV(text){
-  const lines = text.trim().split(/\r?\n/);
-  if(!lines.length) return [];
-  const headers = lines[0].match(/(?:\"([^\"]*)\"|([^\",]+))/g).map(h=>h.replace(/^"|"$/g,'').trim());
-  const rows = [];
-  for(let i=1;i<lines.length;i++){
-    const line = lines[i];
-    if(!line.trim()) continue;
-    const values = [];
-    let inQuotes=false,value='';
-    for(let c=0;c<line.length;c++){
-      const char=line[c];
-      if(char==='"' && line[c-1]!=='\\'){inQuotes=!inQuotes; continue;}
-      if(char===',' && !inQuotes){values.push(value.trim()); value=''; continue;}
-      value+=char;
-    }
-    values.push(value.trim());
-    const obj={};
-    headers.forEach((h,j)=>obj[h]=values[j]||"");
-    rows.push(obj);
-  }
-  return rows;
-}
+  <!-- CSS Geral -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/pages/jogadores-do-campeonato.css">
 
-// Fetch CSV
-async function fetchCSV(url){ const res=await fetch(url); return parseCSV(await res.text()); }
+    <!-- Link o Manifesto inicio -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a4fff">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-// =======================
-// ATUALIZA TOP SCORERS
-// =======================
-async function updateTopScorers(){
-  const urlFichas = "https://docs.google.com/spreadsheets/d/e/.../pub?gid=0&single=true&output=csv";
-  const urlEquipas = "https://docs.google.com/spreadsheets/d/e/.../pub?gid=1253685309&single=true&output=csv";
-  const urlJogadores = "https://docs.google.com/spreadsheets/d/e/.../pub?gid=1795344515&single=true&output=csv";
+  <!-- Link o Manifesto fim -->
+</head>
 
-  const [fichas,equipas,jogadores] = await Promise.all([fetchCSV(urlFichas),fetchCSV(urlEquipas),fetchCSV(urlJogadores)]);
+<body> 
+  <!-- ========== HEADER ========== -->
+  <header class="main-header">
+    <div class="container site-header">
+      <a href="index.html" class="brand">Rios</a>
 
-  const stats={};
-  const clubSet=new Set();
-  jogadores.forEach(j=>{
-    const name=j.Player.trim();
-    stats[name]={golos:0,team:j.Team,position:j.Position||"",image:j.Image||"assets/images/silhouette/silhouette64x64.webp"};
-    if(j.Team) clubSet.add(j.Team);
-  });
+      <!-- LINKS FIXOS NO HEADER -->
+      <div class="top-links">
+        <a href="jogos.html">Jogos</a>
+        <a href="tabeladepontuacao.html">Tabela</a>
+      </div>
 
-  // Popula select de clubes
-  const selectClub=document.getElementById("ts-club-select");
-  clubSet.forEach(club=>{const opt=document.createElement("option"); opt.value=club; opt.textContent=club; selectClub.appendChild(opt);});
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="
+        const nav = document.getElementById('nav');
+        nav.classList.toggle('show');
+        this.setAttribute('aria-expanded', nav.classList.contains('show') ? 'true' : 'false');
+      ">☰</button>
 
-  // Contabiliza golos
-  fichas.forEach(f=>{
-    ["ScorersHome","ScorersAway"].forEach(col=>{
-      const scorers=f[col]; if(!scorers) return;
-      const regex=/(.*?):\s*(\d+)/g; let match;
-      while((match=regex.exec(scorers))!==null){
-        const name=match[1].trim(), goals=parseInt(match[2])||0;
-        if(stats[name]) stats[name].golos+=goals;
-      }
-    });
-  });
+      <nav>
+        <ul class="nav-list" id="nav" aria-label="Main navigation">
+          <li class="has-submenu">
+            <a href="#estatistica">Estatística</a>
+            <ul class="submenu" aria-label="Estatística submenu">
+              <li><a href="estatisticasjogadores.html">Jogadores</a></li>
+              <li><a href="estatisticasequipa.html">Equipas</a></li>
+              <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
+            </ul>
+          </li>
+          <li><a href="equipas.html">Equipas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  // Agrupa por posição
-  const grouped={"Guarda-redes":[],"Fixos":[],"Alas":[],"Pivôs":[]};
-  Object.entries(stats).forEach(([name,data])=>{
-    const pos=(data.position||"").toLowerCase();
-    if(pos.includes("guarda")) grouped["Guarda-redes"].push({playerName:name,...data});
-    else if(pos.includes("fixo")) grouped["Fixos"].push({playerName:name,...data});
-    else if(pos.includes("ala")) grouped["Alas"].push({playerName:name,...data});
-    else if(pos.includes("piv")) grouped["Pivôs"].push({playerName:name,...data});
-  });
+  <!-- ========== MAIN ========== -->
+  <main id="main">
 
-  const displayOrder=["Guarda-redes","Fixos","Alas","Pivôs"];
-  displayOrder.forEach(pos=>grouped[pos].sort((a,b)=>a.playerName.localeCompare(b.playerName)));
+    <!-- ========== MAIORES MARCADORES ========== -->
+    <section class="container">
 
-  const grid=document.querySelector(".scorers-grid");
-  grid.innerHTML="";
+      <div class="topscore-container">
+        <!-- SELECT CLUB -->
+        <div class="ts-club-select-container">
+          <label for="ts-club-select">Seleccionar Clube</label>
+          <select id="ts-club-select">
+            <option value="">Todos Clubes</option>
+          </select>
+        </div>
 
-  function cardHTML(p){
-    const link=`jogador.html?player=${encodeURIComponent(p.playerName)}`;
-    return `
-      <div class="scorer-card">
-        <div class="ts-rank"><p class="ts-rank__label">${p.rank}</p></div>
-        <div class="player-info">
-          <a href="${link}">
-            <img src="${p.image}" class="player-photo" 
-                 onerror="this.onerror=null;this.src='assets/images/silhouette/silhouette64x64.webp';">
-          </a>
-          <div class="player-text">
-            <a href="${link}"><h3>${p.playerName}</h3></a>
-            <p>${p.position}</p>
+        <!-- BARRA DE PESQUISA -->
+        <div class="ts-search-container">
+          <input type="text" id="ts-search" placeholder="Pesquisar por jogador...">
+        </div>
+
+        <!-- GRID DOS MARCADORES -->
+        <div class="elementor-container elementor-column-gap-default">
+          <section class="top-scorers">
+            <div class="scorers-grid"></div>
+          </section>
+        </div>
+
+        <!-- MODAL — LISTA COMPLETA -->
+        <div id="modal-full-list">
+          <div>
+            <button id="modal-close">×</button>
+            <h2>Lista Completa</h2>
+            <div class="modal-grid"></div>
           </div>
         </div>
-      </div>`;
-  }
 
-  // Renderiza
-  let rankCounter=1;
-  displayOrder.forEach(pos=>{
-    if(!grouped[pos].length) return;
-    grid.innerHTML+=`<h2 class="pos-title" style="grid-column:1/-1;margin-top:20px;font-family:DFL Condensed,Arial,sans-serif;font-size:18px;font-weight:700;letter-spacing:1px;margin:40px 0 14px;padding:0 4px;text-transform:uppercase;">${pos}</h2>`;
-    grouped[pos].forEach(p=>{p.rank=rankCounter++; grid.innerHTML+=cardHTML(p);});
-  });
+      </div>
+    </section>
 
-  // =================
-  // FILTRO POR NOME / CLUBE
-  // =================
-  function filterCards(){
-    const term=document.getElementById("ts-search").value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-    const clubTerm=document.getElementById("ts-club-select").value;
-    const cards=document.querySelectorAll(".scorer-card");
-    const titles=document.querySelectorAll(".pos-title");
+  </main>
 
-    cards.forEach(card=>{
-      const name=card.querySelector("h3").textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-      const posi=card.querySelector("p").textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-      const team=stats[card.querySelector("h3").textContent].team;
-      let show=(name.includes(term)||posi.includes(term));
-      if(clubTerm) show=show&&(team===clubTerm);
-      card.style.display=show?"":"none";
-    });
+  <!-- ========== FOOTER ========== -->
+  <footer class="rio-footer" role="contentinfo" aria-label="Rodapé do site">
+    <div class="rio-footer-top">
+      <div class="rio-ct">
+        <div class="rio-brand">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/512px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png" alt="Rios logo" />
+          <div>
+            <p>Rios</p>
+            <div class="muted">Design & Arquitetura Digital</div>
+          </div>
+        </div>
 
-    titles.forEach(title=>{
-      let el=title.nextElementSibling; let hasVisible=false;
-      while(el && !el.classList.contains("pos-title")){
-        if(el.classList.contains("scorer-card") && el.style.display!=="none"){hasVisible=true; break;}
-        el=el.nextElementSibling;
-      }
-      title.style.display=hasVisible?"":"none";
-    });
-  }
+        <nav class="rio-links" aria-label="Links do rodapé">
+          <div>
+            <h4>Competição</h4>
+            <a href="#jogos">Jogos</a>
+            <a href="#tabela">Tabela</a>
+            <a href="#equipas">Equipas</a>
+            <a href="#melhores-marcadores">Melhores Jogadores</a>
+          </div>
 
-  document.getElementById("ts-search").addEventListener("input", filterCards);
-  document.getElementById("ts-club-select").addEventListener("change", filterCards);
-}
+          <div>
+            <h4>Informação</h4>
+            <a href="#news">Notícias</a>
+            <a href="#estatisticas">Estatísticas</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#hist">Histórico</a>
+          </div>
 
-updateTopScorers();
+          <div>
+            <h4>Clube</h4>
+            <a href="#about">Sobre</a>
+            <a href="#contact">Contacto</a>
+            <a href="#rules">Regulamentos</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="rio-footer-bottom">
+      <div class="rio-bottom-inner">
+        <span>© <span id="rioYear"></span> Rios. Todos os direitos reservados.</span>
+        <div class="rio-legal">
+          <a href="#">Privacidade</a>
+          <a href="#">Termos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="assets/js/pages/jogadores-do-campeonato.js"></script>
+  
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>
