@@ -6,6 +6,15 @@
   <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
   <title>Rios — Estatísticas de Jogadores</title>
 
+
+  <!-- Google Fonts (UEFA-style) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap"
+  rel="stylesheet"
+>
   <!-- CSS Geral -->
   <link rel="stylesheet" href="assets/css/main.css">
   <!-- CSS Específico da Página -->
@@ -13,37 +22,9 @@
 </head>
 
 <body>
-  <!-- ========== HEADER ========== -->
-  <header>
-    <div class="container site-header">
-      <a href="index.html" class="brand">Rios</a>
-
-      <div class="top-links">
-        <a href="jogos.html">Jogos</a>
-        <a href="tabeladepontuacao.html">Tabela</a>
-      </div>
-
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="
-        const nav = document.getElementById('nav');
-        nav.classList.toggle('show');
-        this.setAttribute('aria-expanded', nav.classList.contains('show') ? 'true' : 'false');
-      ">☰</button>
-
-      <nav>
-        <ul class="nav-list" id="nav" aria-label="Main navigation">
-          <li class="has-submenu">
-            <a href="#estatistica">Estatística</a>
-            <ul class="submenu" aria-label="Estatística submenu">
-              <li><a href="estatisticasjogadores.html">Jogadores</a></li>
-              <li><a href="estatisticasequipa.html">Equipas</a></li>
-              <li><a href="melhoresmarcadores.html">Melhores Marcadores</a></li>
-            </ul>
-          </li>
-          <li><a href="equipas.html">Equipas</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+ <!-- ========== HEADER ========== -->
+  <div id="header"></div>
+   <!-- ========== HEADER ========== -->
 
   <!-- ========== MAIN ========== -->
   <main id="main">
@@ -53,18 +34,22 @@
       <div class="page-header dtable text-center header-transparent">
         <div class="dcell">
           <div class="container">
-            <h1 class="page-title">Estatísticas de Jogadores</h1>
+            
+            
           </div>
         </div>
       </div>
 
+      <div class="topscore-container">
+        <h2 class="teams-title">Estatisticas</h2>
+        <div class="teams-subtitle">Jogadores</div>
+      </div>
+
+
       <!-- Tabela de Estatísticas -->
       <div class="topscore-container">
         <div class="stats-block">
-          <div class="stats-header">
-            <h2>Estatísticas</h2>
-            <button class="view-full-stats">Ver estatística completa</button>
-          </div>
+          
           <div class="stats-table-wrapper">
             <table class="stats-table" aria-label="Tabela de Estatísticas de Jogadores">
               <thead>
@@ -89,55 +74,10 @@
     </div><!-- #content -->
   </main>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="rio-footer" role="contentinfo" aria-label="Rodapé do site">
-    <div class="rio-footer-top">
-      <div class="rio-ct">
-        <div class="rio-brand">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/512px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png" alt="Rios logo" />
-          <div>
-            <p>Rios</p>
-            <div class="muted">Design & Arquitetura Digital</div>
-          </div>
-        </div>
-
-        <nav class="rio-links" aria-label="Links do rodapé">
-          <div>
-            <h4>Competição</h4>
-            <a href="#jogos">Jogos</a>
-            <a href="#tabela">Tabela</a>
-            <a href="#equipas">Equipas</a>
-            <a href="#melhores-marcadores">Melhores Jogadores</a>
-          </div>
-
-          <div>
-            <h4>Informação</h4>
-            <a href="#news">Notícias</a>
-            <a href="#estatisticas">Estatísticas</a>
-            <a href="#galeria">Galeria</a>
-            <a href="#hist">Histórico</a>
-          </div>
-
-          <div>
-            <h4>Clube</h4>
-            <a href="#about">Sobre</a>
-            <a href="#contact">Contacto</a>
-            <a href="#rules">Regulamentos</a>
-          </div>
-        </nav>
-      </div>
-    </div>
-
-    <div class="rio-footer-bottom">
-      <div class="rio-bottom-inner">
-        <span>© <span id="rioYear"></span> Rios. Todos os direitos reservados.</span>
-        <div class="rio-legal">
-          <a href="#">Privacidade</a>
-          <a href="#">Termos</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  
+   <!-- FOOTER (injetado via JS start) -->
+    <div id="footer"></div>
+    <!-- FOOTER (injetado via JS end) -->
 
   <!-- Scripts -->
   <script src="assets/js/pages/estatisticasjogadores.js"></script>
