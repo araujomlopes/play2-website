@@ -1,0 +1,16 @@
+/* =====================
+   TYPOGRAPHY TOKENS
+   ===================== */
+
+:root {
+
+  --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-secondary: 'Inter Tight', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Font weights (controlados) */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+}
