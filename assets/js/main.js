@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inject header
   const headerSlot = document.getElementById('header');
   if (headerSlot) {
-    fetch('/partials/header.html')
+    fetch('partials/header.html')
       .then(res => res.text())
       .then(html => {
         headerSlot.innerHTML = html;
@@ -60,4 +60,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===============================
 // GLOBAL UI (Header / Nav) END
+
 // ===============================
