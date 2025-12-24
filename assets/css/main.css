@@ -18,24 +18,19 @@
   --gutter:1rem;
   --shadow:0 6px 18px rgba(15,23,42,0.06);
   --text:#111827;
-  --header-height:72px;
-  --footer-bg:#0b0b0b;
-  --footer-surface:#111;
-  --footer-muted:#9ca3af;
-  --footer-contrast:#d1d5db;
 }
 
 /* =========================================================
-   RESET BASE
+   RESET BASE (LIGHT)
    ========================================================= */
 *,*::before,*::after{
   box-sizing:border-box;
 }
 
-html, body{
+html,
+body{
   height:100%;
-  max-width:100%;
-  overflow-x:hidden; /* corrige overflow mobile/Firefox */
+  overflow-x:hidden; /* correção para menu sticky */
 }
 
 /* =========================================================
@@ -43,10 +38,6 @@ html, body{
    ========================================================= */
 body{
   margin:0;
-  padding-top:var(--header-height);
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
   background:var(--bg);
   color:var(--text);
   line-height:1.45;
@@ -64,7 +55,6 @@ body{
   max-width:var(--container);
   margin:0 auto;
   padding:0 var(--gutter);
-  box-sizing:border-box;
 }
 
 .visually-hidden{
@@ -231,55 +221,103 @@ nav{
 }
 
 /* =========================================================
-   HERO / GRID PRINCIPAL
+   HEADER FIXO (ALTURA CONTROLADA)
+   ========================================================= */
+:root{
+  --header-height:72px;
+}
+
+.main-header{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
+}
+
+body{
+  padding-top:var(--header-height);
+}
+
+/* =========================================================
+   HERO / CONTEÚDO PRINCIPAL
    ========================================================= */
 .hero{
   padding:4rem 0;
   display:grid;
   gap:2rem;
   align-items:center;
-  grid-template-columns:1fr; /* Mobile-first */
+  min-width:0;  /* FIX FIREFOX */
+  flex-shrink:1;
 }
 
 .hero-inner{
   display:grid;
   gap:1rem;
+  min-width:0;  /* FIX FIREFOX */
+  flex-shrink:1;
+}
+
+.cta-row{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+  margin-top:.75rem;
+  min-width:0;  /* FIX FIREFOX */
+  flex-shrink:1;
+}
+
+/* Botões */
+.btn{
+  display:inline-block;
+  padding:.7rem 1rem;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  font-size:.95rem;
+}
+
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+}
+
+.btn-ghost{
+  background:transparent;
+  border:1px solid #e5e7eb;
+  color:var(--muted);
+}
+
+/* Grid */
+.grid-3{
+  display:grid;
+  gap:1.5rem;
+  grid-template-columns:1fr;
+  margin-top:1rem;
+  min-width:0;  /* FIX FIREFOX */
 }
 
 @media(min-width:700px){
+  .grid-3{
+    grid-template-columns:repeat(3,1fr);
+  }
+
   .hero{
     grid-template-columns:2fr 1fr;
     padding:4rem 2rem;
   }
 }
 
-/* =========================================================
-   GRID 3 CARDS / Cards
-   ========================================================= */
-.grid-3{
-  display:grid;
-  gap:1.5rem;
-  grid-template-columns:1fr; /* Mobile-first */
-  margin-top:1rem;
-}
-
-@media(min-width:700px){
-  .grid-3{
-    grid-template-columns:repeat(3,1fr); /* Desktop: 3 cards por linha */
-  }
-}
-
+/* Cards */
 .card{
   background:var(--surface);
   border-radius:var(--radius);
   padding:1rem;
   box-shadow:var(--shadow);
-  min-width:0; /* Firefox mobile fix */
+  min-width:0;  /* FIX FIREFOX */
+  flex-shrink:1;
 }
 
-/* =========================================================
-   FORMULÁRIOS
-   ========================================================= */
+/* Formulários */
 form.card input,
 form.card textarea{
   width:100%;
@@ -287,12 +325,16 @@ form.card textarea{
   border:1px solid #ddd;
   border-radius:8px;
   font:inherit;
-  min-width:0;
 }
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
+/* Footer */
+:root{
+  --footer-bg:#0b0b0b;
+  --footer-surface:#111;
+  --footer-muted:#9ca3af;
+  --footer-contrast:#d1d5db;
+}
+
 .rio-footer{
   background:#191e24;
   color:var(--footer-contrast);
@@ -314,6 +356,7 @@ form.card textarea{
   gap:2rem;
   flex-wrap:wrap;
   align-items:flex-start;
+  min-width:0;  /* FIX FIREFOX */
 }
 
 .rio-brand{
@@ -329,12 +372,15 @@ form.card textarea{
   object-fit:contain;
   border-radius:6px;
   background:transparent;
+  flex-shrink:0;  /* FIX FIREFOX */
 }
 
 .rio-brand p{
   margin:0;
   color:var(--footer-contrast);
   font-weight:700;
+  min-width:0;  /* FIX FIREFOX */
+  overflow-wrap:break-word;
 }
 
 .rio-links{
@@ -342,6 +388,7 @@ form.card textarea{
   grid-template-columns:repeat(3,minmax(160px,1fr));
   gap:1.25rem;
   flex:1;
+  min-width:0;  /* FIX FIREFOX */
 }
 
 @media(max-width:840px){
@@ -357,79 +404,7 @@ form.card textarea{
   }
 }
 
-.rio-links h4{
-  margin:0 0 .5rem;
-  color:#fff;
-  font-size:.95rem;
-  font-weight:700;
-}
-
-.rio-links a{
-  display:block;
-  color:#c9cccf;
-  text-decoration:none;
-  margin:.28rem 0;
-  font-size:.9rem;
-}
-
-.rio-links a:hover{
-  color:var(--footer-contrast);
-}
-
-.rio-footer-bottom{
-  background:#191e24;
-  padding:1rem 0;
-  font-size:.85rem;
-}
-
-.rio-bottom-inner{
-  width:100%;
-  max-width:var(--container);
-  margin:0 auto;
-  padding:0 var(--gutter);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:.75rem;
-  flex-wrap:wrap;
-}
-
-.rio-legal a{
-  color:var(--footer-muted);
-  text-decoration:none;
-  margin-left:1rem;
-}
-
-.rio-legal a:hover{
-  color:var(--footer-contrast);
-}
-
-/* =========================================================
-   UTILITÁRIOS
-   ========================================================= */
-.muted{
-  color:var(--muted);
-}
-
-a{
-  color:inherit;
-}
-
-/* =========================================================
-   HEADER BANNER / PLAYER
-   ========================================================= */
-.header-banner{
-  width:100%;
-  position:relative;
-  overflow:hidden;
-}
-
-.header-banner::after{
-  content:"";
-  position:absolute;
-  inset:0;
-}
-
+/* Header banner / player */
 .player-content{
   position:relative;
   z-index:5;
@@ -439,86 +414,49 @@ a{
   padding:30px 20px;
   display:flex;
   align-items:flex-start;
-  flex-wrap:wrap;
+  min-width:0;  /* FIX FIREFOX */
+  flex-shrink:1;
 }
 
-.team-title{
-  font-size:42px;
-  font-weight:900;
-  text-transform:uppercase;
-  color:#fff;
-  word-break:break-word;
+.team-title, .team-sponsor{
+  min-width:0;  /* FIX FIREFOX */
+  overflow-wrap: break-word;
 }
 
-@media(max-width:1024px){
-  .team-title{font-size:34px}
+/* Imagens globais */
+img{
+  max-width:100%;
+  height:auto;
+  display:block;
+  flex-shrink:0; /* FIX FIREFOX */
 }
 
-@media(max-width:768px){
-  .player-content{
-    align-items:flex-end;
-    justify-content:center;
-    padding-bottom:24px;
-  }
-  .team-title{
-    font-size:28px;
-    text-align:center;
-  }
+/* Mantenha footer no final */
+html, body {
+  height: 100%;
+  margin:0;
 }
 
-.team-info{
+body {
   display:flex;
   flex-direction:column;
-  gap:8px;
-  min-width:0; /* Firefox fix */
+  min-height:100vh;
 }
 
-.team-sponsor{
-  font-size:18px;
-  font-weight:600;
-  color:#fff;
+main {
+  flex:1 0 auto;
 }
 
-@media(max-width:768px){
-  .team-sponsor{display:none}
+/* FIREFOX FIX FINAL */
+*, *::before, *::after{
+  box-sizing:border-box;
 }
 
-.player-header-container{
-  position:relative;
-  width:100%;
-  height:360px;
-  max-height:50vh;
-  overflow:hidden;
+html, body{
+  max-width:100%;
+  overflow-x:hidden;
 }
 
-.club-header-background{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:0;
-}
-
-.club-header-background img,
-.club-header-background source{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center center;
-  display:block;
-}
-
-/* =========================================================
-   TEXT UTILITIES
-   ========================================================= */
-.muted-small{
-  font-size:.9rem;
-  margin-top:.2rem;
-}
-
-/* =========================================================
-   FIXES FIREFOX MOBILE / OVERFLOW
-   ========================================================= */
 [class*="slider"],
 [class*="track"],
 [class*="carousel"]{
