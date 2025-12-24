@@ -2,21 +2,14 @@
 <html lang="pt">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
   <title>Rios — Website Leve e Responsivo</title>
 
-
-  <!-- Google Fonts (UEFA-style) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap"
-  rel="stylesheet"
->
-
-
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
 
   <!-- CSS Geral -->
   <link rel="stylesheet" href="assets/css/main.css">
@@ -24,25 +17,18 @@
 </head>
 
 <body>
-  <!-- ========== HEADER ========== -->
+  <!-- HEADER -->
   <div id="header"></div>
-   <!-- ========== HEADER ========== -->
 
-
-  <!-- ========== MAIN ========== -->
+  <!-- MAIN -->
   <main id="main">
 
-    <!-- ========== Título da página ========== -->
     <div class="page-header_title">
-      <h1 class="section--title bigTitle pk-font-size--xl2 pk-font-size-md--xl4">
-        <span class="page-header_title-text">Calendário</span>
-      </h1>
+      <h2 class="HkuidzCZCvkXdJGR">Calendário</h2>
     </div>
 
-    <!-- ========== FILTROS ========== -->
+    <!-- FILTROS -->
     <div class="bl-filters-container">
-
-      <!-- Temporada -->
       <div class="bl-select-wrapper">
         <label class="bl-select-label">Temporada</label>
         <select class="bl-select" disabled>
@@ -51,7 +37,6 @@
         <div class="bl-select-underline"></div>
       </div>
 
-      <!-- Jornada -->
       <div class="bl-select-wrapper">
         <label class="bl-select-label">Selecionar Jornada</label>
         <select id="matchdaySelect" class="bl-select">
@@ -60,7 +45,6 @@
         <div class="bl-select-underline"></div>
       </div>
 
-      <!-- Clube -->
       <div class="bl-select-wrapper">
         <label class="bl-select-label">Selecionar Clube</label>
         <select id="clubSelect" class="bl-select">
@@ -68,25 +52,21 @@
         </select>
         <div class="bl-select-underline"></div>
       </div>
-
     </div>
 
-    <!-- ========== CONTAINER DE JOGOS ========== -->
+    <!-- CONTAINER DE JOGOS -->
     <div class="topscore-container">
       <div id="jornadas-container"></div>
     </div>
 
   </main>
 
-  
-   <!-- FOOTER (injetado via JS start) -->
-    <div id="footer"></div>
-    <!-- FOOTER (injetado via JS end) -->
+  <!-- FOOTER -->
+  <div id="footer"></div>
 
-  <!-- ========== SCRIPTS ========== -->
+  <!-- SCRIPTS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <script src="assets/js/pages/jogos.js"></script>
   <script src="assets/js/main.js"></script>
-
 </body>
 </html>
