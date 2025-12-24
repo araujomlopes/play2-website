@@ -1,3 +1,9 @@
+/* ===============================
+   CSS da página Jogos
+   Contém: grids, cards de partidas, filtros e responsividade
+   Refatorado para Firefox / responsividade
+=============================== */
+
 :root{
   --bg: #f5f7fa;
   --card-bg: #fff;
@@ -9,9 +15,9 @@
   --shadow: 0 6px 18px rgba(16,24,40,0.06);
 }
 
-/* =========================================================
+/* ===============================
    TÍTULO SEÇÃO
-   ========================================================= */
+=============================== */
 h2.section-title {
   font-size: 24px;
   font-weight: 700;
@@ -19,9 +25,9 @@ h2.section-title {
   margin: 20px 0 16px;
 }
 
-/* =========================================================
-   WRAPPER DE PARTIDAS / GRID PRINCIPAL
-   ========================================================= */
+/* ===============================
+   WRAPPER DE PARTIDAS
+=============================== */
 .matches-wrap {
   display: grid;
   gap: 16px;
@@ -30,37 +36,23 @@ h2.section-title {
   margin: 0 auto;
   overflow: hidden;
   transition: all 0.3s ease;
-  grid-template-columns: 1fr; /* Mobile-first: 1 coluna */
-  min-width:0; /* Fix overflow Firefox mobile */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* cards responsivos */
 }
 
-@media(min-width:700px){
-  .matches-wrap {
-    grid-template-columns: repeat(2, 1fr); /* 2 cards por linha desktop */
-  }
-}
-
-@media(min-width:1024px){
-  .matches-wrap {
-    grid-template-columns: repeat(3, 1fr); /* 3 cards por linha desktop grande */
-  }
-}
-
-/* =========================================================
+/* ===============================
    CARD DE PARTIDA
-   ========================================================= */
+=============================== */
 .match-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
   opacity: 1;
   transform: translateY(0);
   transition: all 0.4s ease;
-  min-width:0; /* Fix overflow Firefox mobile */
+  display: flex;
+  flex-direction: column;
 }
 
 /* HEADER DO CARD */
@@ -79,17 +71,21 @@ h2.section-title {
 /* BLOCO CENTRAL DE JOGO */
 .match-card__body {
   display: grid;
-  grid-template-columns: 1fr auto 1fr; /* home | meta | away */
+  grid-template-columns: 1fr min-content 1fr; /* home | meta | away */
   align-items: center;
+  gap: 10px;
   padding: 14px 12px;
-  min-width:0; /* Firefox fix */
+  min-width: 0; /* corrige overflow Firefox */
 }
 
 /* BLOCO HOME / AWAY */
 .home-block, .away-block {
   display: flex;
   align-items: center;
+  min-width: 0; /* corrige overflow Firefox */
+  overflow: hidden;
 }
+
 .home-block { justify-content: flex-start; }
 .away-block { justify-content: flex-end; }
 
@@ -99,7 +95,7 @@ h2.section-title {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  min-width: 140px;
+  min-width: max-content; /* mantém conteúdo centralizado */
 }
 
 /* LOGOS */
@@ -108,15 +104,18 @@ h2.section-title {
 /* NOMES DAS EQUIPES */
 .team-name {
   font-family: var(--font-secondary);
-  font-size: 16px;
-  line-height: 1.4;
-  color: var(--muted-2);
-  display: inline;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-normal);
+  color: var(--color-text-primary);
+  display: block; /* corrige quebra de linha */
   text-align: left;
   white-space: normal;
+  overflow: hidden; /* evita overflow */
+  text-overflow: ellipsis; /* corta nomes muito longos */
   cursor: pointer;
   user-select: none;
-  min-width:0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .team-sub { font-size:13px; color:var(--muted); }
@@ -161,26 +160,23 @@ h2.section-title {
   gap:4px;
   margin:12px 0;
 }
-
 .show-more-btn svg {
   transition:transform .3s ease;
 }
-
 .show-more-btn.active svg {
   transform:rotate(180deg);
 }
 
-/* =========================================================
-   SELECT / FILTROS
-   ========================================================= */
+/* ===============================
+   SELECT BUNDESLIGA
+=============================== */
 .bl-filters-container {
   display: flex;
-  gap: 60px; 
+  gap: 60px;
   align-items: flex-start;
   padding: 25px 0 35px;
   max-width: 1200px;
   margin: 0 auto;
-  flex-wrap: wrap;
 }
 
 .bl-select-wrapper {
@@ -195,6 +191,7 @@ h2.section-title {
   font-weight: 500;
   color: #6b7280;
   margin-bottom: 4px;
+  text-transform: none;
 }
 
 .bl-select {
@@ -234,8 +231,11 @@ h2.section-title {
   margin-top: 3px;
 }
 
+/* RESPONSIVO SELECTS */
 @media (max-width:768px) {
   .bl-filters-container {
+    display: flex;
+    flex-wrap: wrap;
     gap: 16px 20px;
   }
 
@@ -247,7 +247,12 @@ h2.section-title {
   .bl-filters-container .bl-select-wrapper:nth-child(3) {
     flex: 1 1 100%;
   }
+}
 
+/* ===============================
+   RESPONSIVO
+=============================== */
+@media (max-width:768px) {
   .match-card__body { gap:8px; }
   .team-name { font-size:16px; }
   .match-time { font-size:16px; }
@@ -260,39 +265,43 @@ h2.section-title {
   .match-time strong { font-size:14px !important; white-space: nowrap; }
 }
 
-/* =========================================================
-   TÍTULO PÁGINA E CONTAINERS PRINCIPAIS
-   ========================================================= */
-.page-header_title,
-.bl-filters-container,
-.topscore-container {
+/* ===============================
+   HEADER / TÍTULO PÁGINA
+=============================== */
+.page-header_title {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 10px 35px;
 }
 
-/* =========================================================
-   RODAPÉ
-   ========================================================= */
+/* ===============================
+   FOOTER
+=============================== */
 .rio-footer .rio-brand .muted {
   font-size: .9rem;
   margin-top: .2rem;
 }
 
-/* =========================================================
-   FIXES FIREFOX / MOBILE
-   ========================================================= */
-*, *::before, *::after{
-  box-sizing:border-box;
+/* ===============================
+   FIREFOX MOBILE FIX
+=============================== */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-html, body{
-  max-width:100%;
-  overflow-x:hidden;
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
-.matches-wrap,
-.match-card,
-.match-card__body {
+[class*="slider"],
+[class*="track"],
+[class*="carousel"]{
+  min-width:0;
+}
+
+[class*="slider"] > *,
+[class*="track"] > *,
+[class*="carousel"] > *{
   min-width:0;
 }
