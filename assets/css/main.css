@@ -1,11 +1,9 @@
-
 @import url('./base/reset.css');
 @import url('./base/variables.css');
 @import url('./base/typography.css');
 @import url('./base/base.css');
 @import url('./layout.css');
 @import url('./components/...css');
-
 
 /* =========================================================
    :ROOT / VARIÁVEIS GLOBAIS
@@ -20,19 +18,24 @@
   --gutter:1rem;
   --shadow:0 6px 18px rgba(15,23,42,0.06);
   --text:#111827;
+  --header-height:72px;
+  --footer-bg:#0b0b0b;
+  --footer-surface:#111;
+  --footer-muted:#9ca3af;
+  --footer-contrast:#d1d5db;
 }
 
 /* =========================================================
-   RESET BASE (LIGHT)
+   RESET BASE
    ========================================================= */
 *,*::before,*::after{
   box-sizing:border-box;
 }
 
-html,
-body{
+html, body{
   height:100%;
-  overflow-x:hidden; /* correção para menu sticky */
+  max-width:100%;
+  overflow-x:hidden; /* corrige overflow mobile/Firefox */
 }
 
 /* =========================================================
@@ -40,7 +43,10 @@ body{
    ========================================================= */
 body{
   margin:0;
-  
+  padding-top:var(--header-height);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
   background:var(--bg);
   color:var(--text);
   line-height:1.45;
@@ -58,9 +64,9 @@ body{
   max-width:var(--container);
   margin:0 auto;
   padding:0 var(--gutter);
+  box-sizing:border-box;
 }
 
-/* Conteúdo acessível apenas para leitores de ecrã */
 .visually-hidden{
   position:absolute;
   width:1px;
@@ -82,12 +88,11 @@ header{
   border-bottom:1px solid #e5e7eb;
   position:sticky;
   top:0;
-  z-index:999;        /* prioridade máxima */
-  isolation:isolate;  /* evita conflitos visuais */
+  z-index:999;
+  isolation:isolate;
   will-change:transform;
 }
 
-/* Estrutura principal do header */
 .site-header{
   height:64px;
   display:flex;
@@ -95,7 +100,6 @@ header{
   gap:1rem;
 }
 
-/* Branding */
 .brand{
   color:var(--accent);
   text-decoration:none;
@@ -103,7 +107,6 @@ header{
   font-size:1.15rem;
 }
 
-/* Links superiores */
 .top-links{
   margin-left:auto;
   display:flex;
@@ -127,7 +130,6 @@ header{
   background:#f0f4ff;
 }
 
-/* Botão mobile */
 .nav-toggle{
   font-size:1.5rem;
   background:none;
@@ -136,7 +138,6 @@ header{
   cursor:pointer;
 }
 
-/* Navegação */
 nav{
   margin-left:1rem;
   position:relative;
@@ -177,7 +178,6 @@ nav{
   background:#f0f4ff;
 }
 
-/* Submenu */
 .has-submenu{
   position:relative;
 }
@@ -195,7 +195,6 @@ nav{
   display:flex;
 }
 
-/* Header desktop */
 @media(min-width:880px){
   .nav-toggle{display:none}
 
@@ -232,31 +231,14 @@ nav{
 }
 
 /* =========================================================
-   HEADER FIXO (ALTURA CONTROLADA)
-   ========================================================= */
-:root{
-  --header-height:72px;
-}
-
-.main-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:1000;
-}
-
-body{
-  padding-top:var(--header-height);
-}
-
-/* =========================================================
-   HERO / CONTEÚDO PRINCIPAL
+   HERO / GRID PRINCIPAL
    ========================================================= */
 .hero{
   padding:4rem 0;
   display:grid;
   gap:2rem;
   align-items:center;
+  grid-template-columns:1fr; /* Mobile-first */
 }
 
 .hero-inner{
@@ -264,77 +246,35 @@ body{
   gap:1rem;
 }
 
-.eyebrow{
-  color:var(--muted);
-  font-weight:600;
-  font-size:.9rem;
-}
-
-.hero h1{
-  margin:0;
-  font-size:clamp(1.7rem,4vw,2.65rem);
-  line-height:1.05;
-}
-
-.hero p{
-  margin:0;
-  color:var(--muted);
-  max-width:700px;
-}
-
-.cta-row{
-  display:flex;
-  gap:.75rem;
-  flex-wrap:wrap;
-  margin-top:.75rem;
-}
-
-/* Botões */
-.btn{
-  display:inline-block;
-  padding:.7rem 1rem;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:700;
-  font-size:.95rem;
-}
-
-.btn-primary{
-  background:var(--accent);
-  color:#fff;
-}
-
-.btn-ghost{
-  background:transparent;
-  border:1px solid #e5e7eb;
-  color:var(--muted);
-}
-
-/* Grid */
-.grid-3{
-  display:grid;
-  gap:1.5rem;
-  grid-template-columns:1fr;
-  margin-top:1rem;
-}
-
 @media(min-width:700px){
-  .grid-3{
-    grid-template-columns:repeat(3,1fr);
-  }
-
   .hero{
     grid-template-columns:2fr 1fr;
     padding:4rem 2rem;
   }
 }
 
-/* Cards */
+/* =========================================================
+   GRID 3 CARDS / Cards
+   ========================================================= */
+.grid-3{
+  display:grid;
+  gap:1.5rem;
+  grid-template-columns:1fr; /* Mobile-first */
+  margin-top:1rem;
+}
+
+@media(min-width:700px){
+  .grid-3{
+    grid-template-columns:repeat(3,1fr); /* Desktop: 3 cards por linha */
+  }
+}
+
 .card{
   background:var(--surface);
   border-radius:var(--radius);
   padding:1rem;
   box-shadow:var(--shadow);
+  min-width:0; /* Firefox mobile fix */
 }
 
 /* =========================================================
@@ -347,19 +287,12 @@ form.card textarea{
   border:1px solid #ddd;
   border-radius:8px;
   font:inherit;
+  min-width:0;
 }
 
 /* =========================================================
-   FOOTER (ESTRUTURA MODULAR)
+   FOOTER
    ========================================================= */
-:root{
-  --footer-bg:#0b0b0b;
-  --footer-surface:#111;
-  --footer-muted:#9ca3af;
-  --footer-contrast:#d1d5db;
-}
-
-/* Footer base */
 .rio-footer{
   background:#191e24;
   color:var(--footer-contrast);
@@ -367,13 +300,11 @@ form.card textarea{
   font-size:.95rem;
 }
 
-/* Topo */
 .rio-footer-top{
   padding:3rem 0 2rem;
   border-bottom:1px solid rgba(255,255,255,0.04);
 }
 
-/* Container interno */
 .rio-ct{
   width:100%;
   max-width:var(--container);
@@ -385,7 +316,6 @@ form.card textarea{
   align-items:flex-start;
 }
 
-/* Branding */
 .rio-brand{
   display:flex;
   gap:1rem;
@@ -407,7 +337,6 @@ form.card textarea{
   font-weight:700;
 }
 
-/* Links */
 .rio-links{
   display:grid;
   grid-template-columns:repeat(3,minmax(160px,1fr));
@@ -447,7 +376,6 @@ form.card textarea{
   color:var(--footer-contrast);
 }
 
-/* Parte inferior */
 .rio-footer-bottom{
   background:#191e24;
   padding:1rem 0;
@@ -476,30 +404,6 @@ form.card textarea{
   color:var(--footer-contrast);
 }
 
-
-/* ESTE CSS MANTEM O FOOTER EM BAIXO SEM ESPACOS INICIO******/
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* ESTE É O MAIS IMPORTANTE */
-main {
-  flex: 1 0 auto;
-}
-/* ESTE CSS MANTEM O FOOTER EM BAIXO SEM ESPACOS  FIM*********/
-
-
-
-
-
-
 /* =========================================================
    UTILITÁRIOS
    ========================================================= */
@@ -524,7 +428,6 @@ a{
   content:"";
   position:absolute;
   inset:0;
-  background:;
 }
 
 .player-content{
@@ -536,6 +439,7 @@ a{
   padding:30px 20px;
   display:flex;
   align-items:flex-start;
+  flex-wrap:wrap;
 }
 
 .team-title{
@@ -543,6 +447,7 @@ a{
   font-weight:900;
   text-transform:uppercase;
   color:#fff;
+  word-break:break-word;
 }
 
 @media(max-width:1024px){
@@ -565,6 +470,7 @@ a{
   display:flex;
   flex-direction:column;
   gap:8px;
+  min-width:0; /* Firefox fix */
 }
 
 .team-sponsor{
@@ -610,31 +516,17 @@ a{
   margin-top:.2rem;
 }
 
+/* =========================================================
+   FIXES FIREFOX MOBILE / OVERFLOW
+   ========================================================= */
+[class*="slider"],
+[class*="track"],
+[class*="carousel"]{
+  min-width:0;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[class*="slider"] > *,
+[class*="track"] > *,
+[class*="carousel"] > *{
+  min-width:0;
+}
