@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
+  <title>Rios — Estatísticas das Equipas</title>
+  
+
+  <!-- Google Fonts (UEFA-style) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap"
+  rel="stylesheet"
+>
+
+  <!-- CSS Global -->
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- CSS específico da página -->
+  <link rel="stylesheet" href="assets/css/pages/estatisticasequipa.css">
+</head>
+
+<body>
+ <!-- ========== HEADER ========== -->
+  <div id="header"></div>
+   <!-- ========== HEADER ========== -->
+
+
+  <!-- ========== MAIN ========== -->
+  <main id="main">
+
+     <div class="container">
+        <h2 class="teams-title">Estatisticas</h2>
+        <div class="teams-subtitle">Jogadores</div>
+      </div>
+    <!-- ========== ESTATISTICAS EQUIPA INICIO ========== -->
+    <section class="uefa-table-card" aria-label="Standings — UEFA style">
+      <div class="uefa-table-head" role="row">
+        <div class="col-rank">#</div>
+        <div class="col-team">Equipa</div>
+        <div class="col-stat matches">Jogos</div>
+        <div class="col-stat">V</div>
+        <div class="col-stat">E</div>
+        <div class="col-stat">D</div>
+        <div class="col-stat">CA</div>
+        <div class="col-stat">CV</div>
+        <div class="col-stat">Golos</div>
+      </div>
+      <div class="uefa-table-body" id="uefaStandings"></div>
+    </section>
+    <!-- ========== ESTATISTICAS EQUIPA FIM ========== -->
+  </main>
+
+   <!-- FOOTER (injetado via JS start) -->
+    <div id="footer"></div>
+    <!-- FOOTER (injetado via JS end) -->
+
+
+  <script src="assets/js/pages/estatisticasequipa.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

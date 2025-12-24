@@ -1,0 +1,95 @@
+/* =========================================================
+   CARD MATCH – PADRÃO ENTERPRISE
+   Usado em:
+   - Jogos
+   - Resultados
+   - Calendário
+========================================================= */
+
+.match-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+/* Cabeçalho */
+.match-card__header {
+  padding: 10px 14px;
+  font-size: .85rem;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Corpo */
+.match-card__body {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 12px 10px;
+  gap: 8px;
+}
+
+/* Equipas */
+.team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.team.home {
+  justify-content: flex-start;
+}
+
+.team.away {
+  justify-content: flex-end;
+}
+
+.team img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.team span {
+  font-size: .95rem;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Placar */
+.match-score {
+  font-size: .9rem;
+  font-weight: 700;
+  color: #111827;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  white-space: nowrap;
+}
+
+/* Mobile refinado */
+@media (max-width: 600px) {
+  .match-card__body {
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .team span {
+    font-size: .85rem;
+  }
+
+  .match-score {
+    font-size: .85rem;
+    padding: 3px 8px;
+  }
+}
+
+
+
+
