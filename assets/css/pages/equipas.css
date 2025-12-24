@@ -142,3 +142,57 @@
     font-size: 14px;
   }
 }
+
+
+
+
+
+
+
+
+/* ================================
+   CORREÇÃO FIREFOX MOBILE – EQUIPAS
+   (não afeta Chrome)
+================================ */
+
+/* trava zoom automático de texto */
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Firefox-specific */
+@-moz-document url-prefix() {
+
+  .team-card {
+    min-width: 0;
+    align-items: center;
+  }
+
+  .team-info {
+    min-width: 0;
+  }
+
+  .team-name {
+    font-size: 18px; /* igual ao mobile */
+  }
+
+  .team-stadium {
+    font-size: 14px;
+  }
+
+  .teams-title {
+    font-size: 24px;
+  }
+
+  .teams-subtitle {
+    font-size: 16px;
+  }
+
+  .team-card > img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
