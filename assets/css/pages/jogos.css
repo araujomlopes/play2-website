@@ -312,3 +312,54 @@ h2.section-title {
   font-size: .9rem;
   margin-top: .2rem;
 }
+
+
+
+
+
+
+
+
+
+
+/* ================================
+   AJUSTES FIREFOX MOBILE
+================================= */
+body {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Correção específica para Firefox Mobile */
+@-moz-document url-prefix() {
+  .match-card__body {
+    flex-wrap: wrap; /* home/away/meta alinhados */
+    align-items: center;
+  }
+
+  .home-block, .away-block {
+    min-width: 0;
+  }
+
+  .team-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .team-name {
+    font-size: 14px;
+  }
+
+  .match-time {
+    font-size: 14px;
+  }
+
+  .match-meta {
+    min-width: 100px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+}
