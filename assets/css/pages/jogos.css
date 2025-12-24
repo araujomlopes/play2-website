@@ -1,6 +1,7 @@
 /* ===============================
    CSS da página Jogos
    Contém: grids, cards de partidas, filtros e responsividade
+   Revisado para Firefox e outros navegadores
 =============================== */
 
 :root{
@@ -20,6 +21,8 @@ h2.section-title {
   font-weight: 700;
   color: var(--muted-2);
   margin: 20px 0 16px;
+  min-width:0;        /* FIX FIREFOX */
+  overflow-wrap:break-word;
 }
 
 /* WRAPPER DE PARTIDAS */
@@ -30,7 +33,7 @@ h2.section-title {
   max-width: 1200px;
   overflow: hidden;
   transition: all 0.3s ease;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); /* Firefox fix */
+  min-width:0;        /* FIX FIREFOX */
 }
 
 /* CARD DE PARTIDA */
@@ -45,7 +48,7 @@ h2.section-title {
   transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
-  min-width: 0; /* FIX para Firefox */
+  min-width:0;        /* FIX FIREFOX */
 }
 
 /* HEADER DO CARD */
@@ -55,12 +58,12 @@ h2.section-title {
   gap:10px;
   padding:10px 16px;
   border-bottom:1px solid var(--border);
-  min-width: 0; /* FIX Firefox */
+  min-width:0;        /* FIX FIREFOX */
 }
 
 .comp-badge { width:28px; height:28px; flex-shrink:0; }
-.comp-info .comp-name { font-size:14px; font-weight:600; color:var(--muted-2); min-width:0; }
-.comp-info .comp-sub { font-size:13px; color:var(--muted); min-width:0; }
+.comp-info .comp-name { font-size:14px; font-weight:600; color:var(--muted-2); min-width:0; overflow-wrap:break-word; }
+.comp-info .comp-sub { font-size:13px; color:var(--muted); }
 
 /* BLOCO CENTRAL DE JOGO */
 .match-card__body {
@@ -68,17 +71,17 @@ h2.section-title {
   grid-template-columns: 1fr auto 1fr; /* home | meta | away */
   align-items: center;
   padding: 14px 12px;
-  min-width:0; /* FIX Firefox */
+  min-width:0;        /* FIX FIREFOX */
 }
 
 /* BLOCO HOME / AWAY */
 .home-block, .away-block {
   display: flex;
   align-items: center;
-  min-width:0; /* FIX Firefox */
+  min-width:0;        /* FIX FIREFOX */
 }
-.home-block { justify-content: flex-start; flex-shrink:1; }
-.away-block { justify-content: flex-end; flex-shrink:1; }
+.home-block { justify-content: flex-start; }
+.away-block { justify-content: flex-end; }
 
 /* BLOCO CENTRAL (HORÁRIO + LOGOS) */
 .match-meta {
@@ -86,19 +89,12 @@ h2.section-title {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  min-width: 140px; /* fixa largura mínima para centralização */
-  flex-shrink:1; /* FIX Firefox */
+  min-width:140px; /* fixa largura mínima para centralização */
+  flex-shrink:0;
 }
 
 /* LOGOS */
-.team-logo { 
-  width:44px; 
-  height:44px; 
-  max-width:100%; 
-  height:auto; 
-  display:block; 
-  flex-shrink:0;
-}
+.team-logo { width:44px; height:44px; flex-shrink:0; }
 
 /* NOMES DAS EQUIPES */
 .team-name {
@@ -106,23 +102,18 @@ h2.section-title {
   font-size: var(--fs-lg);
   line-height: var(--lh-normal);
   color: var(--color-text-primary);
-  display: inline-block;
+  display: inline;
   text-align: left;
-  white-space: nowrap; /* FIX para evitar overflow */
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
   cursor: pointer;
   user-select: none;
   box-sizing: border-box;
   -webkit-font-smoothing: subpixel-antialiased;
-  min-width: 0; /* FIX Firefox */
+  min-width:0;            /* FIX FIREFOX */
+  overflow-wrap:break-word;
 }
 
-.team-sub { 
-  font-size:13px; 
-  color:var(--muted); 
-  min-width:0; /* FIX Firefox */
-}
+.team-sub { font-size:13px; color:var(--muted); }
 
 /* HORÁRIO / RESULTADO */
 .match-time {
@@ -132,14 +123,14 @@ h2.section-title {
   padding:4px 12px;
   border-radius:4px;
   white-space: nowrap;
-  min-width:0; /* FIX Firefox */
+  min-width:0;            /* FIX FIREFOX */
 }
 
 /* BOTÕES */
 .match-actions {
   justify-content:flex-end;
   display:flex;
-  min-width:0; /* FIX Firefox */
+  min-width:0;            /* FIX FIREFOX */
 }
 
 .btn {
@@ -150,7 +141,6 @@ h2.section-title {
   cursor:pointer;
   text-decoration:none;
   font-weight:600;
-  flex-shrink:1; /* FIX Firefox */
 }
 
 /* SHOW MORE BUTTON */
@@ -166,6 +156,7 @@ h2.section-title {
   align-items:center;
   gap:4px;
   margin:12px 0;
+  min-width:0;            /* FIX FIREFOX */
 }
 .show-more-btn svg {
   transition:transform .3s ease;
@@ -181,7 +172,7 @@ h2.section-title {
   gap: 60px; 
   align-items: flex-start;
   padding: 25px 0 35px;
-  flex-wrap: wrap; /* FIX Firefox */
+  min-width:0;          /* FIX FIREFOX */
 }
 
 .bl-select-wrapper {
@@ -196,6 +187,7 @@ h2.section-title {
   font-weight: 500;
   color: #6b7280;
   margin-bottom: 4px;
+  text-transform: none;
 }
 
 .bl-select {
@@ -235,24 +227,26 @@ h2.section-title {
   margin-top: 3px;
 }
 
-/* RESPONSIVO */
 @media (max-width:768px) {
   .bl-filters-container {
+    display: flex;
+    flex-wrap: wrap;
     gap: 16px 20px;
   }
 
   .bl-filters-container .bl-select-wrapper:nth-child(1),
   .bl-filters-container .bl-select-wrapper:nth-child(2) {
     flex: 1 1 calc(50% - 10px);
-    min-width:0;
   }
 
   .bl-filters-container .bl-select-wrapper:nth-child(3) {
     flex: 1 1 100%;
-    min-width:0;
   }
+}
 
-  .match-card__body { gap:8px; }
+/* RESPONSIVO */
+@media (max-width:768px) {
+  .match-card__body { gap:8px; min-width:0; }
   .team-name { font-size:16px; }
   .match-time { font-size:16px; }
 }
@@ -265,22 +259,42 @@ h2.section-title {
   .match-time strong { font-size:14px !important; white-space: nowrap; }
 }
 
-/* CONTAINERS PRINCIPAIS */
-.page-header_title,
+/* ===============================
+   Título da página e containers
+=============================== */
+.page-header_title {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px 35px 10px;
+  min-width:0;
+}
+
 .topscore-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 10px;
-  padding-bottom: 35px;
-  min-width:0; /* FIX Firefox */
-}
-
-/* FIREFOX MOBILE / DESKTOP FIX */
-*, *::before, *::after {
-  box-sizing: border-box;
+  padding: 0 10px 35px 10px;
   min-width:0;
 }
-html, body {
+
+.bl-filters-container {
+  max-width: 1200px;
+  margin: 25px auto 0 auto;
+  padding: 0 10px 35px 10px;
+  min-width:0;
+}
+
+/* Rodapé: texto menor */
+.rio-footer .rio-brand .muted {
+  font-size: .9rem;
+  margin-top: .2rem;
+  min-width:0;
+  overflow-wrap: break-word;
+}
+
+/* Imagens e logos */
+img{
   max-width:100%;
-  overflow-x:hidden;
+  height:auto;
+  display:block;
+  flex-shrink:0; /* FIX FIREFOX */
 }
