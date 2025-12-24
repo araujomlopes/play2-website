@@ -1,6 +1,6 @@
 /* ===============================
    CSS da página Jogos
-   Corrigido para Firefox e responsivo
+   Contém: grids, cards de partidas, filtros e responsividade
 =============================== */
 
 :root{
@@ -28,10 +28,9 @@ h2.section-title {
   gap: 16px;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
   overflow: hidden;
   transition: all 0.3s ease;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* cards maiores */
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); /* Firefox fix */
 }
 
 /* CARD DE PARTIDA */
@@ -46,7 +45,7 @@ h2.section-title {
   transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
-  min-width: 0; /* Firefox fix */
+  min-width: 0; /* FIX para Firefox */
 }
 
 /* HEADER DO CARD */
@@ -56,31 +55,12 @@ h2.section-title {
   gap:10px;
   padding:10px 16px;
   border-bottom:1px solid var(--border);
-  min-width: 0; /* Firefox fix */
+  min-width: 0; /* FIX Firefox */
 }
 
-.comp-badge { 
-  width:28px; 
-  height:28px; 
-  max-width: 100%;
-}
-
-.comp-info .comp-name { 
-  font-size:14px; 
-  font-weight:600; 
-  color:var(--muted-2); 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.comp-info .comp-sub { 
-  font-size:13px; 
-  color:var(--muted); 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+.comp-badge { width:28px; height:28px; flex-shrink:0; }
+.comp-info .comp-name { font-size:14px; font-weight:600; color:var(--muted-2); min-width:0; }
+.comp-info .comp-sub { font-size:13px; color:var(--muted); min-width:0; }
 
 /* BLOCO CENTRAL DE JOGO */
 .match-card__body {
@@ -88,17 +68,17 @@ h2.section-title {
   grid-template-columns: 1fr auto 1fr; /* home | meta | away */
   align-items: center;
   padding: 14px 12px;
-  min-width: 0; /* Firefox fix */
+  min-width:0; /* FIX Firefox */
 }
 
 /* BLOCO HOME / AWAY */
 .home-block, .away-block {
   display: flex;
   align-items: center;
-  min-width: 0; /* Firefox fix */
+  min-width:0; /* FIX Firefox */
 }
-.home-block { justify-content: flex-start; }
-.away-block { justify-content: flex-end; }
+.home-block { justify-content: flex-start; flex-shrink:1; }
+.away-block { justify-content: flex-end; flex-shrink:1; }
 
 /* BLOCO CENTRAL (HORÁRIO + LOGOS) */
 .match-meta {
@@ -106,15 +86,18 @@ h2.section-title {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  min-width: 0; /* Firefox fix */
+  min-width: 140px; /* fixa largura mínima para centralização */
+  flex-shrink:1; /* FIX Firefox */
 }
 
 /* LOGOS */
-.team-logo, .comp-badge { 
-  width: 44px; 
-  height: 44px; 
-  max-width: 100%;
-  height: auto;
+.team-logo { 
+  width:44px; 
+  height:44px; 
+  max-width:100%; 
+  height:auto; 
+  display:block; 
+  flex-shrink:0;
 }
 
 /* NOMES DAS EQUIPES */
@@ -125,23 +108,20 @@ h2.section-title {
   color: var(--color-text-primary);
   display: inline-block;
   text-align: left;
+  white-space: nowrap; /* FIX para evitar overflow */
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   cursor: pointer;
   user-select: none;
   box-sizing: border-box;
   -webkit-font-smoothing: subpixel-antialiased;
-  max-width: 100%;
+  min-width: 0; /* FIX Firefox */
 }
 
-/* SUBTÍTULOS / LEGENDA */
 .team-sub { 
   font-size:13px; 
   color:var(--muted); 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  min-width:0; /* FIX Firefox */
 }
 
 /* HORÁRIO / RESULTADO */
@@ -152,13 +132,14 @@ h2.section-title {
   padding:4px 12px;
   border-radius:4px;
   white-space: nowrap;
-  min-width: 0; /* Firefox fix */
+  min-width:0; /* FIX Firefox */
 }
 
 /* BOTÕES */
 .match-actions {
   justify-content:flex-end;
   display:flex;
+  min-width:0; /* FIX Firefox */
 }
 
 .btn {
@@ -169,6 +150,7 @@ h2.section-title {
   cursor:pointer;
   text-decoration:none;
   font-weight:600;
+  flex-shrink:1; /* FIX Firefox */
 }
 
 /* SHOW MORE BUTTON */
@@ -192,15 +174,14 @@ h2.section-title {
   transform:rotate(180deg);
 }
 
-/* FILTROS */
+/* ------------------------ */
+/* 🎯 ESTILO SELECT BUNDESLIGA */
 .bl-filters-container {
   display: flex;
   gap: 60px; 
   align-items: flex-start;
   padding: 25px 0 35px;
-  max-width: 1200px;
-  margin: 25px auto 0 auto;
-  padding: 0 10px 35px 10px;
+  flex-wrap: wrap; /* FIX Firefox */
 }
 
 .bl-select-wrapper {
@@ -257,18 +238,18 @@ h2.section-title {
 /* RESPONSIVO */
 @media (max-width:768px) {
   .bl-filters-container {
-    display: flex;
-    flex-wrap: wrap;
     gap: 16px 20px;
   }
 
   .bl-filters-container .bl-select-wrapper:nth-child(1),
   .bl-filters-container .bl-select-wrapper:nth-child(2) {
     flex: 1 1 calc(50% - 10px);
+    min-width:0;
   }
 
   .bl-filters-container .bl-select-wrapper:nth-child(3) {
     flex: 1 1 100%;
+    min-width:0;
   }
 
   .match-card__body { gap:8px; }
@@ -284,44 +265,22 @@ h2.section-title {
   .match-time strong { font-size:14px !important; white-space: nowrap; }
 }
 
-/* TÍTULO DA PÁGINA */
-.page-header_title {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 10px 35px;
-}
-
-/* CONTAINER DE JOGOS / RODAPÉ */
+/* CONTAINERS PRINCIPAIS */
+.page-header_title,
 .topscore-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 10px 35px;
+  padding: 0 10px;
+  padding-bottom: 35px;
+  min-width:0; /* FIX Firefox */
 }
 
-/* RODAPÉ: TEXTO MENOR */
-.rio-footer .rio-brand .muted {
-  font-size: .9rem;
-  margin-top: .2rem;
+/* FIREFOX MOBILE / DESKTOP FIX */
+*, *::before, *::after {
+  box-sizing: border-box;
+  min-width:0;
 }
-
-/* FIREFOX / MOBILE FIX */
-*, *::before, *::after{
-  box-sizing:border-box;
-}
-
-html, body{
+html, body {
   max-width:100%;
   overflow-x:hidden;
-}
-
-[class*="slider"],
-[class*="track"],
-[class*="carousel"]{
-  min-width:0;
-}
-
-[class*="slider"] > *,
-[class*="track"] > *,
-[class*="carousel"] > *{
-  min-width:0;
 }
