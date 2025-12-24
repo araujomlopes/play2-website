@@ -344,7 +344,7 @@
   background:#f8fafc;
   text-align:left;
   min-height:7.2rem;
-  padding:1.2rem;
+  
   border:1px solid #eef2f6;
 }
 
@@ -364,3 +364,4 @@
   .donut-new { width:110px; height:110px; }
   .donut-number-new { font-size:20px; }
 }
+
