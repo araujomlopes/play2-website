@@ -90,50 +90,16 @@ h2.section-title {
 
 /* NOMES DAS EQUIPES */
 .team-name {
-  font-family:;
-  font-size:20px;
+  font-family: var(--font-secondary);
+  font-size: 18px;
   font-weight:600;
-  color:var(--muted-2);
+  color: var(--muted-2);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%;
 }
 
-
-
-/* ---------------------
-   TEAM NAMES / INTERATIVOS
---------------------- */
-.team-name {
-  font-family: var(--font-secondary);
-  font-size: var( --fs-lg);
-  line-height: var(--lh-normal);
-  color: var(--color-text-primary);
-  display: inline;
-  text-align: left;
-  white-space: normal;
-  cursor: pointer;
-  user-select: none;
-  box-sizing: border-box;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* SUBTÍTULO TIME */
 .team-sub { font-size:13px; color:var(--muted); }
 
 /* HORÁRIO / RESULTADO */
@@ -184,7 +150,7 @@ h2.section-title {
 }
 
 /* ------------------------ */
-/* 🎯 ESTILO SELECT BUNDESLIGA - Mantido como estava */
+/* 🎯 ESTILO SELECT BUNDESLIGA */
 .bl-filters-container {
   display: flex;
   gap: 60px; 
@@ -244,7 +210,12 @@ h2.section-title {
   margin-top: 3px;
 }
 
+/* ================================
+   RESPONSIVO MOBILE
+=============================== */
 @media (max-width:768px) {
+
+  /* Filtros adaptáveis */
   .bl-filters-container {
     display: flex;
     flex-wrap: wrap;
@@ -259,13 +230,49 @@ h2.section-title {
   .bl-filters-container .bl-select-wrapper:nth-child(3) {
     flex: 1 1 100%;
   }
-}
 
-/* RESPONSIVO */
-@media (max-width:768px) {
-  .match-card__body { gap:8px; }
-  .team-name { font-size:16px; }
-  .match-time { font-size:16px; }
+  /* CORREÇÃO MOBILE PARA NOMES DE EQUIPES */
+  .match-card__body {
+    display: flex;          
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;       
+  }
+
+  .home-block, .away-block {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 auto;      
+    min-width: 0;
+  }
+
+  .match-meta {
+    flex: 0 0 auto;
+    min-width: 100px;      
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .team-name {
+    font-size: 14px;        
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .team-logo {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .match-time {
+    font-size: 14px;
+    padding: 3px 8px;
+  }
 }
 
 /* MOBILE REDUZ NOME E RESULTADO */
@@ -276,32 +283,18 @@ h2.section-title {
   .match-time strong { font-size:14px !important; white-space: nowrap; }
 }
 
-/* ===============================
-   CSS da página Jogos
-   Contém: grids, cards de partidas, filtros e responsividade
-   Arquivo recomendado: assets/css/pages/jogos.css
-=============================== */
-
-
-
-
-
-
-
-
-
 /* Título da página */
 .page-header_title {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 10px;
-  padding-bottom: 35px; /* substitui o padding-bottom:0px + 35px */
+  padding-bottom: 35px;
 }
 
 /* Container de filtros */
 .bl-filters-container {
   max-width: 1200px;
-  margin: 25px auto 0 auto; /* margin-top:25px + margin:auto */
+  margin: 25px auto 0 auto; 
   padding: 0 10px;
   padding-bottom: 35px;
 }
