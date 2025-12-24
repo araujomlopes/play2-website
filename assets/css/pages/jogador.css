@@ -243,7 +243,7 @@
   background:#f8fafc; text-align:left; min-height:7.2rem;
   border:1px solid #eef2f6;
 }
-.stat-number { font-size:24px; font-weight:700; color:var(--heading); }
+.stat-number { font-size:auto; font-weight:700; color:var(--heading); }
 .stat-label { font-size:13px; color:var(--muted); margin-top:6px; }
 
 /* ===========================
@@ -332,5 +332,6 @@
   font-size: 0.9rem;
   margin-top: 0.2rem;
 }
+
 
 
