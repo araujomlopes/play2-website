@@ -238,13 +238,30 @@
 .ks-right { flex:1; }
 .stats-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
 .stat-item {
-  display:flex; flex-flow:column nowrap; justify-content:center;
-  border-radius:.8rem; gap:.6rem; color:var(--heading);
-  background:#f8fafc; text-align:left; min-height:7.2rem; padding:1.2rem;
-  border:1px solid #eef2f6;
+ display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  border-radius: .8rem;
+  gap: .6rem;
+  color: var(--heading);
+  background: #f8fafc;
+  text-align: left;
+  min-height: 7.2rem;
+  padding: 14px;
+  border: 1px solid #eef2f6;
+  width: 100%;
+  min-width: 0;
 }
-.stat-number { font-size:24px; font-weight:700; color:var(--heading); }
-.stat-label { font-size:13px; color:var(--muted); margin-top:6px; }
+.stat-number { 
+  
+  font-size: clamp(14px, 4vw, 20px);
+  font-weight: 700;
+  color: var(--heading);
+  word-break: break-word;
+  white-space: normal;
+
+}
+.stat-label { font-size:13px; color:var(--muted) }
 
 /* ===========================
    SLIDER DE JOGOS
@@ -332,5 +349,6 @@
   font-size: 0.9rem;
   margin-top: 0.2rem;
 }
+
 
 
