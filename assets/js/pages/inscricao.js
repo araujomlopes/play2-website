@@ -13,7 +13,7 @@ btn.disabled = true;
 btn.style.opacity = "0.5";
 btn.style.cursor = "not-allowed";
 
-const webAppURL = "https://script.google.com/macros/s/AKfycbzJe9vkpjzknBOOl7EY1HrStCBkToUIBgsmo8Ln4jarAo5Qz-Zp9cAVvIKucq0DpbKnHw/exec";
+const webAppURL = "https://script.google.com/macros/s/AKfycbxhjyI95U_OeT9OLWVgKrog_NqGdjgjdCAcf5qzcUmZvQAcAy3dLDGkaH-uVKiznGt4gg/exec";
 
 // Criar span de erro embaixo de cada input (apenas se não existir)
 inputs.forEach(input => {
@@ -279,4 +279,5 @@ function mostrarVerifyModal(email) {
   document.getElementById("userEmail").textContent = email;
   document.getElementById("verifyModal").style.display = "flex";
 }
+
 //MODAL DE VERIFICAÇÃO DE EMAIL fim
