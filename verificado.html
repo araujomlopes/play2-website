@@ -71,15 +71,69 @@
 
 
   
-  <div class="success-box">
-    <div class="check-circle">✓</div>
-    <h2>Email verificado</h2>
-    <p>Inscrito com sucesso</p>
+  <div class="success-box" id="box">
+  <div class="check-circle" id="icon">✓</div>
+  <h2 id="title">A verificar...</h2>
+  <p id="message">Por favor aguarde</p>
 
-    <a href="index.html" class="back-btn">Voltar para o website</a>
-  </div>
+  <a href="index.html" class="back-btn" id="btn" style="display:none">
+    Voltar para o website
+  </a>
+</div>
 
 
+
+<script>
+  // 1. Ler BI da URL
+  const params = new URLSearchParams(window.location.search);
+  const bi = params.get("bi");
+
+  const title   = document.getElementById("title");
+  const message = document.getElementById("message");
+  const icon    = document.getElementById("icon");
+  const btn     = document.getElementById("btn");
+
+  if (!bi) {
+    title.textContent = "Link inválido";
+    message.textContent = "Dados de verificação não encontrados.";
+    icon.style.background = "#dc3545"; // vermelho
+    icon.textContent = "✕";
+  } else {
+    // 2. Chamar Apps Script
+    fetch(
+      "https://script.google.com/macros/s/AKfycbxhjyI95U_OeT9OLWVgKrog_NqGdjgjdCAcf5qzcUmZvQAcAy3dLDGkaH-uVKiznGt4gg/exec?bi=" 
+      + encodeURIComponent(bi)
+    )
+    .then(res => res.text())
+    .then(status => {
+
+      if (status === "OK") {
+        title.textContent = "Email verificado";
+        message.textContent = "Inscrito com sucesso";
+        btn.style.display = "inline-block";
+
+      } else if (status === "ALREADY") {
+        title.textContent = "Already verified";
+        message.textContent = "You've already verified your email address";
+        icon.style.background = "#0d6efd"; // azul
+        icon.textContent = "ℹ";
+        btn.style.display = "inline-block";
+
+      } else {
+        title.textContent = "Erro";
+        message.textContent = "Não foi possível verificar o email.";
+        icon.style.background = "#dc3545";
+        icon.textContent = "✕";
+      }
+    })
+    .catch(() => {
+      title.textContent = "Erro de ligação";
+      message.textContent = "Tente novamente mais tarde.";
+      icon.style.background = "#dc3545";
+      icon.textContent = "✕";
+    });
+  }
+</script>
 
 
 
