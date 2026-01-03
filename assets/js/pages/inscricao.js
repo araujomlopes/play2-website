@@ -224,34 +224,9 @@ btn.addEventListener('click', async e=>{
 
       mostrarVerifyModal(document.getElementById("email").value.trim());
 
-      const joinCard = document.querySelector('.join-card');
-      joinCard.style.display='none';
+      
 
-      // criar div de sucesso
-      const successDiv = document.createElement('div');
-      successDiv.className = 'success-overlay'; // overlay fixo
-      successDiv.innerHTML = `
-        <div class="join-card">
-          <h2>Foi inscrito com sucesso</h2>
-          <p>A sua inscrição foi submetida com sucesso</p>
-          <button id="btnVoltar" class="btn">Voltar à janela inicial</button>
-        </div>
-      `;
-      document.body.appendChild(successDiv);
-
-      document.getElementById('btnVoltar').addEventListener('click',()=>{
-        successDiv.remove();
-        joinCard.style.display='block';
-        inputs.forEach(i=>i.value='');
-        checkboxes.forEach(c=>c.checked=false);
-        btn.disabled=true;
-        btn.style.opacity="0.5";
-        btn.style.cursor="not-allowed";
-        messageDiv.textContent='';
-        inputs.forEach(i=>i.parentNode.querySelector('label').style.color='#777');
-        // Limpar apenas o texto de erros
-        inputs.forEach(i=>i.parentNode.querySelector('.error').textContent='');
-      });
+      
 
     } else {
       messageDiv.textContent=r.mensagem;
@@ -279,8 +254,4 @@ function mostrarVerifyModal(email) {
   document.getElementById("userEmail").textContent = email;
   document.getElementById("verifyModal").style.display = "flex";
 }
-
 //MODAL DE VERIFICAÇÃO DE EMAIL fim
-
-
-
