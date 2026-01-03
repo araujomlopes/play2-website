@@ -80,35 +80,57 @@
 </div>
 
 <script>
-  // 1. Ler parâmetro status da URL
-  const params = new URLSearchParams(window.location.search);
-  const status = (params.get("status") || "").trim().toLowerCase();
+const params = new URLSearchParams(window.location.search);
+const bi = params.get("bi");
 
-  const title = document.getElementById("title");
-  const message = document.getElementById("message");
-  const icon = document.getElementById("icon");
-  const btn = document.getElementById("btn");
+const title   = document.getElementById("title");
+const message = document.getElementById("message");
+const icon    = document.getElementById("icon");
+const btn     = document.getElementById("btn");
 
-  if (status === "ok") {
-    title.textContent = "Email verificado";
-    message.textContent = "Inscrito com sucesso";
-    icon.className = "check-circle";
-    icon.textContent = "✓";
-    btn.style.display = "inline-block";
-  } else if (status === "already") {
-    title.textContent = "Already verified";
-    message.textContent = "You've already verified your email address";
-    icon.className = "info-circle";
-    icon.textContent = "ℹ";
-    btn.style.display = "inline-block";
-  } else {
-    title.textContent = "Link inválido";
-    message.textContent = "Dados de verificação não encontrados.";
-    icon.className = "error-circle";
+if (!bi) {
+  title.textContent = "Link inválido";
+  message.textContent = "Dados de verificação não encontrados.";
+  icon.style.background = "#dc3545";
+  icon.textContent = "✕";
+} else {
+  fetch(
+    "https://script.google.com/macros/s/AKfycbxhjyI95U_OeT9OLWVgKrog_NqGdjgjdCAcf5qzcUmZvQAcAy3dLDGkaH-uVKiznGt4gg/exec?bi="
+    + encodeURIComponent(bi)
+  )
+  .then(res => res.text())
+  .then(status => {
+
+    if (status === "OK") {
+      title.textContent = "Email verificado";
+      message.textContent = "Inscrito com sucesso";
+      icon.style.background = "#28a745";
+      icon.textContent = "✓";
+      btn.style.display = "inline-block";
+
+    } else if (status === "ALREADY") {
+      title.textContent = "Already verified";
+      message.textContent = "You've already verified your email address";
+      icon.style.background = "#0d6efd";
+      icon.textContent = "ℹ";
+      btn.style.display = "inline-block";
+
+    } else {
+      title.textContent = "Link inválido";
+      message.textContent = "Dados de verificação não encontrados.";
+      icon.style.background = "#dc3545";
+      icon.textContent = "✕";
+    }
+  })
+  .catch(() => {
+    title.textContent = "Erro de ligação";
+    message.textContent = "Tente novamente mais tarde.";
+    icon.style.background = "#dc3545";
     icon.textContent = "✕";
-    btn.style.display = "inline-block";
-  }
+  });
+}
 </script>
 
 </body>
 </html>
+
