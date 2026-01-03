@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro, boas práticas de escritórios de design." />
-  <title>Verificação de Email</title>
+  <title>Rios — Verificação de Email</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,24 @@
   <!-- CSS Geral -->
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/pages/tabeladepontuacao.css">
+</head>
+<body>
 
+  <!-- HEADER -->
+  <div id="header"></div>
+
+  <!-- MAIN -->
+  <main id="main"></main>
+
+  <!-- BOX DE SUCESSO / STATUS -->
+  <div class="success-box" id="box">
+    <div class="check-circle" id="icon">✓</div>
+    <h2 id="title">A verificar...</h2>
+    <p id="message">Por favor aguarde</p>
+    <a href="index.html" class="back-btn" id="btn" style="display:none">Voltar para o website</a>
+  </div>
+
+  <!-- ESTILOS LOCAIS -->
   <style>
     .success-box {
       height: 100vh;
@@ -23,7 +40,6 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 0 20px;
     }
     .check-circle {
       width: 90px;
@@ -46,22 +62,8 @@
       border-radius: 6px;
     }
   </style>
-</head>
-<body>
 
-  <!-- HEADER -->
-  <div id="header"></div>
-
-  <!-- MAIN -->
-  <main id="main"></main>
-
-  <div class="success-box" id="box">
-    <div class="check-circle" id="icon">✓</div>
-    <h2 id="title">A verificar...</h2>
-    <p id="message">Por favor aguarde</p>
-    <a href="index.html" class="back-btn" id="btn" style="display:none">Voltar para o website</a>
-  </div>
-
+  <!-- SCRIPT DE VERIFICAÇÃO -->
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const params = new URLSearchParams(window.location.search);
@@ -117,7 +119,7 @@
   <!-- FOOTER -->
   <div id="footer"></div>
 
-  <!-- SCRIPTS -->
+  <!-- SCRIPTS GERAIS -->
   <script src="assets/js/pages/tabeladepontuacao.js"></script>
   <script src="assets/js/main.js"></script>
 
