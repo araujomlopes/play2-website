@@ -3,16 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Rios — Estrutura leve e responsiva — HTML e CSS puro." />
-  <title>Confirmação de Email</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Verificação de Email</title>
+  <link rel="stylesheet" href="assets/css/main.css">
 
   <style>
-    body { font-family: 'Inter', sans-serif; margin:0; }
+    body {
+      margin:0; font-family: 'Inter', sans-serif; background:#f5f5f5;
+    }
     .success-box {
       height: 100vh;
       display: flex;
@@ -20,37 +17,11 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 20px;
     }
     .check-circle {
       width: 90px;
       height: 90px;
       border-radius: 50%;
-      background: #28a745;
-      color: #fff;
-      font-size: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .info-circle {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: #0d6efd;
-      color: #fff;
-      font-size: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .error-circle {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: #dc3545;
       color: #fff;
       font-size: 48px;
       display: flex;
@@ -65,49 +36,68 @@
       color: #fff;
       text-decoration: none;
       border-radius: 6px;
-      display: inline-block;
     }
   </style>
 </head>
-
 <body>
 
 <div class="success-box" id="box">
-  <div id="icon" class="check-circle">✓</div>
+  <div class="check-circle" id="icon">✓</div>
   <h2 id="title">A verificar...</h2>
   <p id="message">Por favor aguarde</p>
   <a href="index.html" class="back-btn" id="btn" style="display:none">Voltar para o website</a>
 </div>
 
 <script>
-  // 1. Ler parâmetro status da URL
+(async function(){
   const params = new URLSearchParams(window.location.search);
-  const status = (params.get("status") || "").trim().toLowerCase();
-
+  const bi = params.get("bi")?.trim();
   const title = document.getElementById("title");
   const message = document.getElementById("message");
   const icon = document.getElementById("icon");
   const btn = document.getElementById("btn");
 
-  if (status === "ok") {
-    title.textContent = "Email verificado";
-    message.textContent = "Inscrito com sucesso";
-    icon.className = "check-circle";
-    icon.textContent = "✓";
-    btn.style.display = "inline-block";
-  } else if (status === "already") {
-    title.textContent = "Already verified";
-    message.textContent = "You've already verified your email address";
-    icon.className = "info-circle";
-    icon.textContent = "ℹ";
-    btn.style.display = "inline-block";
-  } else {
+  if(!bi){
     title.textContent = "Link inválido";
     message.textContent = "Dados de verificação não encontrados.";
-    icon.className = "error-circle";
+    icon.style.background = "#dc3545";
     icon.textContent = "✕";
-    btn.style.display = "inline-block";
+    return;
   }
+
+  try{
+    const response = await fetch(`https://script.google.com/macros/s/AKfycbxhjyI95U_OeT9OLWVgKrog_NqGdjgjdCAcf5qzcUmZvQAcAy3dLDGkaH-uVKiznGt4gg/exec?bi=${encodeURIComponent(bi)}`);
+    const status = await response.text();
+
+    if(status === "OK"){
+      title.textContent = "Email verificado";
+      message.textContent = "Inscrito com sucesso";
+      icon.style.background = "#28a745";
+      icon.textContent = "✓";
+      btn.style.display = "inline-block";
+    }
+    else if(status === "ALREADY"){
+      title.textContent = "Already verified";
+      message.textContent = "You've already verified your email address";
+      icon.style.background = "#0d6efd";
+      icon.textContent = "ℹ";
+      btn.style.display = "inline-block";
+    }
+    else{
+      title.textContent = "Erro";
+      message.textContent = "Inscrição não encontrada.";
+      icon.style.background = "#dc3545";
+      icon.textContent = "✕";
+      btn.style.display = "inline-block";
+    }
+
+  } catch(err){
+    title.textContent = "Erro de ligação";
+    message.textContent = "Tente novamente mais tarde.";
+    icon.style.background = "#dc3545";
+    icon.textContent = "✕";
+  }
+})();
 </script>
 
 </body>
