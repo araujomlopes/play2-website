@@ -77,35 +77,47 @@
 
 <script>
   const params = new URLSearchParams(window.location.search);
-  const status = params.get("status");
+  const bi = params.get("bi");
 
   const icon    = document.getElementById("icon");
   const title   = document.getElementById("title");
   const message = document.getElementById("message");
 
-  switch (status) {
+  if (!bi) {
+    erro();
+  } else {
+    fetch(`https://script.google.com/macros/s/AKfycbxhjyI95U_OeT9OLWVgKrog_NqGdjgjdCAcf5qzcUmZvQAcAy3dLDGkaH-uVKiznGt4gg/exec?bi=${encodeURIComponent(bi)}`)
+      .then(r => r.text())
+      .then(status => {
+        if (status === "OK") sucesso();
+        else if (status === "ALREADY") jaConfirmado();
+        else erro();
+      })
+      .catch(erro);
+  }
 
-    case "ok":
-      icon.textContent = "✔️";
-      icon.className = "icon success";
-      title.textContent = "Inscrição confirmada";
-      message.textContent = "A sua inscrição foi verificada com sucesso.";
-      break;
+  function sucesso() {
+    icon.textContent = "✔️";
+    icon.className = "icon success";
+    title.textContent = "Inscrição confirmada";
+    message.textContent = "A sua inscrição foi verificada com sucesso.";
+  }
 
-    case "already":
-      icon.textContent = "ℹ️";
-      icon.className = "icon warning";
-      title.textContent = "Já confirmado";
-      message.textContent = "Esta inscrição já tinha sido confirmada anteriormente.";
-      break;
+  function jaConfirmado() {
+    icon.textContent = "ℹ️";
+    icon.className = "icon warning";
+    title.textContent = "Já confirmado";
+    message.textContent = "Esta inscrição já tinha sido confirmada anteriormente.";
+  }
 
-    default:
-      icon.textContent = "✖️";
-      icon.className = "icon error";
-      title.textContent = "Link inválido";
-      message.textContent = "Dados de verificação não encontrados.";
+  function erro() {
+    icon.textContent = "✖️";
+    icon.className = "icon error";
+    title.textContent = "Link inválido";
+    message.textContent = "Dados de verificação não encontrados.";
   }
 </script>
 
 </body>
 </html>
+
