@@ -76,18 +76,21 @@ body{
 /* =========================================================
    HEADER / NAVIGATION
    ========================================================= */
+/* =========================================================
+   HEADER / NAVIGATION
+   ========================================================= */
 header{
   background:rgba(255,255,255,0.85);
   backdrop-filter:blur(4px);
   border-bottom:1px solid #e5e7eb;
   position:sticky;
   top:0;
-  z-index:999;        /* prioridade máxima */
-  isolation:isolate;  /* evita conflitos visuais */
+  z-index:999;
+  isolation:isolate;
   will-change:transform;
 }
 
-/* Estrutura principal do header */
+/* Estrutura principal */
 .site-header{
   height:64px;
   display:flex;
@@ -96,11 +99,9 @@ header{
 }
 
 /* Branding */
-.brand{
-  color:var(--accent);
-  text-decoration:none;
-  font-weight:700;
-  font-size:1.15rem;
+.brand img{
+  height:36px;
+  display:block;
 }
 
 /* Links superiores */
@@ -115,28 +116,86 @@ header{
   padding:.38rem .7rem;
   font-size:16px;
   color:#888c90;
-  background:transparent;
+  font-weight:400;
   display:flex;
   align-items:center;
-  justify-content:center;
-  font-weight:400;
 }
 
 .top-links a:hover{
   color:var(--accent);
   background:#f0f4ff;
+  border-radius:8px;
 }
 
-/* Botão mobile */
+/* =========================================================
+   BOTÃO MOBILE — PROFISSIONAL
+   ========================================================= */
 .nav-toggle{
-  font-size:1.5rem;
-  background:none;
+  background:transparent;
   border:none;
-  display:block;
   cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:44px;
+  height:44px;
+  padding:0;
 }
 
-/* Navegação */
+/* Ícone */
+.nav-toggle-icon{
+  position:relative;
+  width:22px;
+  height:2px;
+  background:#111;
+  display:block;
+  transition:background .25s ease;
+}
+
+.nav-toggle-icon::before,
+.nav-toggle-icon::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:22px;
+  height:2px;
+  background:#111;
+  transition:transform .25s ease, top .25s ease;
+}
+
+.nav-toggle-icon::before{ top:-6px; }
+.nav-toggle-icon::after{ top:6px; }
+
+/* Hover / Focus */
+.nav-toggle:hover .nav-toggle-icon,
+.nav-toggle:hover .nav-toggle-icon::before,
+.nav-toggle:hover .nav-toggle-icon::after{
+  background:var(--accent);
+}
+
+.nav-toggle:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:4px;
+}
+
+/* Estado aberto */
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon{
+  background:transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::before{
+  top:0;
+  transform:rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::after{
+  top:0;
+  transform:rotate(-45deg);
+}
+
+/* =========================================================
+   NAVEGAÇÃO
+   ========================================================= */
 nav{
   margin-left:1rem;
   position:relative;
@@ -145,7 +204,7 @@ nav{
 .nav-list{
   list-style:none;
   margin:0;
-  padding:0;
+  padding:.75rem;
   display:none;
   flex-direction:column;
   gap:.25rem;
@@ -154,7 +213,6 @@ nav{
   right:0;
   top:64px;
   width:224px;
-  padding:.75rem;
   border-radius:10px;
   box-shadow:var(--shadow);
 }
@@ -167,8 +225,6 @@ nav{
   text-decoration:none;
   padding:.55rem .8rem;
   color:#888c90;
-  font-weight:400;
-  display:block;
   border-radius:8px;
 }
 
@@ -195,9 +251,12 @@ nav{
   display:flex;
 }
 
-/* Header desktop */
+/* =========================================================
+   DESKTOP
+   ========================================================= */
 @media(min-width:880px){
-  .nav-toggle{display:none}
+
+  .nav-toggle{ display:none; }
 
   .nav-list{
     position:static;
@@ -225,12 +284,16 @@ nav{
   .has-submenu:hover .submenu{
     display:block;
   }
-
-  .submenu a{
-    padding:.6rem .9rem;
-  }
 }
 
+
+.nav-toggle {
+  position: absolute;   /* tira do fluxo flex */
+  right: 1rem;           /* encosta à esquerda da tela */
+  top: 50%;             /* centra verticalmente */
+  transform: translateY(-50%);
+  z-index: 1000;
+}
 
 
 /* =========================================================
@@ -637,8 +700,8 @@ a{
 /* MOBILE */
 @media (max-width: 768px) {
   .brand img {
-    height: 26px;
-    max-width: 130px;
+    height: 30px;
+    max-width: 180px;
   }
 }
 
