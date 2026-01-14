@@ -318,3 +318,52 @@
 
 
 
+
+
+
+
+
+
+/* === CENTRALIZAR COLUNAS NUMÉRICAS === */
+#simplified th:nth-child(3),
+#simplified th:nth-child(4),
+#simplified th:nth-child(5),
+#simplified td:nth-child(3),
+#simplified td:nth-child(4),
+#simplified td:nth-child(5),
+
+#full th:nth-child(4),
+#full th:nth-child(5),
+#full th:nth-child(6),
+#full th:nth-child(7),
+#full th:nth-child(8),
+#full th:nth-child(9),
+#full th:nth-child(10),
+#full th:nth-child(11),
+
+#full td:nth-child(4),
+#full td:nth-child(5),
+#full td:nth-child(6),
+#full td:nth-child(7),
+#full td:nth-child(8),
+#full td:nth-child(9),
+#full td:nth-child(10),
+#full td:nth-child(11) {
+  text-align: center;
+}
+
+
+
+
+/* === FORM CENTRALIZADO === */
+.uefa-table th.text-right {
+  text-align: center;
+}
+
+.uefa-table td:last-child {
+  text-align: center;
+}
+
+.uefa-table td:last-child .form {
+  justify-content: center;
+}

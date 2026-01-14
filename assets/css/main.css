@@ -77,225 +77,13 @@ body{
 /* =========================================================
    HEADER / NAVIGATION
    ========================================================= */
-/* =========================================================
-   HEADER / NAVIGATION
-   ========================================================= */
-header{
-  background:rgba(255,255,255,0.85);
-  backdrop-filter:blur(4px);
-  border-bottom:1px solid #e5e7eb;
-  position:sticky;
-  top:0;
-  z-index:999;
-  isolation:isolate;
-  will-change:transform;
-}
-
-/* Estrutura principal */
-.site-header{
-  height:64px;
-  display:flex;
-  align-items:center;
-  gap:1rem;
-}
-
-/* Branding */
-.brand img{
-  height:36px;
-  display:block;
-}
-
-/* Links superiores */
-.top-links{
-  margin-left:auto;
-  display:flex;
-  gap:1rem;
-}
-
-.top-links a{
-  text-decoration:none;
-  padding:.38rem .7rem;
-  font-size:16px;
-  color:#888c90;
-  font-weight:400;
-  display:flex;
-  align-items:center;
-}
-
-.top-links a:hover{
-  color:var(--accent);
-  background:#f0f4ff;
-  border-radius:8px;
-}
-
-/* =========================================================
-   BOTÃO MOBILE — PROFISSIONAL
-   ========================================================= */
-.nav-toggle{
-  background:transparent;
-  border:none;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:44px;
-  height:44px;
-  padding:0;
-}
-
-/* Ícone */
-.nav-toggle-icon{
-  position:relative;
-  width:22px;
-  height:2px;
-  background:#111;
-  display:block;
-  transition:background .25s ease;
-}
-
-.nav-toggle-icon::before,
-.nav-toggle-icon::after{
-  content:"";
-  position:absolute;
-  left:0;
-  width:22px;
-  height:2px;
-  background:#111;
-  transition:transform .25s ease, top .25s ease;
-}
-
-.nav-toggle-icon::before{ top:-6px; }
-.nav-toggle-icon::after{ top:6px; }
-
-/* Hover / Focus */
-.nav-toggle:hover .nav-toggle-icon,
-.nav-toggle:hover .nav-toggle-icon::before,
-.nav-toggle:hover .nav-toggle-icon::after{
-  background:var(--accent);
-}
-
-.nav-toggle:focus-visible{
-  outline:2px solid var(--accent);
-  outline-offset:4px;
-}
-
-/* Estado aberto */
-.nav-toggle[aria-expanded="true"] .nav-toggle-icon{
-  background:transparent;
-}
-
-.nav-toggle[aria-expanded="true"] .nav-toggle-icon::before{
-  top:0;
-  transform:rotate(45deg);
-}
-
-.nav-toggle[aria-expanded="true"] .nav-toggle-icon::after{
-  top:0;
-  transform:rotate(-45deg);
-}
-
-/* =========================================================
-   NAVEGAÇÃO
-   ========================================================= */
-nav{
-  margin-left:1rem;
-  position:relative;
-}
-
-.nav-list{
-  list-style:none;
-  margin:0;
-  padding:.75rem;
-  display:none;
-  flex-direction:column;
-  gap:.25rem;
-  background:var(--surface);
-  position:absolute;
-  right:0;
-  top:64px;
-  width:224px;
-  border-radius:10px;
-  box-shadow:var(--shadow);
-}
-
-.nav-list.show{
-  display:flex;
-}
-
-.nav-list a{
-  text-decoration:none;
-  padding:.55rem .8rem;
-  color:#888c90;
-  border-radius:8px;
-}
-
-.nav-list a:hover{
-  color:var(--accent);
-  background:#f0f4ff;
-}
-
-/* Submenu */
-.has-submenu{
-  position:relative;
-}
-
-.submenu{
-  list-style:none;
-  margin:0;
-  padding:.5rem 0 .5rem 1rem;
-  display:none;
-  flex-direction:column;
-  gap:.25rem;
-}
-
-.has-submenu:hover .submenu{
-  display:flex;
-}
-
-/* =========================================================
-   DESKTOP
-   ========================================================= */
-@media(min-width:880px){
-
-  .nav-toggle{ display:none; }
-
-  .nav-list{
-    position:static;
-    display:flex !important;
-    flex-direction:row;
-    gap:1rem;
-    background:none;
-    box-shadow:none;
-    width:auto;
-    padding:0;
-  }
-
-  .submenu{
-    position:absolute;
-    top:100%;
-    left:0;
-    background:var(--surface);
-    border-radius:10px;
-    padding:.5rem 0;
-    box-shadow:var(--shadow);
-    width:210px;
-    display:none;
-  }
-
-  .has-submenu:hover .submenu{
-    display:block;
-  }
-}
 
 
-.nav-toggle {
-  position: absolute;   /* tira do fluxo flex */
-  right: 1rem;           /* encosta à esquerda da tela */
-  top: 50%;             /* centra verticalmente */
-  transform: translateY(-50%);
-  z-index: 1000;
-  justify-content: right;
-}
+
+
+
+
+
 
 
 /* =========================================================
@@ -726,10 +514,261 @@ a{
 
 
 
+/* =========================================================
+   VARIÁVEIS GLOBAIS
+   ========================================================= */
+:root {
+  --header-height: 72px;
+  --accent: #0a4fff;
+  --surface: #ffffff;
+  --shadow: 0 6px 18px rgba(15,23,42,0.06);
+  --container: 1400px;
+  --gutter: 1rem;
+}
 
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
 
+body {
+  font-family: Inter, Arial, sans-serif;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  padding-top: var(--header-height);
+}
 
+/* =========================================================
+   HEADER FIXO
+   ========================================================= */
+.main-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
 
+/* Container principal */
+.site-header {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo à esquerda, menu à direita */
+}
 
+/* Logo */
+.brand img {
+  height: 36px;
+  display: block;
+}
 
+/* =========================================================
+   BOTÃO MOBILE
+   ========================================================= */
+.nav-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001;
+}
+
+.nav-toggle-icon {
+  position: relative;
+  width: 22px;
+  height: 2px;
+  background: #111;
+  transition: background .25s ease;
+}
+
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 2px;
+  background: #111;
+  transition: transform .25s ease, top .25s ease;
+}
+
+.nav-toggle-icon::before { top: -6px; }
+.nav-toggle-icon::after  { top:  6px; }
+
+/* Estado aberto */
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon {
+  background: transparent;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* =========================================================
+   NAVEGAÇÃO (BASE)
+   ========================================================= */
+nav {
+  position: relative;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column; /* mobile por padrão */
+  gap: .5rem;
+}
+
+.nav-list a {
+  text-decoration: none;
+  padding: .85rem 0;
+  font-weight: 600;
+  color: #111;
+  border-radius: 6px;
+}
+
+.nav-list a:hover {
+  color: var(--accent);
+  background: #f0f4ff;
+}
+
+/* Submenu */
+.has-submenu {
+  position: relative;
+}
+
+.submenu {
+  list-style: none;
+  margin: 0;
+  padding: .5rem 0 .5rem 1rem;
+  display: none;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.has-submenu.open .submenu {
+  display: flex;
+}
+
+/* =========================================================
+   DESKTOP (>= 880px)
+   ========================================================= */
+@media (min-width: 880px) {
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .nav-list a {
+    padding: .4rem .6rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #111827;
+  }
+
+  /* Submenu desktop */
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: var(--surface);
+    border-radius: 10px;
+    padding: .5rem 0;
+    box-shadow: var(--shadow);
+    display: none;
+  }
+
+  .has-submenu:hover .submenu {
+    display: flex;
+  }
+}
+
+/* =========================================================
+   MOBILE FULLSCREEN (< 880px)
+   ========================================================= */
+@media (max-width: 879px) {
+
+  /* Painel fullscreen */
+  .nav-list {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: calc(100vh - var(--header-height));
+    background: var(--surface);
+    padding: 2rem 1.5rem;
+    gap: 1rem;
+    overflow-y: auto;
+
+    transform: translateX(100%);
+    transition: transform .35s ease;
+    z-index: 1000;
+    box-shadow: -4px 0 15px rgba(0,0,0,.1);
+  }
+
+  .nav-list.show {
+    transform: translateX(0);
+  }
+
+  /* 🔴 CORREÇÃO 1 — submenu abrir no mobile */
+  .has-submenu > a {
+    pointer-events: none;   /* impede navegação do # */
+    cursor: pointer;
+  }
+
+  /* Estilo submenu */
+  .submenu {
+    border-left: 2px solid var(--accent);
+    padding-left: 1rem;
+  }
+}
+
+/* =========================================================
+   🔴 CORREÇÃO 2 — BLOQUEIO TOTAL DE SCROLL
+   ========================================================= */
+html.menu-open,
+body.menu-open {
+  overflow: hidden;
+  height: 100%;
+}
