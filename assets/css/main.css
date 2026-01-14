@@ -58,6 +58,7 @@ body{
   max-width:var(--container);
   margin:0 auto;
   padding:0 var(--gutter);
+
 }
 
 /* Conteúdo acessível apenas para leitores de ecrã */
@@ -293,6 +294,7 @@ nav{
   top: 50%;             /* centra verticalmente */
   transform: translateY(-50%);
   z-index: 1000;
+  justify-content: right;
 }
 
 
