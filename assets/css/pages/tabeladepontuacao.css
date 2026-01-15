@@ -1,0 +1,369 @@
+.uefa-table,
+    .uefa-table * {
+      box-sizing: border-box;
+      font-family: ;
+    }
+
+    .uefa-table {
+      max-width: none;
+      margin: 0 auto;
+      color: #1a313c;
+
+      
+      border-width: 1px;
+      border-style: solid;
+      border-color: #dbdde9;
+      border-radius: 8px;
+      background-color: red;
+    }
+
+    /* === league phase HEADER BOX === */
+    .uefa-table .header-box {
+
+      
+      
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    
+    .uefa-table .title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #374151;
+      margin:20px 0 16px ;
+    }
+
+    /* Tabs */ /* === onde contem botoes === */
+    .uefa-table .tabs {
+      display: flex;
+      gap: 8px;
+      background: #f1f3f8;
+      border-radius: 12px;
+      padding: 6px;
+      width: fit-content;
+    }
+
+    /*botoes === */
+    .uefa-table .tab {
+      background: transparent;
+      padding: 10px 28px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      color: #333;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .uefa-table .tab.active {
+      background: #ffffff;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* === TABLE STYLE === */
+    .uefa-table table {
+      width: 100%;
+      border-collapse: collapse;
+      
+
+      display: none;
+    }
+
+    .uefa-table table.active {
+     
+      border-radius: 16px;
+      display:table;
+      border-left-color: transparent;
+      border-right-color: transparent;
+    }
+
+    
+
+    .uefa-table th {
+      font-size: 12px;
+      color: #6b7280;
+      text-align: left;
+     
+      font-weight: 500;
+      padding: 12px 8px;
+      border-bottom: 1px solid #e5e7eb;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+
+    .uefa-table td {
+      padding: 14px 8px;
+      font-size: 14px;
+      border-bottom: 1px solid #e5e7eb;
+      
+      border-left: none;
+      border-right: none;
+      vertical-align: middle;
+      background: #fff;
+      transition: background-color 0.25s ease;
+    }
+
+    /* Hover Effect */
+    @media (hover: hover) {
+      .uefa-table tr:hover td {
+        background-color: #f1f3f8;
+      }
+      .uefa-table tr:hover {
+        border-radius: 12px;
+      }
+    }
+
+    /* Team */
+    .uefa-table .team {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .uefa-table .team img {
+      width: 30px;
+      height: auto;
+      flex-shrink: 0;
+      border-radius: 0;
+    }
+
+    .uefa-table .team span {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    /* Form */
+    .uefa-table .form {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .uefa-table .form span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      font-size: 0px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    
+
+    .uefa-table .win { background: #24a225; }
+    .uefa-table .draw { background: #fbb700; }
+    .uefa-table .loss { background: red; }
+
+    /* Mobile Scroll Wrapper */
+    @media (max-width: 1024px) {
+      .uefa-table .scroll-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 16px;
+        border: ;
+        background: #ffffff;
+      }
+
+      .uefa-table #full {
+        min-width: 1000px;
+      }
+
+      /* Colunas fixas mantidas, sem linhas verticais */
+      .uefa-table #full th:first-child,
+      .uefa-table #full td:first-child {
+        position: sticky;
+        left: 0;
+        background: #ffffff;
+        z-index: 4;
+        width: 45px;
+        text-align: center;
+        box-shadow: none;
+      }
+
+      .uefa-table #full th:nth-child(2),
+      .uefa-table #full td:nth-child(2) {
+        position: sticky;
+        left: 45px;
+        background: #ffffff;
+        z-index: 3;
+        width: 60px;
+        text-align: center;
+        box-shadow: none;
+      }
+    }
+
+    /* === MOBILE: limitar a 3 bolinhas no FORM === */
+@media (max-width: 600px) {
+  .form span:nth-child(n+4),
+  .match-form:nth-child(n+4) {
+    display: none !important;
+  }
+}
+
+/* Impedir que o .tabs atravesse a tela no mobile */
+@media (max-width: 600px) {
+  .uefa-table .tabs {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 100%;
+    scrollbar-width: none;       /* Firefox */
+  }
+
+  .uefa-table .tabs::-webkit-scrollbar {
+    display: none;               /* Chrome/Safari */
+  }
+}
+
+/* Reduzir padding das tabs no mobile */
+@media (max-width: 600px) {
+  .uefa-table .tab {
+    padding: 6px 10px !important;
+  }
+}
+
+
+
+
+
+/* === TELAS MUITO PEQUENAS: esconder FORM completamente === */
+@media (max-width: 420px) {
+
+  /* Esconde a coluna Form (header e células) */
+  .uefa-table th:last-child,
+  .uefa-table td:last-child {
+    display: none !important;
+  }
+
+  /* Segurança extra: esconde o container do form */
+  .uefa-table .form {
+    display: none !important;
+  }
+}
+
+
+
+/* =========================================================
+   TABELA DE PONTUAÇÃO — FORM (BOLINHAS DE RESULTADO)
+   Página: tabeladepontuacao.html
+   Descrição: Indicadores visuais de vitória, empate e derrota
+   ========================================================= */
+.match-form {
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  margin-left: 4px;
+}
+
+.match-form.win {
+  background-color: #24a225;
+}
+
+.match-form.draw {
+  background-color: #fbb700;
+}
+
+.match-form.loss {
+  background-color: red;
+}
+
+.form {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* =========================================================
+   TABELA DE PONTUAÇÃO — FORM (BOLINHAS DE RESULTADO)
+   Página: tabeladepontuacao.html
+   Descrição: Indicadores visuais de vitória, empate e derrota
+   ========================================================= */
+
+
+
+
+
+
+
+
+   /* ==============================
+   TABELA DE PONTUAÇÃO — LAYOUT
+   ============================== */
+
+.tabelapontos-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+  padding-top: 60px;
+  padding-bottom: 35px;
+}
+
+.uefa-table {
+  background-color: #ffffff;
+  padding: 0;
+}
+
+.text-right {
+  text-align: right;
+}
+
+
+
+
+
+
+
+
+
+/* === CENTRALIZAR COLUNAS NUMÉRICAS === */
+#simplified th:nth-child(3),
+#simplified th:nth-child(4),
+#simplified th:nth-child(5),
+#simplified td:nth-child(3),
+#simplified td:nth-child(4),
+#simplified td:nth-child(5),
+
+#full th:nth-child(4),
+#full th:nth-child(5),
+#full th:nth-child(6),
+#full th:nth-child(7),
+#full th:nth-child(8),
+#full th:nth-child(9),
+#full th:nth-child(10),
+#full th:nth-child(11),
+
+#full td:nth-child(4),
+#full td:nth-child(5),
+#full td:nth-child(6),
+#full td:nth-child(7),
+#full td:nth-child(8),
+#full td:nth-child(9),
+#full td:nth-child(10),
+#full td:nth-child(11) {
+  text-align: center;
+}
+
+
+
+
+/* === FORM CENTRALIZADO === */
+.uefa-table th.text-right {
+  text-align: center;
+}
+
+.uefa-table td:last-child {
+  text-align: center;
+}
+
+.uefa-table td:last-child .form {
+  justify-content: center;
+}

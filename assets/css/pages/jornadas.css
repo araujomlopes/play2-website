@@ -1,0 +1,101 @@
+.matches{
+  background:#fff;
+  border-radius:16px;
+  padding:1.25rem 1rem 1.5rem;
+}
+
+.matches-header h2{
+  margin:0 0 1rem;
+  font-size:1.35rem;
+  font-weight:700;
+  color:#0f172a;
+}
+
+.matches-wrapper{
+  position:relative;
+}
+
+.matches-track{
+  display:flex;
+  gap:0.75rem;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding:0.25rem;
+}
+
+.matches-track::-webkit-scrollbar{
+  display:none;
+}
+
+.match-card{
+  min-width:190px;
+  background:#f3f6fb;
+  border-radius:12px;
+  padding:0.75rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.35rem;
+}
+
+.match-status{
+  font-size:0.75rem;
+  color:#64748b;
+  margin-bottom:0.25rem;
+}
+
+.match-status.live{
+  color:#2563eb;
+  font-weight:600;
+}
+
+.match-teams{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.team{
+  display:flex;
+  align-items:center;
+  gap:0.4rem;
+  font-size:0.85rem;
+  color:#0f172a;
+}
+
+.team img{
+  width:18px;
+  height:18px;
+  object-fit:contain;
+}
+
+.score{
+  font-weight:700;
+  font-size:0.9rem;
+  color:#0f172a;
+}
+
+/* Setas */
+.matches-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.3rem;
+  color:#2563eb;
+  z-index:2;
+}
+
+.matches-arrow.left{ left:-18px; }
+.matches-arrow.right{ right:-18px; }
+
+.matches-arrow:hover{
+  background:#f0f4ff;
+}
