@@ -1562,7 +1562,7 @@
 .motogp-event__bg {
   position: absolute;
   inset: 0;
-  background: url("/assets/images/diversos/projectocampofilia.jpg")
+  background: url("../assets/images/diversos/projectocampofilia.jpg")
     center / cover no-repeat;
 
   /* realce cinematográfico */
@@ -2190,6 +2190,7 @@
   margin: auto;
 
 }
+
 
 
 
