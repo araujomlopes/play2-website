@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>F1 – Tech Weekly</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* =========================
+   RESET / BASE
+========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f4f1ed;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  color: #111;
+}
+
+/* =========================
+   LAYOUT GERAL
+========================= */
+.f1-wrapper {
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.f1-grid {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 28px;
+}
+
+/* =========================
+   HERO PRINCIPAL
+========================= */
+.f1-hero {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 520px;
+  background: #000;
+}
+
+/* imagem */
+.f1-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* overlay gradiente */
+.f1-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top center,
+      rgba(220,0,0,.9) 0%,
+      rgba(120,0,0,.7) 30%,
+      rgba(0,0,0,.85) 70%,
+      #000 100%);
+}
+
+/* conteúdo */
+.f1-hero-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 36px;
+}
+
+/* tag */
+.f1-tag {
+  display: inline-block;
+  background: #e10600;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 3px;
+  margin-bottom: 14px;
+  width: fit-content;
+}
+
+/* título */
+.f1-hero h1 {
+  font-size: 38px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #fff;
+  max-width: 90%;
+}
+
+/* =========================
+   SIDEBAR NOTÍCIAS
+========================= */
+.f1-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.f1-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05);
+}
+
+.f1-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.f1-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #111;
+}
+
+/* labels */
+.f1-label {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+
+.label-unlocked {
+  background: #e10600;
+  color: #fff;
+}
+
+.label-academy {
+  background: #ff4fa3;
+  color: #fff;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 1024px) {
+  .f1-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .f1-hero {
+    min-height: 440px;
+  }
+
+  .f1-hero h1 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .f1-hero h1 {
+    font-size: 24px;
+  }
+
+  .f1-hero-content {
+    padding: 24px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="f1-wrapper">
+  <div class="f1-grid">
+
+    <!-- HERO -->
+    <article class="f1-hero">
+      <!-- imagem de fundo -->
+      <img src="hero-f1.jpg" alt="F1 Car">
+
+      <div class="f1-hero-content">
+        <span class="f1-tag">TECH WEEKLY</span>
+        <h1>How teams have responded to the new regulations</h1>
+      </div>
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="f1-sidebar">
+
+      <div class="f1-card">
+        <img src="assets/images/diversos/Verstappen Red Bull launch.avif" alt="">
+        <h3>Mekies on how Red Bull can keep Verstappen onboard</h3>
+      </div>
+
+      <div class="f1-card">
+        <img src="assets/images/diversos/Verstappen Red Bull launch.avif" alt="">
+        <h3>Drive to Survive Season 8 release date announced</h3>
+      </div>
+
+      <div class="f1-card">
+        <img src="assets/images/diversos/Verstappen Red Bull launch.avif" alt="">
+        <div>
+          <span class="f1-label label-unlocked">UNLOCKED</span>
+          <h3>Why Audi predict 'bumpy periods' in their bid for F1 glory</h3>
+        </div>
+      </div>
+
+      <div class="f1-card">
+        <img src="assets/images/diversos/Verstappen Red Bull launch.avif" alt="">
+        <div>
+          <span class="f1-label label-academy">F1 ACADEMY</span>
+          <h3>Pin graduates to Mercedes development role</h3>
+        </div>
+      </div>
+
+      <div class="f1-card">
+        <img src="assets/images/diversos/Verstappen Red Bull launch.avif" alt="">
+        <h3>Get up to speed with the new F1 regulations for 2026</h3>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+</body>
+</html>
