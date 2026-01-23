@@ -1,5 +1,12 @@
 /* Container e card */
-.containerinscricao { display:flex; justify-content:center;  }
+.containerinscricao { 
+  display:flex; 
+  justify-content:center; 
+  padding-top: 100px;
+  padding-bottom: 100px;
+ }
+
+
 .join-card {
   width:520px;
   max-width:92%;
