@@ -5,7 +5,7 @@ const fields = [
 ];
 
 const checkboxes = Array.from(document.querySelectorAll('.checkbox input'));
-const inputs = fields.map(id => document.getElementById(id)).filter(i => i); // filtra apenas os elementos existentes
+const inputs = fields.map(id => document.getElementById(id)).filter(i => i);
 const btn = document.getElementById('btnInscrever');
 const messageDiv = document.getElementById('messageDiv');
 
@@ -15,7 +15,7 @@ btn.style.cursor = "not-allowed";
 
 const webAppURL = "https://script.google.com/macros/s/AKfycbxhjyI95U_OeT9OLWVgKrog_NqGdjgjdCAcf5qzcUmZvQAcAy3dLDGkaH-uVKiznGt4gg/exec";
 
-// Criar span de erro embaixo de cada input (apenas se não existir)
+// Criar span de erro embaixo de cada input
 inputs.forEach(input => {
   if(!input.parentNode.querySelector('.error')){
     const error = document.createElement('div');
@@ -187,7 +187,6 @@ function validarCampo(input) {
   return valido;
 }
 
-// Validar todos campos e checkboxes
 function validarTudo() {
   let tudoValido = true;
   inputs.forEach(input => { if(!validarCampo(input)) tudoValido=false; });
@@ -198,11 +197,10 @@ function validarTudo() {
   btn.style.cursor = tudoValido ? "pointer" : "not-allowed";
 }
 
-// Validar ao sair do campo
 inputs.forEach(input => input.addEventListener('blur', validarTudo));
 checkboxes.forEach(c => c.addEventListener('change', validarTudo));
 
-// Submeter formulário
+// SUBMISSÃO
 btn.addEventListener('click', async e=>{
   e.preventDefault();
   validarTudo();
@@ -221,13 +219,8 @@ btn.addEventListener('click', async e=>{
     const r = await res.json();
 
     if(r.status==="ok"){
-
-      mostrarVerifyModal(document.getElementById("email").value.trim());
-
-      
-
-      
-
+      const email = document.getElementById("email").value.trim();
+      window.location.href = "inscricao-verificacao.html?email=" + encodeURIComponent(email);
     } else {
       messageDiv.textContent=r.mensagem;
       messageDiv.style.color="red";
@@ -237,21 +230,3 @@ btn.addEventListener('click', async e=>{
     messageDiv.style.color="red";
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-// MODAL DE VERIFICAÇÃO DE EMAIL inicio
-function mostrarVerifyModal(email) {
-  document.getElementById("userEmail").textContent = email;
-  document.getElementById("verifyModal").style.display = "flex";
-}
-//MODAL DE VERIFICAÇÃO DE EMAIL fim
