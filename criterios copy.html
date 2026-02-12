@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>F1 Banner</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="f1-top-links">
+  <a href="#" target="_blank">F1® UNLOCKED <span>↗</span></a>
+  <a href="#" target="_blank">F1® STORE <span>↗</span></a>
+  <a href="#" target="_blank">F1® TICKETS <span>↗</span></a>
+  <a href="#" target="_blank">F1® FANTASY <span>↗</span></a>
+</div>
+
+<section class="f1-banner">
+  <div class="f1-banner-content">
+    <h1>HELP SHAPE THE F1<br>WEBSITE</h1>
+    <p>Take a few minutes to tell us what you think.</p>
+    <a href="#" class="f1-btn">Let's go</a>
+  </div>
+</section>
+<style>
+  /* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  padding: 24px;
+  color: #111;
+}
+
+/* Top Links */
+.f1-top-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.f1-top-links a {
+  background: #cfd1ff;
+  color: #000;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 16px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.f1-top-links span {
+  font-size: 16px;
+}
+
+/* Banner */
+.f1-banner {
+  background: #e10600;
+  border-radius: 10px;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  padding: 48px;
+}
+
+.f1-banner-content {
+  max-width: 520px;
+}
+
+.f1-banner h1 {
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.f1-banner p {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+/* Button */
+.f1-btn {
+  display: inline-block;
+  background: #ffffff;
+  color: #000;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .f1-top-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .f1-banner h1 {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 520px) {
+  .f1-top-links {
+    grid-template-columns: 1fr;
+  }
+
+  .f1-banner {
+    padding: 32px 24px;
+  }
+
+  .f1-banner h1 {
+    font-size: 34px;
+  }
+}
+
+</style>
+
+</body>
+</html>
