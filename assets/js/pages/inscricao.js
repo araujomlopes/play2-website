@@ -13,7 +13,7 @@ btn.disabled = true;
 btn.style.opacity = "0.5";
 btn.style.cursor = "not-allowed";
 
-const webAppURL = "https://script.google.com/macros/s/AKfycbxhjyI95U_OeT9OLWVgKrog_NqGdjgjdCAcf5qzcUmZvQAcAy3dLDGkaH-uVKiznGt4gg/exec";
+const webAppURL = "https://script.google.com/macros/s/AKfycbzgpq1sqwspR7ZjlPY0Ok6HRaqgW8vNfc8rL6Jv0dYRCg3QWywlVJx0hqolghS6o2s/exec";
 
 // Criar span de erro embaixo de cada input
 inputs.forEach(input => {
@@ -230,3 +230,4 @@ btn.addEventListener('click', async e=>{
     messageDiv.style.color="red";
   }
 });
+
